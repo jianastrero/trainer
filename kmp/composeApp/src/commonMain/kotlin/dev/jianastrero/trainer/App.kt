@@ -2,6 +2,7 @@ package dev.jianastrero.trainer
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dev.jianastrero.trainer.ui.effect.SystemBarIconColorEffect
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -23,13 +25,17 @@ import trainer.composeapp.generated.resources.compose_multiplatform
 @Composable
 @Preview
 fun App() {
-    TrainerTheme(
-        modifier = Modifier
-            .fillMaxSize()
-            .systemBarsPadding()
-    ) {
+    SystemBarIconColorEffect(false)
+
+    TrainerTheme {
         var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .fillMaxSize()
+                .systemBarsPadding()
+        ) {
             OutlinedButton(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
