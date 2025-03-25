@@ -1,7 +1,0 @@
-package dev.jianastrero.trainer
-
-interface Platform {
-    val name: String
-}
-
-expect fun getPlatform(): Platform
