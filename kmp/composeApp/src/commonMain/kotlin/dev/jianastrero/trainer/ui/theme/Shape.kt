@@ -5,7 +5,7 @@ import androidx.compose.material.Shapes
 import androidx.compose.ui.unit.dp
 
 val TrainerShapes = Shapes(
-    small = RoundedCornerShape(100),
-    medium = RoundedCornerShape(100),
+    small = RoundedCornerShape(8.dp),
+    medium = RoundedCornerShape(16.dp),
     large = RoundedCornerShape(100),
 )

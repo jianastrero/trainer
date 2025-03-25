@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dev.jianastrero.trainer.ui.atom.TrainerButton
 import dev.jianastrero.trainer.ui.effect.SystemBarIconColorEffect
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.resources.painterResource
@@ -36,9 +37,10 @@ fun App() {
                 .fillMaxSize()
                 .systemBarsPadding()
         ) {
-            OutlinedButton(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
+            TrainerButton(
+                text = "Hello world!",
+                onClick = { showContent = !showContent }
+            )
         }
     }
 }
