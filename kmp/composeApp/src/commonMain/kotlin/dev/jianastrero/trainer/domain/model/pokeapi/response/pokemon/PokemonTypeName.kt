@@ -1,4 +1,4 @@
-package dev.jianastrero.trainer.domain.pokeapi.response.pokemon
+package dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon
 
 
 import dev.jianastrero.trainer.domain.enumeration.PokemonType

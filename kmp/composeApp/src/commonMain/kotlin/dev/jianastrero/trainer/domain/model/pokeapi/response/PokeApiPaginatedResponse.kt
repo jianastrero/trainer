@@ -1,4 +1,4 @@
-package dev.jianastrero.trainer.domain.pokeapi.response
+package dev.jianastrero.trainer.domain.model.pokeapi.response
 
 
 import kotlinx.serialization.SerialName
