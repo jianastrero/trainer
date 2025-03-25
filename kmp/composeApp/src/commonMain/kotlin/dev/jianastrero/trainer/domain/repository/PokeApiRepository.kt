@@ -6,8 +6,7 @@ import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 
 interface PokeApiRepository {
     suspend fun getPokemonList(
-        limit: Int,
-        offset: Int
+        nextPage: PokeApiPaginatedResponse.NextPage
     ): PokeApiPaginatedResponse<PokemonItem>
 
     suspend fun getPokemon(id: String): Pokemon

@@ -10,4 +10,21 @@ data class PokeApiPaginatedResponse<T>(
     @SerialName("next") val next: String?,
     @SerialName("previous") val previous: String?,
     @SerialName("results") val results: List<T>
-)
+) {
+    class NextPage(
+        val offset: Int,
+        val limit: Int
+    )
+
+    val nextPage: NextPage?
+        get() {
+            return runCatching {
+                val url = next ?: return null
+                val query = url.split("?").last()
+                val params = query.split("&")
+                val offset = params.first { it.startsWith("offset") }.split("=").last().toInt()
+                val limit = params.first { it.startsWith("limit") }.split("=").last().toInt()
+                return NextPage(offset = offset, limit = limit)
+            }.getOrNull()
+        }
+}

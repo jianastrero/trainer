@@ -12,7 +12,7 @@ private data object KtorTokens {
     const val POKEMON_TCG_API = "https://api.pokemontcg.io/v2"
 }
 
-val KtorModule = module {
-    single(qualifier = named<PokeApi>()) { KtorClient(KtorTokens.POKE_API) }
-    single(qualifier = named<PokemonTcgApi>()) { KtorClient(KtorTokens.POKEMON_TCG_API) }
+val ktorModule = module {
+    single(named<PokeApi>()) { KtorClient(KtorTokens.POKE_API) }
+    single(named<PokemonTcgApi>()) { KtorClient(KtorTokens.POKEMON_TCG_API) }
 }

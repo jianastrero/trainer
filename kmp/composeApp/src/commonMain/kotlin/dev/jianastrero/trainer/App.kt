@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.ui.atom.TrainerButton
 import dev.jianastrero.trainer.ui.effect.SystemBarIconColorEffect
+import dev.jianastrero.trainer.ui.page.main.MainPage
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -41,47 +42,6 @@ fun App() {
     SystemBarIconColorEffect(false)
 
     TrainerTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .background(MaterialTheme.colors.background)
-                .fillMaxSize()
-                .systemBarsPadding()
-        ) {
-            TrainerButton(
-                text = "Hello world!",
-                onClick = { showContent = !showContent }
-            )
-            LazyColumn(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                items(PokemonType.entries) { pokemonType ->
-                    Row(
-                        modifier = Modifier
-                            .background(pokemonType.color)
-                            .fillMaxWidth()
-                            .padding(12.dp)
-                    ) {
-                        if (pokemonType.icon != null) {
-                            Image(
-                                painter = painterResource(pokemonType.icon),
-                                contentDescription = null,
-                                modifier = Modifier.size(36.dp)
-                            )
-                        }
-                        Text(
-                            text = pokemonType.name,
-                            style = TextStyle(
-                                color = Color.White,
-                                shadow = Shadow(
-                                    color = Color.Black,
-                                    offset = Offset(4f, 4f),
-                                    blurRadius = 4f
-                                )
-                            )
-                        )
-                    }
-                }
-            }
-        }
+        MainPage(modifier = Modifier.fillMaxSize())
     }
 }
