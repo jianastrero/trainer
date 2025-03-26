@@ -8,6 +8,7 @@ import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -19,8 +20,7 @@ class HomeViewModel(
     private val getPokemonsUseCase: GetPokemonsUseCase
 ) : ViewModel() {
 
-    private val _isDarkMode = MutableStateFlow(isDarkModeUseCase())
-    val isDarkMode = _isDarkMode.asStateFlow()
+    val isDarkMode = isDarkModeUseCase()
 
     private val _pokemons = MutableStateFlow(emptyList<Pokemon>())
     val pokemons = _pokemons.asStateFlow()
@@ -28,7 +28,6 @@ class HomeViewModel(
     fun setDarkMode(isDarkMode: Boolean) {
         viewModelScope.launch {
             setDarkModeUseCase(isDarkMode)
-            _isDarkMode.emit(isDarkMode)
         }
     }
 

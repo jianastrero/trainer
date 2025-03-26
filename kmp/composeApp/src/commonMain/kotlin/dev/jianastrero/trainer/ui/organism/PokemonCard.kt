@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import coil3.compose.AsyncImage
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
+import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -62,11 +63,9 @@ fun PokemonCard(
 
     Column(
         modifier = modifier
-            .onGloballyPositioned {
-                size = it.size.toSize()
-            }
+            .onGloballyPositioned { size = it.size.toSize() }
             .shadow(
-                elevation = if (enabled) 16.dp else 0.dp,
+                elevation = if (enabled) 8.dp else 0.dp,
                 shape = MaterialTheme.shapes.medium,
                 ambientColor = color,
                 spotColor = color
@@ -74,15 +73,15 @@ fun PokemonCard(
             .background(
                 brush = Brush.radialGradient(
                     0f to color,
-                    1f to MaterialTheme.colors.background,
+                    1.2f to MaterialTheme.colors.background,
                     center = if (size == Size.Unspecified) Offset.Zero else size.center.copy(y = 0f),
-                    radius = if (size == Size.Unspecified) Float.POSITIVE_INFINITY else size.height * 1.1f
+                    radius = if (size == Size.Unspecified) Float.POSITIVE_INFINITY else size.height
                 ),
                 shape = MaterialTheme.shapes.medium
             )
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
+                color = Light.copy(alpha = 0.1f),
                 shape = MaterialTheme.shapes.medium
             )
     ) {

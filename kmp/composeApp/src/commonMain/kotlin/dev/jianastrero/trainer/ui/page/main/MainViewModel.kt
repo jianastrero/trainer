@@ -13,8 +13,7 @@ class MainViewModel(
     isDarkModeUseCase: IsDarkModeUseCase,
 ) : ViewModel() {
 
-    private val _isDarkMode = MutableStateFlow(isDarkModeUseCase())
-    val isDarkMode = _isDarkMode.asStateFlow()
+    val isDarkMode = isDarkModeUseCase()
 
     private val _selectedBottomNavItem = MutableStateFlow(BottomNavItem.Home)
     val selectedBottomNavItem = _selectedBottomNavItem.asStateFlow()

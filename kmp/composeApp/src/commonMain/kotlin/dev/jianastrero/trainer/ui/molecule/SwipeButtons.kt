@@ -26,19 +26,19 @@ fun SwipeButtons(
     modifier: Modifier = Modifier
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         SwipeButton(
-            icon = Res.drawable.ic_like,
-            onClick = { onAction(SwipeAction.Like) },
+            icon = Res.drawable.ic_dislike,
+            onClick = { onAction(SwipeAction.Dislike) },
             modifier = Modifier.size(64.dp)
         )
 
         SwipeButton(
-            icon = Res.drawable.ic_dislike,
-            onClick = { onAction(SwipeAction.Dislike) },
+            icon = Res.drawable.ic_like,
+            onClick = { onAction(SwipeAction.Like) },
             modifier = Modifier.size(64.dp)
         )
     }

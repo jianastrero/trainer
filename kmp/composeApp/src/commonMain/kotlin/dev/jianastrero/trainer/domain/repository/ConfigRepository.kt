@@ -1,5 +1,9 @@
 package dev.jianastrero.trainer.domain.repository
 
+import kotlinx.coroutines.flow.StateFlow
+
 interface ConfigRepository {
-    var isDarkMode: Boolean
+    val isDarkMode: StateFlow<Boolean>
+
+    fun setDarkMode(isDarkMode: Boolean)
 }

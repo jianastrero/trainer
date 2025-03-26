@@ -2,18 +2,31 @@ package dev.jianastrero.trainer.ui.atom
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.input.key.Key.Companion.M
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
+import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -30,7 +43,7 @@ fun SwipeButton(
     Box(
         modifier = modifier
             .shadow(
-                elevation = 8.dp,
+                elevation = 2.dp,
                 shape = MaterialTheme.shapes.large,
                 ambientColor = MaterialTheme.colors.primary,
                 spotColor = MaterialTheme.colors.primary
@@ -38,6 +51,11 @@ fun SwipeButton(
             .background(
                 color = MaterialTheme.colors.background,
                 shape = MaterialTheme.shapes.large
+            )
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colors.primary.copy(alpha = 0.1f),
+                shape = MaterialTheme.shapes.medium
             )
             .clip(MaterialTheme.shapes.large)
             .clickable(onClick = onClick)
@@ -48,7 +66,7 @@ fun SwipeButton(
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(48.dp)
-                .padding(8.dp)
+                .padding(12.dp)
         )
     }
 }

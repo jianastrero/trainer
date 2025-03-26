@@ -7,7 +7,7 @@ class SetDarkModeUseCase(
 ) {
 
     operator fun invoke(isDarkMode: Boolean) {
-        repository.isDarkMode = isDarkMode
+        repository.setDarkMode(isDarkMode)
     }
 
 }

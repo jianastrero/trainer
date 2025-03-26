@@ -8,4 +8,11 @@ import kotlinx.serialization.Serializable
 data class PokemonCries(
     @SerialName("latest") val latest: String,
     @SerialName("legacy") val legacy: String
-)
+) {
+    companion object {
+        val Sample = PokemonCries(
+            latest = "latest",
+            legacy = "legacy"
+        )
+    }
+}

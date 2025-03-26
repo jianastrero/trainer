@@ -8,4 +8,11 @@ import kotlinx.serialization.Serializable
 data class PokemonSpecies(
     @SerialName("name") val name: String,
     @SerialName("url") val url: String
-)
+) {
+    companion object {
+        val Sample = PokemonSpecies(
+            name = "name",
+            url = "url"
+        )
+    }
+}
