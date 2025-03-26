@@ -15,13 +15,13 @@ class PokeApiDataStoreRemote(
     override suspend fun getPokemonList(
         nextPage: PokeApiPaginatedResponse.NextPage
     ): PokeApiPaginatedResponse<PokemonItem> {
-        val response = pokeApiClient.client.get("pokemon?limit=${nextPage.limit}&offset=${nextPage.offset}")
+        val response = pokeApiClient.client.get("/api/v2/pokemon?limit=${nextPage.limit}&offset=${nextPage.offset}")
 
         return response.body()
     }
 
     override suspend fun getPokemon(id: String): Pokemon {
-        val response = pokeApiClient.client.get("pokemon/$id")
+        val response = pokeApiClient.client.get("/api/v2/pokemon/$id")
 
         return response.body()
     }

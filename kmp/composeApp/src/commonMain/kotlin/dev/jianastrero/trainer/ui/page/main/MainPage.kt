@@ -1,5 +1,7 @@
 package dev.jianastrero.trainer.ui.page.main
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,7 +23,9 @@ fun MainPage(
     ) { paddingValues ->
         HomePage(
             mainViewModel = viewModel,
-            modifier = modifier,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
         )
     }
 }

@@ -12,5 +12,5 @@ sealed interface Remote
 
 val dataStoreModule = module {
     single<ConfigDataStore> { ConfigDataStoreLocal(get()) }
-    single<PokeApiDataStore>(named<Remote>()) { PokeApiDataStoreRemote(get()) }
+    single<PokeApiDataStore>(named<Remote>()) { PokeApiDataStoreRemote(get(named<PokeApi>())) }
 }

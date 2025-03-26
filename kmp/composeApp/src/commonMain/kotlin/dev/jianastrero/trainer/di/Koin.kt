@@ -5,7 +5,6 @@ import org.koin.core.context.startKoin
 
 fun initKoin(appDeclaration: (KoinApplication.() -> Unit)? = null) {
     startKoin {
-        appDeclaration?.invoke(this)
         modules(
             preferenceModule,
             dataStoreModule,
@@ -14,5 +13,6 @@ fun initKoin(appDeclaration: (KoinApplication.() -> Unit)? = null) {
             useCaseModule,
             viewModelModule
         )
+        appDeclaration?.invoke(this)
     }
 }

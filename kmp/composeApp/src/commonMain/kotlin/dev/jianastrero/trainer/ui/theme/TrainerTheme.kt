@@ -7,11 +7,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
+private var _isDarkMode by mutableStateOf(false)
+
+data object TrainerTheme {
+    val isDarkMode: Boolean
+        get() = _isDarkMode
+}
+
 @Composable
 fun TrainerTheme(
     isDarkMode: Boolean = false,
     content: @Composable () -> Unit
 ) {
+    LaunchedEffect(isDarkMode) {
+        _isDarkMode = isDarkMode
+    }
 
     MaterialTheme(
         colors = if (isDarkMode) TrainerDarkColors else TrainerLightColors,

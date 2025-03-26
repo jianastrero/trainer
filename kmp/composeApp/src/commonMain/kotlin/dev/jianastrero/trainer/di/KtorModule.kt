@@ -8,8 +8,8 @@ sealed interface PokeApi
 sealed interface PokemonTcgApi
 
 private data object KtorTokens {
-    const val POKE_API = "https://pokeapi.co/api/v2"
-    const val POKEMON_TCG_API = "https://api.pokemontcg.io/v2"
+    const val POKE_API = "https://pokeapi.co"
+    const val POKEMON_TCG_API = "https://api.pokemontcg.io"
 }
 
 val ktorModule = module {

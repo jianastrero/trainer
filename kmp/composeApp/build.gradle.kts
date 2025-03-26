@@ -69,6 +69,7 @@ kotlin {
 
             // Coil
             implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
         }
     }
 }
