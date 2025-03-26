@@ -4,6 +4,13 @@ import org.koin.core.context.startKoin
 
 fun initKoin() {
     startKoin {
-        modules(ktorModule, serviceModule, repositoryModule, useCaseModule, viewModelModule)
+        modules(
+            preferenceModule,
+            dataStoreModule,
+            ktorModule,
+            repositoryModule,
+            useCaseModule,
+            viewModelModule
+        )
     }
 }
