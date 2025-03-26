@@ -4,20 +4,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import dev.jianastrero.trainer.ui.template.AppBarTemplate
+import dev.jianastrero.trainer.ui.page.home.HomePage
+import dev.jianastrero.trainer.ui.template.BottomNavTemplate
 
 @Composable
 fun MainPage(
     viewModel: MainViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val isDarkMode by viewModel.isDarkMode.collectAsState()
+    val selectedBottomNavItem by viewModel.selectedBottomNavItem.collectAsState()
 
-    AppBarTemplate(
-        isDarkMode = isDarkMode,
-        onDarkModeToggle = viewModel::setDarkMode,
+    BottomNavTemplate(
+        selected = selectedBottomNavItem,
+        onSelectBottomNavItem = viewModel::setSelectedBottomNavItem,
         modifier = modifier
     ) { paddingValues ->
-
+        HomePage(
+            mainViewModel = viewModel,
+            modifier = modifier,
+        )
     }
 }
