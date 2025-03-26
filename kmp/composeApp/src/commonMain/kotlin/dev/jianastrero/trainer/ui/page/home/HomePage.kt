@@ -1,6 +1,7 @@
 package dev.jianastrero.trainer.ui.page.home
 
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -30,12 +31,14 @@ import dev.jianastrero.trainer.ui.molecule.SwipeButtons
 import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 
 private data object CardAnimTokens {
     const val ANIM_X_OFFSET = 1.4f
     const val ANIM_Z_ROTATION = 30f
+    const val ANIM_DURATION = 300
 }
 
 @Composable
@@ -59,6 +62,12 @@ fun HomePage(
     ) { paddingValues ->
         HomePageContent(
             pokemons = pokemons,
+            onSwipeAction = { action, pokemon ->
+                when (action) {
+                    SwipeAction.Like -> viewModel.like(pokemon)
+                    SwipeAction.Dislike -> viewModel.dislike(pokemon)
+                }
+            },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -69,6 +78,7 @@ fun HomePage(
 @Composable
 private fun HomePageContent(
     pokemons: List<Pokemon>,
+    onSwipeAction: (SwipeAction, Pokemon) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var containerSize by remember { mutableStateOf(Size.Zero) }
@@ -77,19 +87,40 @@ private fun HomePageContent(
             pokemons.firstOrNull()
         }
     }
+    val secondPokemon by remember(pokemons) {
+        derivedStateOf {
+            pokemons.getOrNull(1)
+        }
+    }
     var swipeAction: SwipeAction? by remember {
         mutableStateOf(null)
     }
 
     val transition = updateTransition(swipeAction)
-    val animTranslationX by transition.animateFloat {
+    val animTranslationX by transition.animateFloat(
+        transitionSpec = {
+            when {
+                targetState == SwipeAction.Like ||
+                targetState == SwipeAction.Dislike -> tween(durationMillis = CardAnimTokens.ANIM_DURATION)
+                else -> tween(durationMillis = 0)
+            }
+        }
+    ) {
         when (it) {
             SwipeAction.Like -> CardAnimTokens.ANIM_X_OFFSET * containerSize.width
             SwipeAction.Dislike -> -CardAnimTokens.ANIM_X_OFFSET * containerSize.width
             else -> 0f
         }
     }
-    val animRotationZ by transition.animateFloat {
+    val animRotationZ by transition.animateFloat(
+        transitionSpec = {
+            when {
+                targetState == SwipeAction.Like ||
+                        targetState == SwipeAction.Dislike -> tween(durationMillis = CardAnimTokens.ANIM_DURATION)
+                else -> tween(durationMillis = 0)
+            }
+        }
+    ) {
         when (it) {
             SwipeAction.Like -> CardAnimTokens.ANIM_Z_ROTATION
             SwipeAction.Dislike -> -CardAnimTokens.ANIM_Z_ROTATION
@@ -98,7 +129,10 @@ private fun HomePageContent(
     }
 
     LaunchedEffect(transition.isRunning) {
-        if (!transition.isRunning) {
+        val action = swipeAction
+        val pokemon = firstPokemon
+        if (!transition.isRunning && action != null && pokemon != null) {
+            onSwipeAction(action, pokemon)
             swipeAction = null
         }
     }
@@ -108,6 +142,22 @@ private fun HomePageContent(
             .onGloballyPositioned { containerSize = it.size.toSize() }
             .then(modifier)
     ) {
+        secondPokemon?.let { pokemon ->
+            PokemonCard(
+                zIndex = 0,
+                name = pokemon.name,
+                previewImageUrl = pokemon.sprites.otherSprites.officialArtwork.frontDefault,
+                color = pokemon.types.firstOrNull()?.type?.name?.color ?: PokemonType.Normal.color,
+                modifier = Modifier
+                    .padding(
+                        start = 32.dp,
+                        end = 32.dp,
+                        top = 8.dp,
+                        bottom = 50.dp
+                    )
+                    .fillMaxSize()
+            )
+        }
         firstPokemon?.let { pokemon ->
             PokemonCard(
                 zIndex = 2,
@@ -145,6 +195,7 @@ private fun HomePageContentPreview() {
     TrainerTheme {
         HomePageContent(
             pokemons = listOf(Pokemon.Sample, Pokemon.Sample),
+            onSwipeAction = { _, _ -> },
             modifier = Modifier
                 .fillMaxSize()
         )

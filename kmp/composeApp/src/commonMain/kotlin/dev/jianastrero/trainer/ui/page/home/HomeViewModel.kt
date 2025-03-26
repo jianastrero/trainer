@@ -8,7 +8,6 @@ import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -37,6 +36,18 @@ class HomeViewModel(
             _pokemons.emit(_pokemons.value + response)
         }.onFailure { throwable ->
             throwable.printStackTrace()
+        }
+    }
+
+    fun dislike(pokemon: Pokemon) {
+        viewModelScope.launch {
+            _pokemons.emit(_pokemons.value - pokemon)
+        }
+    }
+
+    fun like(pokemon: Pokemon) {
+        viewModelScope.launch {
+            _pokemons.emit(_pokemons.value - pokemon)
         }
     }
 
