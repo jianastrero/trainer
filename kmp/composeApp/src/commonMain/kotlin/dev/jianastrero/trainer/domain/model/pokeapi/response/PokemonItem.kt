@@ -9,8 +9,8 @@ data class PokemonItem(
     @SerialName("name") val name: String,
     @SerialName("url") val url: String
 ) {
-    val id: Int
-        get() = url.split("/").last { it.isNotEmpty() }.toIntOrNull() ?: 1
+    val id: String
+        get() = url.split("/").last { it.isNotEmpty() }
 
     val imageUrl: String
         get() = "$POKEMON_OFFICIAL_ARTWORK_BASE_URL/$id.$POKEMON_OFFICIAL_ARTWORK_EXTENSION"

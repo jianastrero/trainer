@@ -8,7 +8,7 @@ class ConfigRepositoryImpl(
 ) : ConfigRepository {
 
     override var isDarkMode: Boolean
-        get() = dataStore.getBoolean(KEY_IS_DARK_MODE, false)
+        get() = dataStore.getBoolean(KEY_IS_DARK_MODE, true)
         set(value) {
             dataStore.putBoolean(KEY_IS_DARK_MODE, value)
         }

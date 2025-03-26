@@ -2,6 +2,7 @@ package dev.jianastrero.trainer.data.usecase
 
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokeApiPaginatedResponse
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokemonItem
+import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
 class GetPokemonsUseCase(
@@ -9,10 +10,10 @@ class GetPokemonsUseCase(
 ) {
     private var nextPage = startingPage
 
-    suspend operator fun invoke(): PokeApiPaginatedResponse<PokemonItem> {
+    suspend operator fun invoke(): List<Pokemon> {
         val response = repository.getPokemonList(nextPage)
         nextPage = response.nextPage ?: startingPage
-        return response
+        return response.results.map { repository.getPokemon(it.id) }
     }
 
     fun reset() {
@@ -20,6 +21,6 @@ class GetPokemonsUseCase(
     }
 
     companion object {
-        private val startingPage = PokeApiPaginatedResponse.NextPage(0, 20)
+        private val startingPage = PokeApiPaginatedResponse.NextPage(0, 1)
     }
 }

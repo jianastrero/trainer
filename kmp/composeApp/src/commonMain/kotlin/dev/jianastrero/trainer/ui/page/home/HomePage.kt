@@ -10,8 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.P
 import androidx.compose.ui.unit.dp
+import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.page.main.MainViewModel
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
@@ -26,10 +26,10 @@ fun HomePage(
     viewModel: HomeViewModel = koinInject(),
 ) {
     val isDarkMode by mainViewModel.isDarkMode.collectAsState()
-    val pokemonItems by viewModel.pokemonItems.collectAsState()
+    val pokemons by viewModel.pokemons.collectAsState()
 
-    LaunchedEffect(pokemonItems) {
-        if (pokemonItems.size <= 5) {
+    LaunchedEffect(pokemons) {
+        if (pokemons.size <= 5) {
             viewModel.getNextPokemons()
         }
     }
@@ -48,12 +48,13 @@ fun HomePage(
                     vertical = 128.dp
                 )
         ) {
-            if (pokemonItems.isNotEmpty()) {
-                val pokemonItem = pokemonItems.first()
+            if (pokemons.isNotEmpty()) {
+                val pokemon = pokemons.first()
                 PokemonCard(
                     zIndex = 2,
-                    name = pokemonItem.name,
-                    previewImageUrl = pokemonItem.imageUrl,
+                    name = pokemon.name,
+                    previewImageUrl = pokemon.sprites.otherSprites.officialArtwork.frontDefault,
+                    color = pokemon.types.firstOrNull()?.type?.name?.color ?: PokemonType.Normal.color,
                     modifier = Modifier.fillMaxSize()
                 )
             }

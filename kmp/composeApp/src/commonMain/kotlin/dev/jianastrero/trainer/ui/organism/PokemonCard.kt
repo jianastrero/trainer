@@ -1,6 +1,7 @@
 package dev.jianastrero.trainer.ui.organism
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,18 +18,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import coil3.compose.AsyncImage
+import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -37,6 +48,7 @@ fun PokemonCard(
     zIndex: Int,
     name: String,
     previewImageUrl: String,
+    color: Color,
     modifier: Modifier = Modifier
 ) {
     val enabled by remember(zIndex) {
@@ -46,28 +58,33 @@ fun PokemonCard(
     }
     val name = name.split("\\s+".toRegex())
         .joinToString(" ") { it.capitalize(Locale.current) }
-    val shadowColor = if (TrainerTheme.isDarkMode) {
-        MaterialTheme.colors.onBackground
-    } else {
-        MaterialTheme.colors.primary
-    }
-
-    LaunchedEffect(Unit) {
-        println("JIANDDEBUG -> previewImageUrl: $previewImageUrl")
-    }
+    var size by remember { mutableStateOf(Size.Unspecified) }
 
     Column(
         modifier = modifier
+            .onGloballyPositioned {
+                size = it.size.toSize()
+            }
             .shadow(
                 elevation = if (enabled) 16.dp else 0.dp,
                 shape = MaterialTheme.shapes.medium,
-                ambientColor = shadowColor,
-                spotColor = shadowColor
+                ambientColor = color,
+                spotColor = color
             )
             .background(
-                color = MaterialTheme.colors.surface,
+                brush = Brush.radialGradient(
+                    0f to color,
+                    1f to MaterialTheme.colors.background,
+                    center = if (size == Size.Unspecified) Offset.Zero else size.center.copy(y = 0f),
+                    radius = if (size == Size.Unspecified) Float.POSITIVE_INFINITY else size.height * 1.1f
+                ),
                 shape = MaterialTheme.shapes.medium
-            ),
+            )
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
+                shape = MaterialTheme.shapes.medium
+            )
     ) {
         AsyncImage(
             model = previewImageUrl,
@@ -101,6 +118,7 @@ private fun PokemonCardPreview() {
             2,
             "Pikachu",
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+            color = PokemonType.Psychic.color,
             modifier = Modifier.size(320.dp, 640.dp)
         )
     }
