@@ -70,8 +70,10 @@ private fun HomePageContent(
                 color = pokemon.types.firstOrNull()?.type?.name?.color ?: PokemonType.Normal.color,
                 modifier = Modifier
                     .padding(
-                        horizontal = 32.dp,
-                        vertical = 50.dp
+                        start = 32.dp,
+                        end = 32.dp,
+                        top = 8.dp,
+                        bottom = 50.dp
                     )
                     .fillMaxSize()
             )
