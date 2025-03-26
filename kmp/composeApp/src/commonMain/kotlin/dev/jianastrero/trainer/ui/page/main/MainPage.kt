@@ -22,7 +22,6 @@ fun MainPage(
         modifier = modifier
     ) { paddingValues ->
         HomePage(
-            mainViewModel = viewModel,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),

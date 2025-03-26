@@ -21,11 +21,10 @@ import org.koin.compose.koinInject
 
 @Composable
 fun HomePage(
-    mainViewModel: MainViewModel,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinInject(),
 ) {
-    val isDarkMode by mainViewModel.isDarkMode.collectAsState()
+    val isDarkMode by viewModel.isDarkMode.collectAsState()
     val pokemons by viewModel.pokemons.collectAsState()
 
     LaunchedEffect(pokemons) {
@@ -36,7 +35,7 @@ fun HomePage(
 
     AppBarTemplate(
         isDarkMode = isDarkMode,
-        onDarkModeToggle = mainViewModel::setDarkMode,
+        onDarkModeToggle = viewModel::setDarkMode,
         modifier = modifier.background(Color.Red)
     ) { paddingValues ->
         Box(
@@ -66,8 +65,6 @@ fun HomePage(
 @Composable
 private fun HomePagePreview() {
     TrainerTheme {
-        HomePage(
-            mainViewModel = koinInject(),
-        )
+        HomePage(modifier = Modifier.fillMaxSize())
     }
 }

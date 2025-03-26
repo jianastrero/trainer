@@ -5,6 +5,6 @@ import dev.jianastrero.trainer.ui.page.main.MainViewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    factory { MainViewModel(get(), get()) }
-    factory { HomeViewModel(get()) }
+    factory { MainViewModel(get()) }
+    factory { HomeViewModel(get(), get(), get()) }
 }

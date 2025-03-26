@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     isDarkModeUseCase: IsDarkModeUseCase,
-    private val setDarkModeUseCase: SetDarkModeUseCase
 ) : ViewModel() {
 
     private val _isDarkMode = MutableStateFlow(isDarkModeUseCase())
@@ -19,13 +18,6 @@ class MainViewModel(
 
     private val _selectedBottomNavItem = MutableStateFlow(BottomNavItem.Home)
     val selectedBottomNavItem = _selectedBottomNavItem.asStateFlow()
-
-    fun setDarkMode(isDarkMode: Boolean) {
-        viewModelScope.launch {
-            setDarkModeUseCase(isDarkMode)
-            _isDarkMode.emit(isDarkMode)
-        }
-    }
 
     fun setSelectedBottomNavItem(bottomNavItem: BottomNavItem) {
         viewModelScope.launch {
