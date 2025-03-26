@@ -71,7 +71,7 @@ private fun HomePageContent(
                 modifier = Modifier
                     .padding(
                         horizontal = 32.dp,
-                        vertical = 72.dp
+                        vertical = 50.dp
                     )
                     .fillMaxSize()
             )
