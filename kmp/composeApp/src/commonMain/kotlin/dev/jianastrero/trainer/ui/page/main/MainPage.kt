@@ -1,17 +1,21 @@
 package dev.jianastrero.trainer.ui.page.main
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
-import org.koin.compose.koinInject
 
 @Composable
 fun MainPage(
+    viewModel: MainViewModel,
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = koinInject(),
 ) {
+    val isDarkMode by viewModel.isDarkMode.collectAsState()
+
     AppBarTemplate(
-        onDarkModeToggle = {},
+        isDarkMode = isDarkMode,
+        onDarkModeToggle = viewModel::setDarkMode,
         modifier = modifier
     ) { paddingValues ->
 

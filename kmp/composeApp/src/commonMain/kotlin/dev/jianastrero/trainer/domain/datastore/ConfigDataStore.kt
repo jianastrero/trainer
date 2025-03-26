@@ -1,5 +1,6 @@
 package dev.jianastrero.trainer.domain.datastore
 
 interface ConfigDataStore {
-    var isDarkMode: Boolean
+    fun getBoolean(key: String, defaultValue: Boolean): Boolean
+    fun putBoolean(key: String, value: Boolean)
 }

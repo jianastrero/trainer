@@ -7,14 +7,12 @@ class ConfigDataStoreLocal(
     private val preference: KMPPreference
 ) : ConfigDataStore {
 
-    override var isDarkMode: Boolean
-        get() = preference.getBoolean(KEY_IS_DARK_MODE, false)
-        set(value) {
-            preference.put(KEY_IS_DARK_MODE, value)
-        }
+    override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+        return preference.getBoolean(key, defaultValue)
+    }
 
-    companion object {
-        private const val KEY_IS_DARK_MODE = "KEY_IS_DARK_MODE"
+    override fun putBoolean(key: String, value: Boolean) {
+        preference.put(key, value)
     }
 
 }

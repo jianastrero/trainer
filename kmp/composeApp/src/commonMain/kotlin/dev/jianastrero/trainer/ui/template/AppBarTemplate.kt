@@ -10,19 +10,22 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key.Companion.P
 import dev.jianastrero.trainer.ui.organism.AppBar
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AppBarTemplate(
-    onDarkModeToggle: (Boolean) -> Unit = {},
+    isDarkMode: Boolean,
+    onDarkModeToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
             AppBar(
+                isDarkMode = isDarkMode,
                 onDarkModeToggle = onDarkModeToggle,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -36,7 +39,10 @@ fun AppBarTemplate(
 @Composable
 private fun AppBarsTemplatePreview() {
     TrainerTheme {
-        AppBarTemplate {
+        AppBarTemplate(
+            isDarkMode = true,
+            onDarkModeToggle = {}
+        ) {
             Box(modifier = Modifier.fillMaxSize().padding(it)) {
                 Text(
                     "Content",
