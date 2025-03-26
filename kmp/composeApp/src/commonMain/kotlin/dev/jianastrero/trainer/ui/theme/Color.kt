@@ -36,6 +36,6 @@ val TrainerDarkColors = Colors(
     onSecondary = Light,
     onBackground = Light,
     onSurface = Light,
-    onError = Dark,
+    onError = Light,
     isLight = false
 )

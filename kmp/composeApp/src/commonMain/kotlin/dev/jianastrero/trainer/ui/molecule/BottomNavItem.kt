@@ -40,8 +40,9 @@ fun BottomNavItem(
     inactiveIcon: DrawableResource,
     modifier: Modifier = Modifier
 ) {
+    val color = MaterialTheme.colors.onBackground
     val colorAnim by animateColorAsState(
-        targetValue = if (isActive) Dark else Dark.copy(alpha = 0.6f),
+        targetValue = if (isActive) color else color.copy(alpha = 0.6f),
         animationSpec = tween()
     )
     val weightAnim by animateIntAsState(
@@ -61,7 +62,7 @@ fun BottomNavItem(
         Image(
             painter = painterResource(if (isActive) activeIcon else inactiveIcon),
             contentDescription = label,
-            colorFilter = if (isActive) null else ColorFilter.tint(Dark.copy(alpha = 0.6f)),
+            colorFilter = if (isActive) null else ColorFilter.tint(color.copy(alpha = 0.6f)),
             modifier = Modifier.size(24.dp)
         )
         Text(
