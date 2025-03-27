@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.key.Key.Companion.L
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
@@ -28,18 +30,15 @@ import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import dev.jianastrero.trainer.ui.molecule.SwipeAction
 import dev.jianastrero.trainer.ui.molecule.SwipeButtons
+import dev.jianastrero.trainer.ui.organism.CardAction
 import dev.jianastrero.trainer.ui.organism.PokemonCard
+import dev.jianastrero.trainer.ui.page.home.type
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
+import kotlinx.coroutines.NonCancellable.start
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
-
-private data object CardAnimTokens {
-    const val ANIM_X_OFFSET = 1.4f
-    const val ANIM_Z_ROTATION = 30f
-    const val ANIM_DURATION = 300
-}
 
 @Composable
 fun HomePage(
@@ -81,106 +80,34 @@ private fun HomePageContent(
     onSwipeAction: (SwipeAction, Pokemon) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var containerSize by remember { mutableStateOf(Size.Zero) }
-    val firstPokemon by remember(pokemons) {
-        derivedStateOf {
-            pokemons.firstOrNull()
-        }
-    }
-    val secondPokemon by remember(pokemons) {
-        derivedStateOf {
-            pokemons.getOrNull(1)
-        }
-    }
-    var swipeAction: SwipeAction? by remember {
-        mutableStateOf(null)
-    }
+    var cardAction by remember { mutableStateOf<CardAction?>(null) }
 
-    val transition = updateTransition(swipeAction)
-    val animTranslationX by transition.animateFloat(
-        transitionSpec = {
-            when {
-                targetState == SwipeAction.Like ||
-                targetState == SwipeAction.Dislike -> tween(durationMillis = CardAnimTokens.ANIM_DURATION)
-                else -> tween(durationMillis = 0)
-            }
-        }
-    ) {
-        when (it) {
-            SwipeAction.Like -> CardAnimTokens.ANIM_X_OFFSET * containerSize.width
-            SwipeAction.Dislike -> -CardAnimTokens.ANIM_X_OFFSET * containerSize.width
-            else -> 0f
-        }
-    }
-    val animRotationZ by transition.animateFloat(
-        transitionSpec = {
-            when {
-                targetState == SwipeAction.Like ||
-                        targetState == SwipeAction.Dislike -> tween(durationMillis = CardAnimTokens.ANIM_DURATION)
-                else -> tween(durationMillis = 0)
-            }
-        }
-    ) {
-        when (it) {
-            SwipeAction.Like -> CardAnimTokens.ANIM_Z_ROTATION
-            SwipeAction.Dislike -> -CardAnimTokens.ANIM_Z_ROTATION
-            else -> 0f
-        }
-    }
-
-    LaunchedEffect(transition.isRunning) {
-        val action = swipeAction
-        val pokemon = firstPokemon
-        if (!transition.isRunning && action != null && pokemon != null) {
-            onSwipeAction(action, pokemon)
-            swipeAction = null
-        }
-    }
-
-    Box(
-        modifier = Modifier
-            .onGloballyPositioned { containerSize = it.size.toSize() }
-            .then(modifier)
-    ) {
-        secondPokemon?.let { pokemon ->
-            PokemonCard(
-                zIndex = 0,
-                name = pokemon.name,
-                previewImageUrl = pokemon.sprites.otherSprites.officialArtwork.frontDefault,
-                color = pokemon.types.firstOrNull()?.type?.name?.color ?: PokemonType.Normal.color,
-                modifier = Modifier
-                    .padding(
-                        start = 32.dp,
-                        end = 32.dp,
-                        top = 8.dp,
-                        bottom = 50.dp
-                    )
-                    .fillMaxSize()
-            )
-        }
-        firstPokemon?.let { pokemon ->
-            PokemonCard(
-                zIndex = 2,
-                name = pokemon.name,
-                previewImageUrl = pokemon.sprites.otherSprites.officialArtwork.frontDefault,
-                color = pokemon.types.firstOrNull()?.type?.name?.color ?: PokemonType.Normal.color,
-                modifier = Modifier
-                    .padding(
-                        start = 32.dp,
-                        end = 32.dp,
-                        top = 8.dp,
-                        bottom = 50.dp
-                    )
-                    .fillMaxSize()
-                    .graphicsLayer {
-                        translationX = animTranslationX
-                        rotationZ = animRotationZ
-                    }
-            )
-        }
+    Box(modifier = modifier) {
+        PokemonCards(
+            cardAction = cardAction,
+            onCardAction = { action ->
+                cardAction = action
+            },
+            onSwipeAction = onSwipeAction,
+            pokemons = pokemons,
+            modifier = Modifier
+                .padding(
+                    start = 32.dp,
+                    end = 32.dp,
+                    top = 8.dp,
+                    bottom = 50.dp
+                )
+                .fillMaxSize()
+        )
 
         SwipeButtons(
-            onAction = { swipeAction = it },
+            enabled = cardAction == null,
+            onAction = { action ->
+                cardAction = when (action) {
+                    SwipeAction.Like -> CardAction.SwipeRight
+                    SwipeAction.Dislike -> CardAction.SwipeLeft
+                }
+            },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(12.dp)
@@ -188,6 +115,58 @@ private fun HomePageContent(
         )
     }
 }
+
+@Composable
+private fun PokemonCards(
+    cardAction: CardAction?,
+    onCardAction: (CardAction?) -> Unit,
+    onSwipeAction: (SwipeAction, Pokemon) -> Unit,
+    pokemons: List<Pokemon>,
+    modifier: Modifier = Modifier
+) {
+    val firstPokemon by remember(pokemons) {
+        derivedStateOf {
+            pokemons.firstOrNull()
+        }
+    }
+    var secondPokemon by remember { mutableStateOf<Pokemon?>(null) }
+
+    LaunchedEffect(pokemons, firstPokemon) {
+        secondPokemon = pokemons.getOrNull(1)
+    }
+
+    Box(modifier = modifier) {
+        PokemonCard(
+            enabled = false,
+            name = secondPokemon?.name.orEmpty(),
+            previewImageUrl = secondPokemon.officialArtwork,
+            color = secondPokemon.type.color,
+        )
+        PokemonCard(
+            name = firstPokemon?.name.orEmpty(),
+            previewImageUrl = firstPokemon.officialArtwork,
+            color = firstPokemon.type.color,
+            cardAction = cardAction,
+            onCardAction = onCardAction@{ action ->
+                val swipeAction = when (action) {
+                    CardAction.SwipeRight -> SwipeAction.Like
+                    CardAction.SwipeLeft -> SwipeAction.Dislike
+                    else -> null
+                } ?: return@onCardAction
+                val pokemon = firstPokemon ?: return@onCardAction
+
+                onSwipeAction(swipeAction, pokemon)
+                onCardAction(null)
+            },
+        )
+    }
+}
+
+private val Pokemon?.officialArtwork: String
+    get() = this?.sprites?.otherSprites?.officialArtwork?.frontDefault.orEmpty()
+
+private val Pokemon?.type: PokemonType
+    get() = this?.types?.firstOrNull()?.type?.name ?: PokemonType.Unknown
 
 @Preview
 @Composable

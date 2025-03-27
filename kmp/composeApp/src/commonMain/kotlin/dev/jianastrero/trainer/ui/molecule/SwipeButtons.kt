@@ -23,22 +23,25 @@ enum class SwipeAction {
 @Composable
 fun SwipeButtons(
     onAction: (action: SwipeAction) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
     Row(
-        horizontalArrangement = Arrangement.SpaceAround,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         SwipeButton(
             icon = Res.drawable.ic_dislike,
             onClick = { onAction(SwipeAction.Dislike) },
+            enabled = enabled,
             modifier = Modifier.size(64.dp)
         )
 
         SwipeButton(
             icon = Res.drawable.ic_like,
             onClick = { onAction(SwipeAction.Like) },
+            enabled = enabled,
             modifier = Modifier.size(64.dp)
         )
     }

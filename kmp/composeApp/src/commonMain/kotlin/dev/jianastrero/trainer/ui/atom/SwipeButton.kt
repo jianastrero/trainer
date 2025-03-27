@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
@@ -38,10 +39,12 @@ import trainer.composeapp.generated.resources.ic_love_active
 fun SwipeButton(
     icon: DrawableResource,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
     Box(
         modifier = modifier
+            .alpha(if (enabled) 1f else 0.4f)
             .shadow(
                 elevation = 2.dp,
                 shape = MaterialTheme.shapes.large,
@@ -58,7 +61,7 @@ fun SwipeButton(
                 shape = MaterialTheme.shapes.medium
             )
             .clip(MaterialTheme.shapes.large)
-            .clickable(onClick = onClick)
+            .clickable(enabled = enabled, onClick = onClick)
     ) {
         Image(
             painter = painterResource(icon),
