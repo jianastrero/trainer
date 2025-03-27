@@ -4,6 +4,7 @@ import dev.jianastrero.trainer.domain.datastore.PokeApiDataStore
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokeApiPaginatedResponse
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokemonItem
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.model.pokeapi.response.species.PokemonSpecies
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
 class PokeApiRepositoryImpl(
@@ -17,4 +18,7 @@ class PokeApiRepositoryImpl(
 
     override suspend fun getPokemon(id: String): Pokemon =
         remote.getPokemon(id)
+
+    override suspend fun getSpecies(id: String): PokemonSpecies =
+        remote.getSpecies(id)
 }
