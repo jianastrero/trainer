@@ -5,6 +5,7 @@ import dev.jianastrero.trainer.domain.datastore.PokeApiDataStore
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokeApiPaginatedResponse
 import dev.jianastrero.trainer.domain.model.pokeapi.response.PokemonItem
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.model.pokeapi.response.species.PokemonSpecies
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 
@@ -22,6 +23,12 @@ class PokeApiDataStoreRemote(
 
     override suspend fun getPokemon(id: String): Pokemon {
         val response = pokeApiClient.client.get("/api/v2/pokemon/$id")
+
+        return response.body()
+    }
+
+    override suspend fun getSpecies(id: String): PokemonSpecies {
+        val response = pokeApiClient.client.get("/api/v2/pokemon-species/$id")
 
         return response.body()
     }
