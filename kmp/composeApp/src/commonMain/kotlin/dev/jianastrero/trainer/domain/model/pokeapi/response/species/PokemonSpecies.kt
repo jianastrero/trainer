@@ -19,4 +19,22 @@ data class PokemonSpecies(
     @SerialName("name") val name: String,
     @SerialName("order") val order: Int,
     @SerialName("pal_park_encounters") val palParkEncounters: List<PokemonSpeciesPalParkEncounter>,
-)
+) {
+    companion object {
+        val Sample = PokemonSpecies(
+            baseHappiness = 0,
+            captureRate = 0,
+            flavorTextEntries = emptyList(),
+            genera = emptyList(),
+            growthRate = PokemonSpeciesGrowthRate("sample", "sample"),
+            habitat = PokemonSpeciesHabitat("sample", "sample"),
+            id = 0,
+            isBaby = false,
+            isLegendary = false,
+            isMythical = false,
+            name = "Sample",
+            order = 0,
+            palParkEncounters = emptyList()
+        )
+    }
+}
