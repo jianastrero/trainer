@@ -30,22 +30,18 @@ import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.key.Key.Companion.M
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import coil3.compose.AsyncImage
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
+import dev.jianastrero.trainer.domain.ext.capitalized
 import dev.jianastrero.trainer.ui.modifier.then
-import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 private data object CardTokens {
@@ -172,12 +168,6 @@ fun PokemonCard(
         )
     }
 }
-
-private val String.capitalized: String
-    get() {
-        return split("\\s+".toRegex())
-            .joinToString(" ") { it.capitalize(Locale.current) }
-    }
 
 @Preview
 @Composable

@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
+import dev.jianastrero.trainer.domain.ext.officialArtwork
+import dev.jianastrero.trainer.domain.ext.type
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import dev.jianastrero.trainer.ui.molecule.SwipeAction
 import dev.jianastrero.trainer.ui.molecule.SwipeButtons
@@ -149,12 +151,6 @@ private fun PokemonCards(
         )
     }
 }
-
-private val Pokemon?.officialArtwork: String
-    get() = this?.sprites?.otherSprites?.officialArtwork?.frontDefault.orEmpty()
-
-private val Pokemon?.type: PokemonType
-    get() = this?.types?.firstOrNull()?.type?.name ?: PokemonType.Unknown
 
 @Preview
 @Composable
