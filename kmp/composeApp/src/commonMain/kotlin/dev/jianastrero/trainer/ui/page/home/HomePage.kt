@@ -1,11 +1,7 @@
 package dev.jianastrero.trainer.ui.page.home
 
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,24 +15,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.key.Key.Companion.L
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
 import dev.jianastrero.trainer.ui.molecule.SwipeAction
 import dev.jianastrero.trainer.ui.molecule.SwipeButtons
 import dev.jianastrero.trainer.ui.organism.CardAction
 import dev.jianastrero.trainer.ui.organism.PokemonCard
-import dev.jianastrero.trainer.ui.page.home.type
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
-import kotlinx.coroutines.NonCancellable.start
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 
