@@ -137,7 +137,7 @@ fun PokemonCard(
             )
             .clip(MaterialTheme.shapes.medium)
             .clickable(enabled = enabled) {
-                // TODO: Implement view
+                onCardAction(CardAction.View)
             }
     ) {
         AsyncImage(

@@ -22,15 +22,12 @@ fun App(
 
     SystemBarIconColorEffect(isDarkMode)
 
-    TrainerTheme(
-        isDarkMode = isDarkMode
-    ) {
+    TrainerTheme(isDarkMode = isDarkMode) {
         MainPage(
             viewModel = viewModel,
             modifier = Modifier
                 .background(MaterialTheme.colors.background)
                 .fillMaxSize()
-                .systemBarsPadding()
         )
     }
 }

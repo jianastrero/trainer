@@ -21,6 +21,7 @@ import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.ext.officialArtwork
 import dev.jianastrero.trainer.domain.ext.type
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.nav.NavDirection
 import dev.jianastrero.trainer.ui.molecule.SwipeAction
 import dev.jianastrero.trainer.ui.molecule.SwipeButtons
 import dev.jianastrero.trainer.ui.organism.CardAction
@@ -32,6 +33,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun HomePage(
+    navigate: (NavDirection) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinInject(),
 ) {
@@ -51,6 +53,9 @@ fun HomePage(
     ) { paddingValues ->
         HomePageContent(
             pokemons = pokemons,
+            onView = {
+                navigate(NavDirection.Screen.PokemonDetail(it))
+            },
             onSwipeAction = { action, pokemon ->
                 when (action) {
                     SwipeAction.Like -> viewModel.like(pokemon)
@@ -67,6 +72,7 @@ fun HomePage(
 @Composable
 private fun HomePageContent(
     pokemons: List<Pokemon>,
+    onView: (pokemonId: String) -> Unit,
     onSwipeAction: (SwipeAction, Pokemon) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -75,9 +81,8 @@ private fun HomePageContent(
     Box(modifier = modifier) {
         PokemonCards(
             cardAction = cardAction,
-            onCardAction = { action ->
-                cardAction = action
-            },
+            onView = onView,
+            onCardAction = { cardAction = it},
             onSwipeAction = onSwipeAction,
             pokemons = pokemons,
             modifier = Modifier
@@ -109,6 +114,7 @@ private fun HomePageContent(
 @Composable
 private fun PokemonCards(
     cardAction: CardAction?,
+    onView: (String) -> Unit,
     onCardAction: (CardAction?) -> Unit,
     onSwipeAction: (SwipeAction, Pokemon) -> Unit,
     pokemons: List<Pokemon>,
@@ -141,8 +147,8 @@ private fun PokemonCards(
                 val swipeAction = when (action) {
                     CardAction.SwipeRight -> SwipeAction.Like
                     CardAction.SwipeLeft -> SwipeAction.Dislike
-                    else -> null
-                } ?: return@onCardAction
+                    CardAction.View -> return@onCardAction onView(firstPokemon?.id?.toString().orEmpty())
+                }
                 val pokemon = firstPokemon ?: return@onCardAction
 
                 onSwipeAction(swipeAction, pokemon)
@@ -158,6 +164,7 @@ private fun HomePageContentPreview() {
     TrainerTheme {
         HomePageContent(
             pokemons = listOf(Pokemon.Sample, Pokemon.Sample),
+            onView = {},
             onSwipeAction = { _, _ -> },
             modifier = Modifier
                 .fillMaxSize()
