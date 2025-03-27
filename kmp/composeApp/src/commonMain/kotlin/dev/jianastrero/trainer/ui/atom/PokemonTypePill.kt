@@ -31,7 +31,7 @@ fun PokemonTypePill(
     modifier: Modifier = Modifier
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .background(
@@ -45,15 +45,15 @@ fun PokemonTypePill(
                 painter = painterResource(icon),
                 contentDescription = pokemonType.name,
                 tint = pokemonType.color,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(14.dp)
             )
         }
         Text(
             text = pokemonType.name,
             color = pokemonType.color,
-            fontSize = 14.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Black,
-            lineHeight = 10.sp
+            lineHeight = 12.sp
         )
     }
 }

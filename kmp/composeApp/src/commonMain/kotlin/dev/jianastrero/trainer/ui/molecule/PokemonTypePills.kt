@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.ui.atom.PokemonTypePill
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -36,7 +37,7 @@ fun PokemonTypePills(
 @Preview
 @Composable
 private fun PreviewPokemonTypePills() {
-    MaterialTheme {
+    TrainerTheme {
         PokemonTypePills(
             pokemonTypes = PokemonType.entries,
             modifier = Modifier

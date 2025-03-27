@@ -30,4 +30,10 @@ data class Pokemon(
             weight = 0
         )
     }
+
+    val heightCm: Float
+        get() = height * 10f
+
+    val weightKg: Float
+        get() = weight / 10f
 }

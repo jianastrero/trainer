@@ -6,6 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import dev.jianastrero.trainer.domain.screen.Screen
+import dev.jianastrero.trainer.ui.page.details.PokemonDetailsPage
 import dev.jianastrero.trainer.ui.page.home.HomePage
 import dev.jianastrero.trainer.ui.template.BottomNavTemplate
 
@@ -14,6 +20,7 @@ fun MainPage(
     viewModel: MainViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val navController = rememberNavController()
     val selectedBottomNavItem by viewModel.selectedBottomNavItem.collectAsState()
 
     BottomNavTemplate(
@@ -21,10 +28,27 @@ fun MainPage(
         onSelectBottomNavItem = viewModel::setSelectedBottomNavItem,
         modifier = modifier
     ) { paddingValues ->
-        HomePage(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-        )
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Main
+        ) {
+            composable<Screen.Main> {
+                HomePage(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                )
+            }
+
+            composable<Screen.PokemonDetail> { backStackEntry ->
+                val pokemon = backStackEntry.toRoute<Screen.PokemonDetail>()
+                PokemonDetailsPage(
+                    pokemonId = pokemon.id,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                )
+            }
+        }
     }
 }

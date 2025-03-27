@@ -17,6 +17,7 @@ import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonType
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonTypeName
 import dev.jianastrero.trainer.ui.molecule.PokemonTypePills
 import dev.jianastrero.trainer.ui.theme.Light
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import dev.jianastrero.trainer.domain.enumeration.PokemonType as PokemonTypeEnum
 
@@ -45,7 +46,7 @@ fun PokemonTitleBar(
 @Preview
 @Composable
 private fun PreviewPokemonTitleBar() {
-    MaterialTheme {
+    TrainerTheme {
         PokemonTitleBar(
             pokemon = Pokemon.Sample.copy(
                 name = "Bulbasaur",
