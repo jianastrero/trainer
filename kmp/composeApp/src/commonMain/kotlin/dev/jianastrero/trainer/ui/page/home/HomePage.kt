@@ -28,6 +28,10 @@ import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
 import org.koin.compose.koinInject
 
+private data object HomePageTokens {
+    val MIN_POKEMONS = 5
+}
+
 @Composable
 fun HomePage(
     navigate: (NavDirection) -> Unit,
@@ -37,7 +41,7 @@ fun HomePage(
     val pokemons by viewModel.pokemons.collectAsState()
 
     LaunchedEffect(pokemons) {
-        if (pokemons.size <= 5) {
+        if (pokemons.size <= HomePageTokens.MIN_POKEMONS) {
             viewModel.getNextPokemons()
         }
     }

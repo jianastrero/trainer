@@ -12,10 +12,11 @@ class PokeApiRepositoryImpl(
     private val dataStore: PokemonDataStore
 ) : PokeApiRepository {
 
-    override suspend fun getPokemonList(
+    override suspend fun getNextPokemons(
         offset: Int,
         limit: Int
     ): List<Pokemon> {
+        println("JIANDDEBUG -> offset: $offset, limit: $limit")
         val pokemons = dataStore.get(offset = offset, limit = limit)
 
         if (pokemons.isNotEmpty()) return pokemons
@@ -30,7 +31,7 @@ class PokeApiRepositoryImpl(
         }
         dataStore.insert(pokemonList)
 
-        return pokemons
+        return pokemonList
     }
 
     override suspend fun getPokemon(id: String): Pokemon {

@@ -11,13 +11,13 @@ class GetPokemonsUseCase(
         private set
 
     suspend operator fun invoke(): List<Pokemon> {
-        val pokemons = repository.getPokemonList(offset = nextOffset)
+        val pokemons = repository.getNextPokemons(offset = nextOffset)
         if (pokemons.isEmpty()) {
             hasNext = false
             return emptyList()
         }
 
-        this.nextOffset = pokemons.size
+        this.nextOffset += pokemons.size
         return pokemons
     }
 

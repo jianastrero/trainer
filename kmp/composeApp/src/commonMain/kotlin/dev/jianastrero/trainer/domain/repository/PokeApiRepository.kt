@@ -4,7 +4,7 @@ import dev.jianastrero.trainer.domain.entity.Pokemon
 
 interface PokeApiRepository {
 
-    suspend fun getPokemonList(
+    suspend fun getNextPokemons(
         offset: Int,
         limit: Int = 5
     ): List<Pokemon>
