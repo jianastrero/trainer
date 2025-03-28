@@ -40,6 +40,8 @@ import androidx.compose.ui.unit.toSize
 import coil3.compose.AsyncImage
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.ext.capitalized
+import dev.jianastrero.trainer.ui.modifier.RadialGradientTokens
+import dev.jianastrero.trainer.ui.modifier.background
 import dev.jianastrero.trainer.ui.modifier.then
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -122,17 +124,14 @@ fun PokemonCard(
                 spotColor = color
             )
             .background(
-                brush = Brush.radialGradient(
-                    0f to color,
-                    CardTokens.GRADIENT_RADIUS to MaterialTheme.colors.background,
-                    center = if (size == Size.Unspecified) Offset.Zero else size.center.copy(y = 0f),
-                    radius = if (size == Size.Unspecified) Float.POSITIVE_INFINITY else size.height
-                ),
+                radialColor = color,
+                backgroundColor = MaterialTheme.colors.background,
+                radiusBias = RadialGradientTokens.Bias.Height,
                 shape = MaterialTheme.shapes.medium
             )
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
+                color = color,
                 shape = MaterialTheme.shapes.medium
             )
             .clip(MaterialTheme.shapes.medium)
