@@ -36,4 +36,7 @@ data class Pokemon(
 
     val weightKg: Float
         get() = weight / 10f
+
+    val officialArtwork: String
+        get() = sprites.otherSprites.officialArtwork.frontDefault
 }
