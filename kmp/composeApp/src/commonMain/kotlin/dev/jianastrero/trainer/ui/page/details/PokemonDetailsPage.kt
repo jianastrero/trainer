@@ -39,21 +39,26 @@ fun PokemonDetailsPage(
     modifier: Modifier = Modifier,
     viewModel: PokemonDetailsViewModel = koinInject(),
 ) {
-    val pokemon by viewModel.pokemon.collectAsState()
+    val state by viewModel.state.collectAsState()
     val background by animateColorAsState(
-        if (pokemon == null) {
+        if (state.pokemon == null) {
             MaterialTheme.colors.background
         } else {
-            pokemon?.type?.color?.copy(alpha = 0.72f) ?: MaterialTheme.colors.background
+            state.pokemon?.type?.color?.copy(alpha = 0.72f) ?: MaterialTheme.colors.background
         },
         animationSpec = tween(PokemonDetailsPageTokens.REVEAL_ANIM_DURATION)
     )
 
-    val images by remember(pokemon) {
+    val images: List<String> by remember(state) {
         derivedStateOf {
-            List(10) {
-                pokemon?.officialArtwork
-            }.filterNotNull()
+            val officialArtwork = state.pokemon?.officialArtwork
+
+            var cards = state.pokemonCards.map { it.images.large }
+            if (officialArtwork != null) {
+                cards = listOf(officialArtwork) + cards
+            }
+
+            return@derivedStateOf cards
         }
     }
 
@@ -79,15 +84,14 @@ fun PokemonDetailsPage(
         ) {
             item {
                 PokemonHeader(
-                    pokemon = pokemon,
+                    pokemon = state.pokemon,
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp)
                 )
             }
             item {
                 ImageViewPager(
                     images = images,
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }

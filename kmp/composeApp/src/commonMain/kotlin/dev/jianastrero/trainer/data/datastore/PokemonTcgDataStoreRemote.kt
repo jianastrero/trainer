@@ -12,8 +12,13 @@ class PokemonTcgDataStoreRemote(
     private val ktorClient: KtorClient
 ) : PokemonTcgDataStore {
 
-    override suspend fun getPokemonDetails(name: String): PokemonTcgPaginatedResponse<PokemonCard> {
-        val response = ktorClient.client.get("v2/cards?name=$name") {
+    override suspend fun getPokemonCards(
+        name: String,
+        nextPage: PokemonTcgPaginatedResponse.NextPage
+    ): PokemonTcgPaginatedResponse<PokemonCard> {
+        val response = ktorClient.client.get(
+            "/v2/cards?q=name:$name&page=${nextPage.page}&pageSize=${nextPage.pageSize}"
+        ) {
             headers {
                 append("X-Api-Key", API_KEY)
             }
