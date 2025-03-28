@@ -21,8 +21,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun PokemonAbout(
-    pokemon: Pokemon,
-    species: PokemonSpecies,
+    pokemon: Pokemon?,
+    species: PokemonSpecies?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -39,22 +39,22 @@ fun PokemonAbout(
         )
         LabelAndValue(
             label = "Species",
-            value = species.genera.firstOrNull { it.language.name == Language.English }?.genus ?: "Unknown",
+            value = species?.genera?.firstOrNull { it.language.name == Language.English }?.genus,
             modifier = Modifier.fillMaxWidth()
         )
         LabelAndValue(
             label = "Height",
-            value = "${pokemon.heightCm} cm",
+            value = pokemon?.let { "${it.heightCm} cm" },
             modifier = Modifier.fillMaxWidth()
         )
         LabelAndValue(
             label = "Weight",
-            value = "${pokemon.weightKg} kg",
+            value = pokemon?.let { "${it.weightKg} kg" },
             modifier = Modifier.fillMaxWidth()
         )
         LabelAndValue(
             label = "Abilities",
-            value = pokemon.abilities.joinToString(",") { it.ability.name.capitalized },
+            value = pokemon?.let { it.abilities.joinToString(",") { it.ability.name.capitalized } },
             modifier = Modifier.fillMaxWidth()
         )
     }

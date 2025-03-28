@@ -6,7 +6,5 @@ import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 class GetPokemonSpeciesUseCase(
     private val repository: PokeApiRepository
 ) {
-    suspend operator fun invoke(pokemonId: String): PokemonSpecies? {
-        return repository.getSpecies(pokemonId)
-    }
+    suspend operator fun invoke(id: String): PokemonSpecies = repository.getSpecies(id)
 }

@@ -3,7 +3,6 @@ package dev.jianastrero.trainer.ui.molecule
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +19,7 @@ import dev.jianastrero.trainer.domain.enumeration.PokemonStat as PokemonStatEnum
 
 @Composable
 fun PokemonBaseStats(
-    stats: List<PokemonStat>,
+    stats: List<PokemonStat>?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -35,10 +34,12 @@ fun PokemonBaseStats(
             textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth()
         )
-        PokemonStatEnum.labels.forEach {
+        PokemonStatEnum.labels.forEach { stat ->
             LabelAndValue(
-                label = it.label,
-                value = stats.firstOrNull { stat -> stat.stat.name == it }?.baseStat?.toString() ?: "Unknown",
+                label = stat.label,
+                value = stats?.let { list ->
+                    list.firstOrNull { it.stat.name == stat }?.baseStat?.toString() ?: "Unknown"
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }

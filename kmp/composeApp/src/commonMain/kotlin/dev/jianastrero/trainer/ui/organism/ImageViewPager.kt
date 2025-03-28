@@ -6,10 +6,12 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.gestures.snapping.SnapPosition
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
@@ -18,6 +20,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -52,20 +55,19 @@ fun ImageViewPager(
         },
         modifier = modifier
     ) {
-        Box {
+        Column {
             if (it.isEmpty()) {
-                Skeleton(
+                SkeletonLoading(
                     modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(240.dp, 320.dp)
+                        .fillMaxWidth()
+                        .padding(start = 12.dp)
                 )
             } else {
                 ImageViewPagerContent(
                     images = it,
                     activePageIndicatorColor = activePageIndicatorColor,
                     pageIndicatorSpacing = pageIndicatorSpacing,
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
@@ -73,7 +75,29 @@ fun ImageViewPager(
 }
 
 @Composable
-private fun BoxScope.ImageViewPagerContent(
+private fun SkeletonLoading(
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
+        Skeleton(
+            modifier = Modifier
+                .size(240.dp, 320.dp)
+                .clip(MaterialTheme.shapes.small)
+        )
+        Skeleton(
+            modifier = Modifier
+                .size(240.dp * 0.9f, 320.dp * 0.9f)
+                .clip(MaterialTheme.shapes.small)
+        )
+    }
+}
+
+@Composable
+private fun ImageViewPagerContent(
     images: List<String>,
     activePageIndicatorColor: Color,
     pageIndicatorSpacing: Dp,
@@ -84,52 +108,54 @@ private fun BoxScope.ImageViewPagerContent(
         pageCount = { if (images.isEmpty()) 1 else images.size },
     )
 
-    HorizontalPager(
-        state = pagerState,
-//        contentPadding = PaddingValues(horizontal = 32.dp),
-        pageSize = PageSize.Fixed(240.dp),
-        snapPosition = SnapPosition.Center,
-        modifier = modifier
-    ) {
-        AsyncImage(
-            model = images[it],
-            contentDescription = null,
-            contentScale = ContentScale.Fit,
+    Column(modifier = modifier) {
+        HorizontalPager(
+            state = pagerState,
+            pageSize = PageSize.Fixed(240.dp),
+            snapPosition = SnapPosition.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            AsyncImage(
+                model = images[it],
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .graphicsLayer {
+                        val pageOffset = (pagerState.currentPage - it) + pagerState.currentPageOffsetFraction
+                        val pageOffsetAbs = pageOffset.absoluteValue
+                        alpha = lerp(
+                            start = 0.4f,
+                            stop = 1f,
+                            fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
+                        )
+                        scaleX = lerp(
+                            start = 0.9f,
+                            stop = 1f,
+                            fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
+                        )
+                        scaleY = lerp(
+                            start = 0.9f,
+                            stop = 1f,
+                            fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
+                        )
+                    }
+                    .fillMaxWidth()
+                    .height(320.dp)
+            )
+        }
+
+        PageIndicators(
+            currentPage = pagerState.currentPage,
+            pageCount = images.size,
+            activeColor = activePageIndicatorColor,
+            inactiveColor = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
+            spacing = pageIndicatorSpacing,
+            borderColor = MaterialTheme.colors.background,
             modifier = Modifier
-                .graphicsLayer {
-                    val pageOffset = (pagerState.currentPage - it) + pagerState.currentPageOffsetFraction
-                    val pageOffsetAbs = pageOffset.absoluteValue
-                    alpha = lerp(
-                        start = 0.4f,
-                        stop = 1f,
-                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
-                    )
-                    scaleX = lerp(
-                        start = 0.9f,
-                        stop = 1f,
-                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
-                    )
-                    scaleY = lerp(
-                        start = 0.9f,
-                        stop = 1f,
-                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
-                    )
-                }
-                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
+                .height(32.dp)
         )
     }
-
-    PageIndicators(
-        currentPage = pagerState.currentPage,
-        pageCount = images.size,
-        activeColor = activePageIndicatorColor,
-        inactiveColor = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
-        spacing = pageIndicatorSpacing,
-        borderColor = MaterialTheme.colors.background,
-        modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .height(32.dp)
-    )
 }
 
 @Preview

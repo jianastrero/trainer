@@ -2,6 +2,8 @@ package dev.jianastrero.trainer.ui.page.details
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +23,8 @@ import dev.jianastrero.trainer.domain.ext.type
 import dev.jianastrero.trainer.domain.nav.NavDirection
 import dev.jianastrero.trainer.ui.modifier.RadialGradientTokens
 import dev.jianastrero.trainer.ui.modifier.background
+import dev.jianastrero.trainer.ui.molecule.PokemonAbout
+import dev.jianastrero.trainer.ui.molecule.PokemonBaseStats
 import dev.jianastrero.trainer.ui.organism.ImageViewPager
 import dev.jianastrero.trainer.ui.organism.PokemonHeader
 import dev.jianastrero.trainer.ui.template.BackButtonTemplate
@@ -59,7 +63,7 @@ fun PokemonDetailsPage(
                 cards = listOf(officialArtwork) + cards
             }
 
-            return@derivedStateOf cards
+            return@derivedStateOf if (cards.size > 1) cards else emptyList()
         }
     }
 
@@ -69,6 +73,7 @@ fun PokemonDetailsPage(
 
     BackButtonTemplate(
         onBack = { navigate(NavDirection.Back) },
+        onDarkModeToggle = viewModel::setDarkMode,
         modifier = modifier
             .background(
                 radialColor = background,
@@ -79,8 +84,8 @@ fun PokemonDetailsPage(
             .systemBarsPadding()
     ) { paddingValues ->
         LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier
-                .padding(vertical = 12.dp)
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
@@ -94,11 +99,29 @@ fun PokemonDetailsPage(
                 ImageViewPager(
                     images = images,
                     activePageIndicatorColor = state.pokemon?.type?.color ?: Light,
-                    pageIndicatorSpacing = 6.dp,
+                    pageIndicatorSpacing = 2.dp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            item {
+                PokemonAbout(
+                    pokemon = state.pokemon,
+                    species = state.pokemonSpecies,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(320.dp)
+                        .padding(horizontal = 24.dp)
                 )
+            }
+            item {
+                PokemonBaseStats(
+                    stats = state.pokemon?.stats,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                )
+            }
+            item {
+                Spacer(modifier = Modifier.height(64.dp))
             }
         }
     }

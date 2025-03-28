@@ -6,7 +6,7 @@ import dev.jianastrero.trainer.ui.page.main.MainViewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    factory { HomeViewModel(get(), get(), get()) }
+    factory { HomeViewModel(get(), get()) }
     factory { MainViewModel(get()) }
-    factory { PokemonDetailsViewModel(get(), get()) }
+    factory { PokemonDetailsViewModel(get(), get(), get(), get()) }
 }

@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.ext.officialArtwork
 import dev.jianastrero.trainer.domain.ext.type
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
@@ -37,7 +36,6 @@ fun HomePage(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinInject(),
 ) {
-    val isDarkMode by viewModel.isDarkMode.collectAsState()
     val pokemons by viewModel.pokemons.collectAsState()
 
     LaunchedEffect(pokemons) {
@@ -47,7 +45,6 @@ fun HomePage(
     }
 
     AppBarTemplate(
-        isDarkMode = isDarkMode,
         onDarkModeToggle = viewModel::setDarkMode,
         modifier = modifier.background(Color.Red)
     ) { paddingValues ->

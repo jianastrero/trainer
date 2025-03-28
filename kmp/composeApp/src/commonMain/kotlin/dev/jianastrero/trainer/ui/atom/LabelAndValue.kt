@@ -1,10 +1,12 @@
 package dev.jianastrero.trainer.ui.atom
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun LabelAndValue(
     label: String,
-    value: String,
+    value: String?,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -42,14 +44,25 @@ fun LabelAndValue(
                 .height(1.dp)
                 .weight(1f)
         )
-        Text(
-            text = value,
-            color = MaterialTheme.colors.onBackground,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.ExtraBold,
-            textAlign = TextAlign.End,
-            modifier = Modifier
-        )
+        AnimatedContent(
+            targetState = value,
+            label = "ValueAnim",
+        ) { text ->
+            if (text == null) {
+                Skeleton(
+                    modifier = Modifier.size(128.dp, 16.dp)
+                )
+            } else {
+                Text(
+                    text = text,
+                    color = MaterialTheme.colors.onBackground,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier
+                )
+            }
+        }
     }
 }
 

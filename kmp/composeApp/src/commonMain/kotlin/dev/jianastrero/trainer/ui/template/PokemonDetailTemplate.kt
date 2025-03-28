@@ -15,6 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BackButtonTemplate(
     onBack: () -> Unit,
+    onDarkModeToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
 ) {
@@ -22,6 +23,7 @@ fun BackButtonTemplate(
         topBar = {
             BackButtonAppBar(
                 onBack = onBack,
+                onDarkModeToggle = onDarkModeToggle,
                 modifier = Modifier.fillMaxWidth()
             )
         },
@@ -38,6 +40,7 @@ private fun PreviewPokemonDetailTemplate() {
     TrainerTheme {
         BackButtonTemplate(
             onBack = {},
+            onDarkModeToggle = {},
             modifier = Modifier.background(Color.Red).fillMaxSize()
         ) {}
     }

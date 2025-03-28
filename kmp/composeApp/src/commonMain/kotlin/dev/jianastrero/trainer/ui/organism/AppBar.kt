@@ -19,7 +19,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AppBar(
-    isDarkMode: Boolean,
     onDarkModeToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -39,7 +38,7 @@ fun AppBar(
         )
         Spacer(modifier = Modifier.weight(1f))
         DarkModeToggle(
-            isDarkMode = isDarkMode,
+            isDarkMode = TrainerTheme.isDarkMode,
             onToggle = onDarkModeToggle,
             modifier = Modifier
                 .size(32.dp)
@@ -56,7 +55,6 @@ private fun AppBarPreview() {
             modifier = Modifier.fillMaxSize()
         ) {
             AppBar(
-                isDarkMode = true,
                 onDarkModeToggle = {}
             )
         }
