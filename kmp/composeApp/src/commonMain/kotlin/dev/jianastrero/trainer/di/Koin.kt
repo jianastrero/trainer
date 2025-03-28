@@ -7,6 +7,8 @@ fun initKoin(appDeclaration: (KoinApplication.() -> Unit)? = null) {
     startKoin {
         modules(
             preferenceModule,
+            remoteModule,
+            roomModule,
             dataStoreModule,
             ktorModule,
             repositoryModule,

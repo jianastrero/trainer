@@ -1,19 +1,11 @@
 package dev.jianastrero.trainer.di
 
-import dev.jianastrero.trainer.data.datastore.ConfigDataStoreLocal
-import dev.jianastrero.trainer.data.datastore.PokeApiDataStoreRemote
-import dev.jianastrero.trainer.data.datastore.PokemonTcgDataStoreRemote
-import dev.jianastrero.trainer.domain.datastore.ConfigDataStore
-import dev.jianastrero.trainer.domain.datastore.PokeApiDataStore
-import dev.jianastrero.trainer.domain.datastore.PokemonTcgDataStore
-import org.koin.core.qualifier.named
+import dev.jianastrero.trainer.data.database.TrainerDatabase
+import dev.jianastrero.trainer.data.datastore.ConfigDataStore
+import dev.jianastrero.trainer.data.datastore.PokemonDataStore
 import org.koin.dsl.module
 
-sealed interface Local
-sealed interface Remote
-
 val dataStoreModule = module {
-    single<ConfigDataStore> { ConfigDataStoreLocal(get()) }
-    single<PokeApiDataStore>(named<Remote>()) { PokeApiDataStoreRemote(get(named<PokeApi>())) }
-    single<PokemonTcgDataStore>(named<Remote>()) { PokemonTcgDataStoreRemote(get(named<PokemonTcgApi>())) }
+    single<ConfigDataStore> { ConfigDataStore(get()) }
+    single<PokemonDataStore> { get<TrainerDatabase>().pokemonDataStore() }
 }

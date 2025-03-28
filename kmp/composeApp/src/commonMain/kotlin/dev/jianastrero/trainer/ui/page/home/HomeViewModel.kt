@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.jianastrero.trainer.data.usecase.GetPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.entity.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow

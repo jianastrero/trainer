@@ -1,16 +1,13 @@
 package dev.jianastrero.trainer.domain.repository
 
-import dev.jianastrero.trainer.domain.model.pokeapi.response.PokeApiPaginatedResponse
-import dev.jianastrero.trainer.domain.model.pokeapi.response.PokemonItem
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
-import dev.jianastrero.trainer.domain.model.pokeapi.response.species.PokemonSpecies
+import dev.jianastrero.trainer.domain.entity.Pokemon
 
 interface PokeApiRepository {
+
     suspend fun getPokemonList(
-        nextPage: PokeApiPaginatedResponse.NextPage
-    ): PokeApiPaginatedResponse<PokemonItem>
+        offset: Int,
+        limit: Int = 5
+    ): List<Pokemon>
 
     suspend fun getPokemon(id: String): Pokemon
-
-    suspend fun getSpecies(id: String): PokemonSpecies
 }

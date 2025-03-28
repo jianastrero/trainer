@@ -1,11 +1,11 @@
 package dev.jianastrero.trainer.domain.ext
 
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonResponse
 
 
-val Pokemon?.officialArtwork: String
+val PokemonResponse?.officialArtwork: String
     get() = this?.sprites?.otherSprites?.officialArtwork?.frontDefault.orEmpty()
 
-val Pokemon?.type: PokemonType
+val PokemonResponse?.type: PokemonType
     get() = this?.types?.firstOrNull()?.type?.name ?: PokemonType.Unknown

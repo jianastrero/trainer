@@ -65,7 +65,7 @@ private val cardTransitionSpec: @Composable Transition.Segment<CardAction?>.() -
 @Composable
 fun PokemonCard(
     name: String,
-    previewImageUrl: String,
+    imageUrl: String,
     color: Color,
     modifier: Modifier = Modifier,
     cardAction: CardAction? = null,
@@ -135,7 +135,7 @@ fun PokemonCard(
             }
     ) {
         LoadingImage(
-            uri = previewImageUrl,
+            uri = imageUrl,
             contentDescription = name,
             contentScale = ContentScale.Fit,
             modifier = Modifier

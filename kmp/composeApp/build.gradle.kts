@@ -47,7 +47,10 @@ kotlin {
             implementation(libs.compose.navigation)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+
+            // Room
             implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
 
             // Koin
             implementation(project.dependencies.platform(libs.koin.bom))

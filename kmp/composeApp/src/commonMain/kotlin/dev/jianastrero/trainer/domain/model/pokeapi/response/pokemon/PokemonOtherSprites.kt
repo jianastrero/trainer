@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PokemonOtherSprites(
-    @SerialName("official-artwork") val officialArtwork: PokemonOfficialArtwork,
+    @SerialName("official-artwork") val officialArtwork: PokemonOfficialArtworkResponse,
 ) {
     companion object {
         val Sample = PokemonOtherSprites(
-            officialArtwork = PokemonOfficialArtwork.Sample,
+            officialArtwork = PokemonOfficialArtworkResponse.Sample,
         )
     }
 }

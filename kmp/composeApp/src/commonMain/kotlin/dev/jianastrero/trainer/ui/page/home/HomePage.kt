@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,17 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.jianastrero.trainer.domain.ext.officialArtwork
-import dev.jianastrero.trainer.domain.ext.type
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.entity.Pokemon
+import dev.jianastrero.trainer.domain.entity.primaryType
 import dev.jianastrero.trainer.domain.nav.NavDirection
 import dev.jianastrero.trainer.ui.molecule.SwipeAction
 import dev.jianastrero.trainer.ui.molecule.SwipeButtons
 import dev.jianastrero.trainer.ui.organism.CardAction
 import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
-import dev.jianastrero.trainer.ui.theme.TrainerTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 
 @Composable
@@ -132,13 +130,13 @@ private fun PokemonCards(
         PokemonCard(
             enabled = false,
             name = secondPokemon?.name.orEmpty(),
-            previewImageUrl = secondPokemon.officialArtwork,
-            color = secondPokemon.type.color,
+            imageUrl = secondPokemon?.officialArtwork.orEmpty(),
+            color = secondPokemon?.primaryType?.color ?: MaterialTheme.colors.onBackground,
         )
         PokemonCard(
             name = firstPokemon?.name.orEmpty(),
-            previewImageUrl = firstPokemon.officialArtwork,
-            color = firstPokemon.type.color,
+            imageUrl = firstPokemon?.officialArtwork.orEmpty(),
+            color = firstPokemon?.primaryType?.color ?: MaterialTheme.colors.onBackground,
             cardAction = cardAction,
             onCardAction = onCardAction@{ action ->
                 val swipeAction = when (action) {
@@ -151,20 +149,6 @@ private fun PokemonCards(
                 onSwipeAction(swipeAction, pokemon)
                 onCardAction(null)
             },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun HomePageContentPreview() {
-    TrainerTheme {
-        HomePageContent(
-            pokemons = listOf(Pokemon.Sample, Pokemon.Sample),
-            onView = {},
-            onSwipeAction = { _, _ -> },
-            modifier = Modifier
-                .fillMaxSize()
         )
     }
 }

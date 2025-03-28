@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PokemonSpeciesPalParkEncounter(
-    @SerialName("area") val area: PokemonSpeciesArea,
+    @SerialName("area") val area: PokemonSpeciesAreaResponse,
     @SerialName("base_score") val baseScore: Int,
     @SerialName("rate") val rate: Int
 )

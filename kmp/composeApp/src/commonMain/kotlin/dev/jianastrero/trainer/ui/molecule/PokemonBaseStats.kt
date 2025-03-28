@@ -11,15 +11,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonStat
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonStatName
+import dev.jianastrero.trainer.domain.enumeration.PokemonStat
 import dev.jianastrero.trainer.ui.atom.LabelAndValue
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import dev.jianastrero.trainer.domain.enumeration.PokemonStat as PokemonStatEnum
 
 @Composable
 fun PokemonBaseStats(
-    stats: List<PokemonStat>?,
+    stats: Map<PokemonStat, Int>?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -34,72 +31,12 @@ fun PokemonBaseStats(
             textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth()
         )
-        PokemonStatEnum.labels.forEach { stat ->
+        PokemonStat.labels.forEach { stat ->
             LabelAndValue(
                 label = stat.label,
-                value = stats?.let { list ->
-                    list.firstOrNull { it.stat.name == stat }?.baseStat?.toString() ?: "Unknown"
-                },
+                value = stats?.get(stat)?.toString(),
                 modifier = Modifier.fillMaxWidth()
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun PreviewPokemonBaseStats() {
-    PokemonBaseStats(
-        stats = listOf(
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.HP,
-                    url = "https://pokeapi.co/api/v2/stat/1/"
-                )
-            ),
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.Attack,
-                    url = "https://pokeapi.co/api/v2/stat/2/"
-                )
-            ),
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.Defense,
-                    url = "https://pokeapi.co/api/v2/stat/3/"
-                )
-            ),
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.SpecialAttack,
-                    url = "https://pokeapi.co/api/v2/stat/4/"
-                )
-            ),
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.SpecialDefense,
-                    url = "https://pokeapi.co/api/v2/stat/5/"
-                )
-            ),
-            PokemonStat(
-                baseStat = 50,
-                effort = 0,
-                stat = PokemonStatName(
-                    name = PokemonStatEnum.Speed,
-                    url = "https://pokeapi.co/api/v2/stat/6/"
-                )
-            )
-        ),
-        modifier = Modifier
-    )
 }

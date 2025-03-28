@@ -19,7 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.jianastrero.trainer.domain.ext.type
+import dev.jianastrero.trainer.domain.entity.primaryType
 import dev.jianastrero.trainer.domain.nav.NavDirection
 import dev.jianastrero.trainer.ui.modifier.RadialGradientTokens
 import dev.jianastrero.trainer.ui.modifier.background
@@ -49,7 +49,7 @@ fun PokemonDetailsPage(
         if (state.pokemon == null) {
             MaterialTheme.colors.background
         } else {
-            state.pokemon?.type?.color?.copy(alpha = 0.72f) ?: MaterialTheme.colors.background
+            state.pokemon?.primaryType?.color ?: MaterialTheme.colors.background
         },
         animationSpec = tween(PokemonDetailsPageTokens.REVEAL_ANIM_DURATION)
     )
@@ -98,7 +98,7 @@ fun PokemonDetailsPage(
             item {
                 ImageViewPager(
                     images = images,
-                    activePageIndicatorColor = state.pokemon?.type?.color ?: Light,
+                    activePageIndicatorColor = state.pokemon?.primaryType?.color ?: Light,
                     pageIndicatorSpacing = 2.dp,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -106,7 +106,6 @@ fun PokemonDetailsPage(
             item {
                 PokemonAbout(
                     pokemon = state.pokemon,
-                    species = state.pokemonSpecies,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp)

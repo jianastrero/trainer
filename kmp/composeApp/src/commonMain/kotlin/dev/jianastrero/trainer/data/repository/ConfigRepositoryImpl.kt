@@ -1,6 +1,6 @@
 package dev.jianastrero.trainer.data.repository
 
-import dev.jianastrero.trainer.domain.datastore.ConfigDataStore
+import dev.jianastrero.trainer.data.datastore.ConfigDataStore
 import dev.jianastrero.trainer.domain.repository.ConfigRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

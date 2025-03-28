@@ -1,31 +1,24 @@
 package dev.jianastrero.trainer.data.usecase
 
-import dev.jianastrero.trainer.domain.model.pokeapi.response.PokeApiPaginatedResponse
-import dev.jianastrero.trainer.domain.model.pokeapi.response.PokemonItem
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
+import dev.jianastrero.trainer.domain.entity.Pokemon
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
 class GetPokemonsUseCase(
     private val repository: PokeApiRepository
 ) {
-    private var nextPage: PokeApiPaginatedResponse.NextPage? = startingPage
+    private var nextOffset: Int = 0
+    var hasNext = true
+        private set
 
     suspend operator fun invoke(): List<Pokemon> {
-        val nextPage = nextPage
-        if (nextPage == null) return emptyList()
+        val pokemons = repository.getPokemonList(offset = nextOffset)
+        if (pokemons.isEmpty()) {
+            hasNext = false
+            return emptyList()
+        }
 
-        val response = repository.getPokemonList(nextPage)
-        this.nextPage = response.nextPage
-        return response.results.map { repository.getPokemon(it.id) }
+        this.nextOffset = pokemons.size
+        return pokemons
     }
 
-    fun hasNext(): Boolean = nextPage != null
-
-    fun reset() {
-        nextPage = startingPage
-    }
-
-    companion object {
-        private val startingPage = PokeApiPaginatedResponse.NextPage(0, 5)
-    }
 }

@@ -11,18 +11,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.jianastrero.trainer.domain.enumeration.Language
-import dev.jianastrero.trainer.domain.ext.capitalized
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.Pokemon
-import dev.jianastrero.trainer.domain.model.pokeapi.response.species.PokemonSpecies
+import dev.jianastrero.trainer.domain.entity.Pokemon
 import dev.jianastrero.trainer.ui.atom.LabelAndValue
-import dev.jianastrero.trainer.ui.theme.TrainerTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun PokemonAbout(
     pokemon: Pokemon?,
-    species: PokemonSpecies?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -39,7 +33,7 @@ fun PokemonAbout(
         )
         LabelAndValue(
             label = "Species",
-            value = species?.genera?.firstOrNull { it.language.name == Language.English }?.genus,
+            value = pokemon?.species,
             modifier = Modifier.fillMaxWidth()
         )
         LabelAndValue(
@@ -54,20 +48,8 @@ fun PokemonAbout(
         )
         LabelAndValue(
             label = "Abilities",
-            value = pokemon?.let { it.abilities.joinToString(",") { it.ability.name.capitalized } },
+            value = pokemon?.abilities?.joinToString(",", postfix = " "),
             modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PokemonAboutPreview() {
-    TrainerTheme {
-        PokemonAbout(
-            pokemon = Pokemon.Sample,
-            species = PokemonSpecies.Sample,
-            modifier = Modifier
         )
     }
 }
