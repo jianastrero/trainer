@@ -33,9 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-import coil3.compose.AsyncImage
 import dev.jianastrero.trainer.domain.enumeration.PokemonType
 import dev.jianastrero.trainer.domain.ext.capitalized
+import dev.jianastrero.trainer.ui.atom.LoadingImage
 import dev.jianastrero.trainer.ui.modifier.RadialGradientTokens
 import dev.jianastrero.trainer.ui.modifier.background
 import dev.jianastrero.trainer.ui.modifier.then
@@ -134,8 +134,8 @@ fun PokemonCard(
                 onCardAction(CardAction.View)
             }
     ) {
-        AsyncImage(
-            model = previewImageUrl,
+        LoadingImage(
+            uri = previewImageUrl,
             contentDescription = name,
             contentScale = ContentScale.Fit,
             modifier = Modifier

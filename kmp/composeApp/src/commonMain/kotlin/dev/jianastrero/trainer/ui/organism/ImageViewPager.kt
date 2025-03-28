@@ -27,7 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import coil3.compose.AsyncImage
+import dev.jianastrero.trainer.ui.atom.LoadingImage
 import dev.jianastrero.trainer.ui.atom.Skeleton
 import dev.jianastrero.trainer.ui.molecule.PageIndicators
 import dev.jianastrero.trainer.ui.theme.Light
@@ -115,8 +115,8 @@ private fun ImageViewPagerContent(
             snapPosition = SnapPosition.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            AsyncImage(
-                model = images[it],
+            LoadingImage(
+                uri = images[it],
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
