@@ -26,7 +26,7 @@ fun PageIndicator(
     activeColor: Color = MaterialTheme.colors.background,
     inactiveCcolor: Color = MaterialTheme.colors.background.copy(alpha = 0.48f),
     borderColor: Color? = null,
-    shape: Shape = CircleShape
+    shape: Shape = CircleShape,
 ) {
     Spacer(
         modifier = modifier

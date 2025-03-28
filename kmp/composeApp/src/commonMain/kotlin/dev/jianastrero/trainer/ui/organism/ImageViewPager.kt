@@ -1,14 +1,18 @@
 package dev.jianastrero.trainer.ui.organism
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -16,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.key.Key.Companion.M
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import coil3.compose.AsyncImage
@@ -36,10 +40,16 @@ private data object ImageViewPagerTokens {
 fun ImageViewPager(
     images: List<String>,
     modifier: Modifier = Modifier,
+    activePageIndicatorColor: Color = Light,
+    pageIndicatorSpacing: Dp = 12.dp,
 ) {
     AnimatedContent(
         targetState = images,
         label = "ImageViewPager",
+        transitionSpec = {
+            fadeIn(tween(ImageViewPagerTokens.ANIM_DURATION)) togetherWith
+                    fadeOut(tween(ImageViewPagerTokens.ANIM_DURATION))
+        },
         modifier = modifier
     ) {
         Box {
@@ -47,11 +57,16 @@ fun ImageViewPager(
                 Skeleton(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .fillMaxWidth()
-                        .aspectRatio(ImageViewPagerTokens.ASPECT_RATIO)
+                        .size(240.dp, 320.dp)
                 )
             } else {
-                ImageViewPagerContent(images = it)
+                ImageViewPagerContent(
+                    images = it,
+                    activePageIndicatorColor = activePageIndicatorColor,
+                    pageIndicatorSpacing = pageIndicatorSpacing,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
             }
         }
     }
@@ -60,6 +75,9 @@ fun ImageViewPager(
 @Composable
 private fun BoxScope.ImageViewPagerContent(
     images: List<String>,
+    activePageIndicatorColor: Color,
+    pageIndicatorSpacing: Dp,
+    modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -68,7 +86,10 @@ private fun BoxScope.ImageViewPagerContent(
 
     HorizontalPager(
         state = pagerState,
-        contentPadding = PaddingValues(horizontal = 32.dp),
+//        contentPadding = PaddingValues(horizontal = 32.dp),
+        pageSize = PageSize.Fixed(240.dp),
+        snapPosition = SnapPosition.Center,
+        modifier = modifier
     ) {
         AsyncImage(
             model = images[it],
@@ -76,40 +97,38 @@ private fun BoxScope.ImageViewPagerContent(
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .graphicsLayer {
-                    val pageOffset = (
-                            (pagerState.currentPage - it) + pagerState.currentPageOffsetFraction
-                            ).absoluteValue
+                    val pageOffset = (pagerState.currentPage - it) + pagerState.currentPageOffsetFraction
+                    val pageOffsetAbs = pageOffset.absoluteValue
                     alpha = lerp(
-                        start = 0.5f,
+                        start = 0.4f,
                         stop = 1f,
-                        fraction = 1 - pageOffset.coerceIn(0f, 1f),
+                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
                     )
                     scaleX = lerp(
-                        start = 0.8f,
+                        start = 0.9f,
                         stop = 1f,
-                        fraction = 1 - pageOffset.coerceIn(0f, 1f),
+                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
                     )
                     scaleY = lerp(
-                        start = 0.8f,
+                        start = 0.9f,
                         stop = 1f,
-                        fraction = 1 - pageOffset.coerceIn(0f, 1f),
+                        fraction = 1 - pageOffsetAbs.coerceIn(0f, 1f),
                     )
                 }
                 .fillMaxWidth()
-                .aspectRatio(ImageViewPagerTokens.ASPECT_RATIO)
-                .padding(24.dp)
         )
     }
 
     PageIndicators(
         currentPage = pagerState.currentPage,
         pageCount = images.size,
-        activeColor = Light,
-        borderColor = Color.Transparent,
+        activeColor = activePageIndicatorColor,
+        inactiveColor = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
+        spacing = pageIndicatorSpacing,
+        borderColor = MaterialTheme.colors.background,
         modifier = Modifier
             .align(Alignment.BottomCenter)
-            .fillMaxWidth()
-            .padding(16.dp)
+            .height(32.dp)
     )
 }
 

@@ -1,12 +1,16 @@
 package dev.jianastrero.trainer.ui.molecule
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.ui.atom.PageIndicator
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
@@ -18,24 +22,27 @@ fun PageIndicators(
     pageCount: Int,
     modifier: Modifier = Modifier,
     activeColor: Color = MaterialTheme.colors.background,
-    inactiveCcolor: Color = MaterialTheme.colors.background.copy(alpha = 0.48f),
+    inactiveColor: Color = MaterialTheme.colors.background.copy(alpha = 0.48f),
     borderColor: Color? = null,
+    spacing: Dp = 12.dp
 ) {
-    androidx.compose.foundation.layout.Row(
-        horizontalArrangement = Arrangement.spacedBy(
-            12.dp,
-            Alignment.CenterHorizontally
-        ),
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(spacing, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         repeat(pageCount) { index ->
+            val isActive = currentPage == index
+            val size by animateDpAsState(
+                targetValue = if (isActive) 12.dp else 6.dp,
+                label = "PageIndicatorSizeAnimation",
+            )
             PageIndicator(
-                active = currentPage == index,
+                active = isActive,
                 activeColor = activeColor,
-                inactiveCcolor = inactiveCcolor,
+                inactiveCcolor = inactiveColor,
                 borderColor = borderColor,
-                modifier = Modifier.size(12.dp)
+                modifier = Modifier.size(size)
             )
         }
     }

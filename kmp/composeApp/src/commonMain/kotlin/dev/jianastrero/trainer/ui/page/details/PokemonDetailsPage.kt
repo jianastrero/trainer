@@ -2,9 +2,9 @@ package dev.jianastrero.trainer.ui.page.details
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +24,7 @@ import dev.jianastrero.trainer.ui.modifier.background
 import dev.jianastrero.trainer.ui.organism.ImageViewPager
 import dev.jianastrero.trainer.ui.organism.PokemonHeader
 import dev.jianastrero.trainer.ui.template.BackButtonTemplate
+import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
@@ -79,6 +80,7 @@ fun PokemonDetailsPage(
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
+                .padding(vertical = 12.dp)
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
@@ -91,7 +93,11 @@ fun PokemonDetailsPage(
             item {
                 ImageViewPager(
                     images = images,
-                    modifier = Modifier.fillMaxWidth()
+                    activePageIndicatorColor = state.pokemon?.type?.color ?: Light,
+                    pageIndicatorSpacing = 6.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(320.dp)
                 )
             }
         }
