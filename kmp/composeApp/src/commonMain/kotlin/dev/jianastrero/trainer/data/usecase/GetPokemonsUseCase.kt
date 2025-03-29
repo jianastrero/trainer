@@ -11,7 +11,10 @@ class GetPokemonsUseCase(
         private set
 
     suspend operator fun invoke(): List<Pokemon> {
-        val pokemons = repository.getNextPokemons(offset = nextOffset)
+        val pokemons = repository.getNextPokemons(
+            offset = nextOffset,
+            limit = if (nextOffset == 0) 2 else 1
+        )
         if (pokemons.isEmpty()) {
             hasNext = false
             return emptyList()

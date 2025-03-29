@@ -38,6 +38,7 @@ import dev.jianastrero.trainer.domain.ext.capitalized
 import dev.jianastrero.trainer.ui.atom.LoadingImage
 import dev.jianastrero.trainer.ui.modifier.RadialGradientTokens
 import dev.jianastrero.trainer.ui.modifier.background
+import dev.jianastrero.trainer.ui.modifier.skeleton
 import dev.jianastrero.trainer.ui.modifier.then
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -124,6 +125,11 @@ fun PokemonCard(
                 radiusBias = RadialGradientTokens.Bias.Height,
                 shape = MaterialTheme.shapes.medium
             )
+            .then(name.isEmpty()) {
+                Modifier
+                    .clip(MaterialTheme.shapes.medium)
+                    .skeleton()
+            }
             .border(
                 width = 1.dp,
                 color = color,

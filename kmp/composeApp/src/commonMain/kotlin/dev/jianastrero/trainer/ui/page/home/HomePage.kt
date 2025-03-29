@@ -29,7 +29,7 @@ import dev.jianastrero.trainer.ui.template.AppBarTemplate
 import org.koin.compose.koinInject
 
 private data object HomePageTokens {
-    val MIN_POKEMONS = 5
+    const val MIN_POKEMONS = 10
 }
 
 @Composable
@@ -95,7 +95,7 @@ private fun HomePageContent(
         )
 
         SwipeButtons(
-            enabled = cardAction == null,
+            enabled = cardAction == null && pokemons.isNotEmpty(),
             onAction = { action ->
                 cardAction = when (action) {
                     SwipeAction.Like -> CardAction.SwipeRight

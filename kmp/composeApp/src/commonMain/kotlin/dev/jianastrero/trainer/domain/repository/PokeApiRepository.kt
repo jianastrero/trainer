@@ -6,7 +6,7 @@ interface PokeApiRepository {
 
     suspend fun getNextPokemons(
         offset: Int,
-        limit: Int = 5
+        limit: Int
     ): List<Pokemon>
 
     suspend fun getPokemon(id: String): Pokemon
