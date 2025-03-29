@@ -2,7 +2,7 @@ package dev.jianastrero.trainer.ui.page.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.jianastrero.trainer.data.usecase.GetPokemonsUseCase
+import dev.jianastrero.trainer.data.usecase.GetNextPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val setDarkModeUseCase: SetDarkModeUseCase,
-    private val getPokemonsUseCase: GetPokemonsUseCase
+    private val getPokemonsUseCase: GetNextPokemonsUseCase
 ) : ViewModel() {
 
     private val _pokemons = MutableStateFlow(emptyList<Pokemon>())

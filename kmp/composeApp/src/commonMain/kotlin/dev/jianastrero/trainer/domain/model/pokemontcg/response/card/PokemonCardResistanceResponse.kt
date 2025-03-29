@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PokemonCardResistance(
+data class PokemonCardResistanceResponse(
     @SerialName("type") val type: PokemonType,
     @SerialName("value") val value: String
 )

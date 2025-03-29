@@ -1,15 +1,15 @@
 package dev.jianastrero.trainer.di
 
-import dev.jianastrero.trainer.data.usecase.GetPokemonCardsUseCase
+import dev.jianastrero.trainer.data.usecase.GetNextPokemonCardsUseCase
+import dev.jianastrero.trainer.data.usecase.GetNextPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.GetPokemonUseCase
-import dev.jianastrero.trainer.data.usecase.GetPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.IsDarkModeUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory { GetPokemonCardsUseCase(get()) }
-    factory { GetPokemonsUseCase(get()) }
+    factory { GetNextPokemonCardsUseCase(get()) }
+    factory { GetNextPokemonsUseCase(get()) }
     factory { GetPokemonUseCase(get()) }
     factory { IsDarkModeUseCase(get()) }
     factory { SetDarkModeUseCase(get()) }

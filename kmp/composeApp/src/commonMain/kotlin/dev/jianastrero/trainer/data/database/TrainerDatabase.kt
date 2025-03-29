@@ -6,21 +6,25 @@ import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import dev.jianastrero.trainer.data.converter.Converters
+import dev.jianastrero.trainer.data.datastore.PokemonCardDataStore
 import dev.jianastrero.trainer.data.datastore.PokemonDataStore
 import dev.jianastrero.trainer.domain.entity.Pokemon
+import dev.jianastrero.trainer.domain.entity.PokemonCard
 import dev.jianastrero.trainer.platform.KMPContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 @Database(
     entities = [
-        Pokemon::class
+        Pokemon::class,
+        PokemonCard::class
     ],
     version = 1
 )
 @TypeConverters(Converters::class)
 abstract class TrainerDatabase : RoomDatabase() {
     abstract fun pokemonDataStore(): PokemonDataStore
+    abstract fun pokemonCardDataStore(): PokemonCardDataStore
 }
 
 // The Room compiler generates the `actual` implementations

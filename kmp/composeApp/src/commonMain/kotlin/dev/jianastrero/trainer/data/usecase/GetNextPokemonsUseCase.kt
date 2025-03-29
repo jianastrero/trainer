@@ -3,7 +3,7 @@ package dev.jianastrero.trainer.data.usecase
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
-class GetPokemonsUseCase(
+class GetNextPokemonsUseCase(
     private val repository: PokeApiRepository
 ) {
     private var nextOffset: Int = 0
@@ -11,17 +11,14 @@ class GetPokemonsUseCase(
         private set
 
     suspend operator fun invoke(): List<Pokemon> {
-        val pokemons = repository.getNextPokemons(
+        val nextPokemons = repository.getNextPokemons(
             offset = nextOffset,
             limit = if (nextOffset == 0) 2 else 1
         )
-        if (pokemons.isEmpty()) {
-            hasNext = false
-            return emptyList()
-        }
+        hasNext = nextPokemons.hasNext
+        nextOffset = nextPokemons.nextOffset
 
-        this.nextOffset += pokemons.size
-        return pokemons
+        return nextPokemons.pokemons
     }
 
 }

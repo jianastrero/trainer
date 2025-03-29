@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PokemonCardImages(
-    @SerialName("large") val large: String,
-    @SerialName("small") val small: String
+data class PokemonCardWeaknessResponse(
+    @SerialName("type") val type: String,
+    @SerialName("value") val value: String
 )

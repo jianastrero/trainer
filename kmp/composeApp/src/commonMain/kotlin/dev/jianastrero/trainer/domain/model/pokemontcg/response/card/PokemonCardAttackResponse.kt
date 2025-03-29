@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PokemonCardAttack(
+data class PokemonCardAttackResponse(
     @SerialName("convertedEnergyCost") val convertedEnergyCost: Int,
     @SerialName("cost") val cost: List<String>,
     @SerialName("damage") val damage: String,

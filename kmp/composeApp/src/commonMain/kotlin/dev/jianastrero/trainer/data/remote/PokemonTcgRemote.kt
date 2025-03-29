@@ -2,7 +2,7 @@ package dev.jianastrero.trainer.data.remote
 
 import dev.jianastrero.trainer.data.ktor.KtorClient
 import dev.jianastrero.trainer.domain.model.pokemontcg.response.PokemonTcgPaginatedResponse
-import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.PokemonCard
+import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.PokemonCardResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.headers
@@ -13,10 +13,11 @@ class PokemonTcgRemote(
 
     suspend fun getPokemonCards(
         name: String,
-        nextPage: PokemonTcgPaginatedResponse.NextPage
-    ): PokemonTcgPaginatedResponse<PokemonCard> {
+        page: Int,
+        pageSize: Int,
+    ): PokemonTcgPaginatedResponse<PokemonCardResponse> {
         val response = ktorClient.client.get(
-            "/v2/cards?q=name:$name&page=${nextPage.page}&pageSize=${nextPage.pageSize}"
+            "/v2/cards?q=name:$name&page=${page}&pageSize=${pageSize}"
         ) {
             headers {
                 append("X-Api-Key", API_KEY)

@@ -2,18 +2,18 @@ package dev.jianastrero.trainer.ui.page.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.jianastrero.trainer.data.usecase.GetPokemonCardsUseCase
+import dev.jianastrero.trainer.data.usecase.GetNextPokemonCardsUseCase
 import dev.jianastrero.trainer.data.usecase.GetPokemonUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.entity.Pokemon
-import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.PokemonCard
+import dev.jianastrero.trainer.domain.entity.PokemonCard
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PokemonDetailsViewModel(
     private val setDarkModeUseCase: SetDarkModeUseCase,
-    private val getPokemonCardsUseCase: GetPokemonCardsUseCase,
+    private val getPokemonCardsUseCase: GetNextPokemonCardsUseCase,
     private val getPokemonUseCase: GetPokemonUseCase,
 ) : ViewModel() {
 
@@ -48,7 +48,7 @@ class PokemonDetailsViewModel(
     private suspend fun fetchPokemonCards(pokemonName: String) {
         runCatching {
             val allCards = mutableListOf<PokemonCard>()
-            while (getPokemonCardsUseCase.hasNext()) {
+            while (getPokemonCardsUseCase.hasNext) {
                 allCards += getPokemonCardsUseCase(pokemonName)
             }
             _state.emit(state.value.copy(pokemonCards = allCards))

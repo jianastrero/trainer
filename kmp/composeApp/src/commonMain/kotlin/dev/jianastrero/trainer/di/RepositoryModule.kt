@@ -11,5 +11,5 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<ConfigRepository> { ConfigRepositoryImpl(get()) }
     single<PokeApiRepository> { PokeApiRepositoryImpl(get(), get()) }
-    single<PokemonTcgRepository> { PokemonTcgRepositoryImpl(get()) }
+    single<PokemonTcgRepository> { PokemonTcgRepositoryImpl(get(), get()) }
 }

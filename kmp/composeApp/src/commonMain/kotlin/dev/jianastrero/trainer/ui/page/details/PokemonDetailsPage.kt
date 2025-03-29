@@ -58,7 +58,7 @@ fun PokemonDetailsPage(
         derivedStateOf {
             val officialArtwork = state.pokemon?.officialArtwork
 
-            var cards = state.pokemonCards.map { it.images.large }
+            var cards = state.pokemonCards.map { it.card }
             if (officialArtwork != null) {
                 cards = listOf(officialArtwork) + cards
             }
