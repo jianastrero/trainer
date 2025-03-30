@@ -2,10 +2,13 @@ package dev.jianastrero.trainer.data.coil
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import coil3.EventListener
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.disk.DiskCache
 import coil3.memory.MemoryCache
+import coil3.request.ErrorResult
+import coil3.request.ImageRequest
 import coil3.request.crossfade
 import dev.jianastrero.trainer.platform.KMPContext
 import dev.jianastrero.trainer.platform.cachePath
@@ -43,7 +46,24 @@ fun rememberImageLoader(kmpContext: KMPContext = koinInject()): ImageLoader {
                 }
         }
 
-        builder.build()
+        builder
+            .eventListener(
+                object : EventListener() {
+                    override fun onError(request: ImageRequest, result: ErrorResult) {
+                        super.onError(request, result)
+
+                        val memoryCacheKey = result.request.memoryCacheKey
+                        if (memoryCacheKey != null) {
+                            request.memoryCacheKey?.removeSurrounding(memoryCacheKey)
+                        }
+                        val diskCacheKey = result.request.diskCacheKey
+                        if (diskCacheKey != null) {
+                            request.diskCacheKey?.removeSurrounding(diskCacheKey)
+                        }
+                    }
+                }
+            )
+            .build()
     }
 
     return imageLoader
