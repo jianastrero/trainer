@@ -1,5 +1,8 @@
 package dev.jianastrero.trainer.di
 
-import org.koin.core.module.Module
+import dev.jianastrero.trainer.platform.KMPPreference
+import org.koin.dsl.module
 
-expect val preferenceModule: Module
+val preferenceModule = module {
+    single { KMPPreference(get()) }
+}

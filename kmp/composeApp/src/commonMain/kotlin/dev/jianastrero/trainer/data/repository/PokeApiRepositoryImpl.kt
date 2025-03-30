@@ -25,21 +25,29 @@ class PokeApiRepositoryImpl(
             pokemons = localPokemons
         )
 
-        val response = remote.getPokemonList(offset = offset, limit = limit)
-        val remotePokemons = response.results.map { pokemonItem ->
-            val pokemonResponse = remote.getPokemon(pokemonItem.id)
-            val speciesResponse = remote.getSpecies(pokemonItem.id)
-            pokemonResponse.toEntity(
-                species = speciesResponse.genus
+        return runCatching {
+            val response = remote.getPokemonList(offset = offset, limit = limit)
+            val remotePokemons = response.results.map { pokemonItem ->
+                val pokemonResponse = remote.getPokemon(pokemonItem.id)
+                val speciesResponse = remote.getSpecies(pokemonItem.id)
+                pokemonResponse.toEntity(
+                    species = speciesResponse.genus
+                )
+            }
+            dataStore.insert(remotePokemons)
+
+            NextPokemons(
+                hasNext = response.next != null,
+                nextOffset = offset + response.results.size,
+                pokemons = remotePokemons
+            )
+        }.getOrElse {
+            NextPokemons(
+                hasNext = false,
+                nextOffset = offset,
+                pokemons = emptyList()
             )
         }
-        dataStore.insert(remotePokemons)
-
-        return NextPokemons(
-            hasNext = response.next != null,
-            nextOffset = offset + response.results.size,
-            pokemons = remotePokemons
-        )
     }
 
     override suspend fun getPokemon(id: String): Pokemon {

@@ -11,36 +11,48 @@ class PokemonTcgRepositoryImpl(
     private val dataStore: PokemonCardDataStore
 ) : PokemonTcgRepository {
 
-    override suspend fun getPokemonCards(
+    override suspend fun getNextPokemonCards(
         name: String,
         page: Int,
         pageSize: Int
     ): NextPokemonCards {
-        println("JIANDDEBUG -> page: $page, pageSize: $pageSize")
 
-        val localPokemonCards = dataStore.get(name = name)
+        val localPokemonCards = dataStore.get(
+            name = name,
+            offset = page * pageSize,
+            limit = pageSize
+        )
         if (localPokemonCards.isNotEmpty()) {
             return NextPokemonCards(
                 hasNext = true,
-                nextPage = 2,
+                nextPage = page + 1,
                 nextPageSize = pageSize,
                 pokemonCards = localPokemonCards,
             )
         }
 
-        val response = remote.getPokemonCards(
-            name = name,
-            page = page,
-            pageSize = pageSize
-        )
-        val remotePokemonCards = response.result.map { it.toEntity() }
-        dataStore.insert(remotePokemonCards)
+        return runCatching {
+            val response = remote.getPokemonCards(
+                name = name,
+                page = page,
+                pageSize = pageSize
+            )
+            val remotePokemonCards = response.result.map { it.toEntity(name) }
+            dataStore.insert(remotePokemonCards)
 
-        return NextPokemonCards(
-            hasNext = response.pageSize <= response.count,
-            nextPage = page + 1,
-            nextPageSize = pageSize,
-            pokemonCards = remotePokemonCards,
-        )
+            NextPokemonCards(
+                hasNext = response.pageSize <= response.count,
+                nextPage = page + 1,
+                nextPageSize = pageSize,
+                pokemonCards = remotePokemonCards,
+            )
+        }.getOrElse {
+            NextPokemonCards(
+                hasNext = false,
+                nextPage = page,
+                nextPageSize = pageSize,
+                pokemonCards = emptyList(),
+            )
+        }
     }
 }

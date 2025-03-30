@@ -4,7 +4,7 @@ import dev.jianastrero.trainer.domain.model.NextPokemonCards
 
 interface PokemonTcgRepository {
 
-    suspend fun getPokemonCards(
+    suspend fun getNextPokemonCards(
         name: String,
         page: Int,
         pageSize: Int

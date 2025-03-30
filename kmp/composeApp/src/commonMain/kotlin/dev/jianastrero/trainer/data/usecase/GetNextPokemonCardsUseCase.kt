@@ -12,7 +12,7 @@ class GetNextPokemonCardsUseCase(
         private set
 
     suspend operator fun invoke(name: String): List<PokemonCard> {
-        val nextPokemonCards = repository.getPokemonCards(
+        val nextPokemonCards = repository.getNextPokemonCards(
             name = name,
             page = nextPage,
             pageSize = nextPageSize

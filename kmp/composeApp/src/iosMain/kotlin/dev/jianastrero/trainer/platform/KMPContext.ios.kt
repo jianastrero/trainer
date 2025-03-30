@@ -1,5 +1,6 @@
 package dev.jianastrero.trainer.platform
 
+import okio.Path
 import platform.Foundation.NSUserDefaults
 import platform.darwin.NSObject
 
@@ -20,3 +21,6 @@ actual fun KMPContext.put(
         NSUserDefaults.standardUserDefaults.setBool(value = value, forKey = key)
     }
 }
+
+actual val KMPContext.cachePath: Path?
+    get() = TODO("Not yet implemented")

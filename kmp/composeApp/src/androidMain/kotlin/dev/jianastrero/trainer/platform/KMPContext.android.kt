@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import okio.Path
+import okio.Path.Companion.toOkioPath
 
 actual typealias KMPContext = Application
 
@@ -36,3 +38,6 @@ private var sharedPreferences: SharedPreferences? = null
 private fun KMPContext.initSharedPreferences() {
     sharedPreferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
 }
+
+actual val KMPContext.cachePath: Path?
+    get() = cacheDir.toOkioPath()

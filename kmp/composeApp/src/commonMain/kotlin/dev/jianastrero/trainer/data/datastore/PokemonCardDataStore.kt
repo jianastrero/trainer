@@ -12,13 +12,7 @@ interface PokemonCardDataStore {
     @Insert
     suspend fun insert(pokemonCards: List<PokemonCard>)
 
-    @Query("SELECT * FROM pokemon_card LIMIT :limit OFFSET :offset")
-    suspend fun get(
-        limit: Int,
-        offset: Int
-    ): List<PokemonCard>
-
-    @Query("SELECT * FROM pokemon_card WHERE name = :name")
-    suspend fun get(name: String): List<PokemonCard>
+    @Query("SELECT * FROM pokemon_card WHERE name = :name LIMIT :limit OFFSET :offset")
+    suspend fun get(name: String, offset: Int, limit: Int): List<PokemonCard>
 
 }
