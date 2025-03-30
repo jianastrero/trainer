@@ -1,6 +1,6 @@
 package dev.jianastrero.trainer.domain.repository
 
-import dev.jianastrero.trainer.domain.entity.Pokemon
+import dev.jianastrero.trainer.domain.entity.relation.PokemonAndCards
 import dev.jianastrero.trainer.domain.model.NextPokemons
 
 interface PokeApiRepository {
@@ -10,5 +10,5 @@ interface PokeApiRepository {
         limit: Int
     ): NextPokemons
 
-    suspend fun getPokemon(id: String): Pokemon
+    suspend fun getPokemon(id: String): PokemonAndCards
 }

@@ -8,5 +8,5 @@ import org.koin.dsl.module
 val viewModelModule = module {
     factory { HomeViewModel(get(), get()) }
     factory { MainViewModel(get()) }
-    factory { PokemonDetailsViewModel(get(), get(), get()) }
+    factory { PokemonDetailsViewModel(get(), get()) }
 }

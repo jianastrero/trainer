@@ -22,7 +22,11 @@ data class PokemonCardResponse(
     @SerialName("weaknesses") val weaknesses: List<PokemonCardWeaknessResponse> = emptyList()
 )
 
-fun PokemonCardResponse.toEntity(name: String?): PokemonCard = PokemonCard(
+fun PokemonCardResponse.toEntity(
+    pokemonId: String,
+    name: String?
+): PokemonCard = PokemonCard(
     name = name ?: this.name,
-    card = images.small
+    card = images.small,
+    pokemonId = pokemonId
 )

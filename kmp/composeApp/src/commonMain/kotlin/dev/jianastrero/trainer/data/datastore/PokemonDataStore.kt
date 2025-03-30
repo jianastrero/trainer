@@ -3,7 +3,9 @@ package dev.jianastrero.trainer.data.datastore
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import dev.jianastrero.trainer.domain.entity.Pokemon
+import dev.jianastrero.trainer.domain.entity.relation.PokemonAndCards
 
 @Dao
 interface PokemonDataStore {
@@ -17,7 +19,8 @@ interface PokemonDataStore {
         offset: Int
     ): List<Pokemon>
 
+    @Transaction
     @Query("SELECT * FROM pokemon WHERE id = :id")
-    suspend fun get(id: String): Pokemon?
+    suspend fun get(id: String): PokemonAndCards?
 
 }
