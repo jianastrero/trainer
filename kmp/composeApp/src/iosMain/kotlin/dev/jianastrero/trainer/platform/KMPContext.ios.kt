@@ -25,7 +25,7 @@ actual fun KMPContext.getString(
     return runCatching {
         NSUserDefaults.standardUserDefaults.objectForKey(key)
             ?.toString()
-            ?. error("Unknown Object")
+            ?: error("Unknown Object")
     }.getOrElse {
         runCatching {
             NSUserDefaults.standardUserDefaults.stringForKey(key) ?: defaultValue
@@ -33,6 +33,15 @@ actual fun KMPContext.getString(
             defaultValue
         }
     }
+}
+
+actual fun KMPContext.getInt(
+    key: String,
+    defaultValue: Int
+): Int {
+    return runCatching {
+        NSUserDefaults.standardUserDefaults.integerForKey(key).toInt()
+    }.getOrElse { defaultValue }
 }
 
 
@@ -51,6 +60,15 @@ actual fun KMPContext.put(
 ) {
     runCatching {
         NSUserDefaults.standardUserDefaults.setObject(value = value, forKey = key)
+    }
+}
+
+actual fun KMPContext.put(
+    key: String,
+    value: Int
+) {
+    runCatching {
+        NSUserDefaults.standardUserDefaults.setInteger(value = value.toLong(), forKey = key)
     }
 }
 

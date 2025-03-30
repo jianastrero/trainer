@@ -31,6 +31,17 @@ actual fun KMPContext.getString(
     }.getOrElse { defaultValue }
 }
 
+actual fun KMPContext.getInt(
+    key: String,
+    defaultValue: Int
+): Int {
+    if (sharedPreferences == null) initSharedPreferences()
+
+    return runCatching {
+        sharedPreferences?.getInt(key, defaultValue) ?: defaultValue
+    }.getOrElse { defaultValue }
+}
+
 actual fun KMPContext.put(
     key: String,
     value: Boolean
@@ -53,6 +64,19 @@ actual fun KMPContext.put(
     runCatching {
         sharedPreferences?.edit {
             putString(key, value)
+        }
+    }
+}
+
+actual fun KMPContext.put(
+    key: String,
+    value: Int
+) {
+    if (sharedPreferences == null) initSharedPreferences()
+
+    runCatching {
+        sharedPreferences?.edit {
+            putInt(key, value)
         }
     }
 }

@@ -11,12 +11,12 @@ import dev.jianastrero.trainer.data.usecase.SetLastSeenPokemonIdUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory { GetNextPokemonsUseCase(get()) }
+    factory { GetNextPokemonsUseCase(get(), get()) }
     factory { GetPokemonUseCase(get()) }
     factory { IsDarkModeUseCase(get()) }
     factory { SetDarkModeUseCase(get()) }
     factory { LikePokemonUseCase(get()) }
     factory { DislikePokemonUseCase(get()) }
     factory { GetLikedPokemonsUseCase(get()) }
-    factory { SetLastSeenPokemonIdUseCase(get()) }
+    factory { SetLastSeenPokemonIdUseCase(get(), get()) }
 }

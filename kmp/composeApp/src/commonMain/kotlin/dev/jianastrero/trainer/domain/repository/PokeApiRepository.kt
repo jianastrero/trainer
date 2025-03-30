@@ -11,4 +11,6 @@ interface PokeApiRepository {
     ): NextPokemons
 
     suspend fun getPokemon(id: String): PokemonAndCards
+
+    suspend fun getPokemonRowId(pokemonId: String): Int
 }

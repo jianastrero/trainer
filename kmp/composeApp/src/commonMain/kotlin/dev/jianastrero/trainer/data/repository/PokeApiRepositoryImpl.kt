@@ -15,14 +15,14 @@ class PokeApiRepositoryImpl(
     private val pokemonRemote: PokeApiRemote,
     private val cardRemote: PokemonTcgRemote,
     private val pokemonDataStore: PokemonDataStore,
-    private val cardDataStore: PokemonCardDataStore
+    private val cardDataStore: PokemonCardDataStore,
 ) : PokeApiRepository {
 
     override suspend fun getNextPokemons(
         offset: Int,
         limit: Int
     ): NextPokemons {
-        val localPokemons = pokemonDataStore.get(offset = offset, limit = limit)
+        val localPokemons = pokemonDataStore.getPokemonStartingFromRowId(rowId = offset, limit = limit)
 
         if (localPokemons.isNotEmpty()) return NextPokemons(
             hasNext = true,
@@ -91,14 +91,13 @@ class PokeApiRepositoryImpl(
             cardDataStore.insert(localCards)
         }
 
-        localCards?.forEach {
-            println("JIANDDEBUG: card: ${it.card}")
-        }
-
         return PokemonAndCards(
             pokemon = localPokemon,
             cards = localCards ?: emptyList()
         )
     }
+
+    override suspend fun getPokemonRowId(pokemonId: String): Int =
+        pokemonDataStore.getRowId(pokemonId)
 
 }

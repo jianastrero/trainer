@@ -22,4 +22,12 @@ class ConfigDataStore(
         return preference.getString(key, defaultValue)
     }
 
+    fun putInt(key: String, value: Int) {
+        preference.put(key, value)
+    }
+
+    fun getInt(key: String, defaultValue: Int): Int {
+        return preference.getInt(key, defaultValue)
+    }
+
 }

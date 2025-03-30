@@ -20,7 +20,17 @@ interface PokemonDataStore {
     ): List<Pokemon>
 
     @Transaction
-    @Query("SELECT * FROM pokemon WHERE id = :id")
+    @Query("SELECT * FROM pokemon WHERE id = :id LIMIT 1")
     suspend fun get(id: String): PokemonAndCards?
+
+    @Query("SELECT rowid FROM pokemon WHERE id = :id LIMIT 1")
+    suspend fun getRowId(id: String): Int
+
+    @Transaction
+    @Query("SELECT * FROM pokemon WHERE rowid >= :rowId LIMIT :limit")
+    suspend fun getPokemonStartingFromRowId(
+        rowId: Int,
+        limit: Int
+    ): List<Pokemon>
 
 }

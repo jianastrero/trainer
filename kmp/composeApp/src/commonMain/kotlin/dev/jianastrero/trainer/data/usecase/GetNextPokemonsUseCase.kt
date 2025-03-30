@@ -1,12 +1,14 @@
 package dev.jianastrero.trainer.data.usecase
 
 import dev.jianastrero.trainer.domain.entity.Pokemon
+import dev.jianastrero.trainer.domain.repository.ConfigRepository
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
 class GetNextPokemonsUseCase(
-    private val repository: PokeApiRepository
+    private val repository: PokeApiRepository,
+    configRepository: ConfigRepository
 ) {
-    private var nextOffset: Int = 0
+    private var nextOffset: Int = configRepository.lastSeenPokemonRowId
     var hasNext = true
         private set
 

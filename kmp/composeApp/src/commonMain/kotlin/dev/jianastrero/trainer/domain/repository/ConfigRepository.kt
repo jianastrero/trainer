@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface ConfigRepository {
     val isDarkMode: StateFlow<Boolean>
-    var lastSeenPokemonId: String
+    var lastSeenPokemonRowId: Int
 
     fun setDarkMode(isDarkMode: Boolean)
 }
