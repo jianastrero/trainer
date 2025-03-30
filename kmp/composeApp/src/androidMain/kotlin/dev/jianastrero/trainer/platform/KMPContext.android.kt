@@ -40,4 +40,4 @@ private fun KMPContext.initSharedPreferences() {
 }
 
 actual val KMPContext.cachePath: Path?
-    get() = cacheDir.toOkioPath()
+    get() = runCatching { cacheDir.toOkioPath() }.getOrNull()
