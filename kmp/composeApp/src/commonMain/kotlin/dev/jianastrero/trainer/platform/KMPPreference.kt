@@ -10,4 +10,12 @@ class KMPPreference(private val kmpContext: KMPContext) {
         kmpContext.put(key, value)
     }
 
+    fun getString(key: String, defaultValue: String): String? {
+        return kmpContext.getString(key, defaultValue)
+    }
+
+    fun put(key: String, value: String) {
+        kmpContext.put(key, value)
+    }
+
 }

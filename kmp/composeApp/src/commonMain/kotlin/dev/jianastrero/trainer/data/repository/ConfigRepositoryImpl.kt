@@ -19,6 +19,12 @@ class ConfigRepositoryImpl(
     private val _isDarkMode = MutableStateFlow(dataStore.getBoolean(KEY_IS_DARK_MODE, true))
     override val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
 
+    override var lastSeenPokemonId: String
+        get() = dataStore.getString(KEY_LAST_SEEN_POKEMON_ID, "") ?: ""
+        set(value) {
+            dataStore.putString(KEY_LAST_SEEN_POKEMON_ID, value)
+        }
+
     override fun setDarkMode(isDarkMode: Boolean) {
         scope.launch {
             dataStore.putBoolean(KEY_IS_DARK_MODE, isDarkMode)
@@ -28,5 +34,6 @@ class ConfigRepositoryImpl(
 
     companion object {
         private const val KEY_IS_DARK_MODE = "KEY_IS_DARK_MODE"
+        private const val KEY_LAST_SEEN_POKEMON_ID = "KEY_LAST_SEEN_POKEMON_ID"
     }
 }

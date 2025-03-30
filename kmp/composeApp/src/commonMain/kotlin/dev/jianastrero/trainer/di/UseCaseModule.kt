@@ -7,6 +7,7 @@ import dev.jianastrero.trainer.data.usecase.GetPokemonUseCase
 import dev.jianastrero.trainer.data.usecase.IsDarkModeUseCase
 import dev.jianastrero.trainer.data.usecase.LikePokemonUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
+import dev.jianastrero.trainer.data.usecase.SetLastSeenPokemonIdUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -17,4 +18,5 @@ val useCaseModule = module {
     factory { LikePokemonUseCase(get()) }
     factory { DislikePokemonUseCase(get()) }
     factory { GetLikedPokemonsUseCase(get()) }
+    factory { SetLastSeenPokemonIdUseCase(get()) }
 }

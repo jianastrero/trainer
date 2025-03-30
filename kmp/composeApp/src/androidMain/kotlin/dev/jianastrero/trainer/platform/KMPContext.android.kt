@@ -20,6 +20,17 @@ actual fun KMPContext.getBoolean(
     }.getOrElse { defaultValue }
 }
 
+actual fun KMPContext.getString(
+    key: String,
+    defaultValue: String
+): String {
+    if (sharedPreferences == null) initSharedPreferences()
+
+    return runCatching {
+        sharedPreferences?.getString(key, defaultValue) ?: defaultValue
+    }.getOrElse { defaultValue }
+}
+
 actual fun KMPContext.put(
     key: String,
     value: Boolean
@@ -29,6 +40,19 @@ actual fun KMPContext.put(
     runCatching {
         sharedPreferences?.edit {
             putBoolean(key, value)
+        }
+    }
+}
+
+actual fun KMPContext.put(
+    key: String,
+    value: String
+) {
+    if (sharedPreferences == null) initSharedPreferences()
+
+    runCatching {
+        sharedPreferences?.edit {
+            putString(key, value)
         }
     }
 }

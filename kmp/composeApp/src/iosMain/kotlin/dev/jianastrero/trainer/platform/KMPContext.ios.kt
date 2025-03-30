@@ -18,12 +18,39 @@ actual fun KMPContext.getBoolean(
     NSUserDefaults.standardUserDefaults.boolForKey(key)
 }.getOrElse { defaultValue }
 
+actual fun KMPContext.getString(
+    key: String,
+    defaultValue: String
+): String {
+    return runCatching {
+        NSUserDefaults.standardUserDefaults.objectForKey(key)
+            ?.toString()
+            ?. error("Unknown Object")
+    }.getOrElse {
+        runCatching {
+            NSUserDefaults.standardUserDefaults.stringForKey(key) ?: defaultValue
+        }.getOrElse {
+            defaultValue
+        }
+    }
+}
+
+
 actual fun KMPContext.put(
     key: String,
     value: Boolean
 ) {
     runCatching {
         NSUserDefaults.standardUserDefaults.setBool(value = value, forKey = key)
+    }
+}
+
+actual fun KMPContext.put(
+    key: String,
+    value: String
+) {
+    runCatching {
+        NSUserDefaults.standardUserDefaults.setObject(value = value, forKey = key)
     }
 }
 

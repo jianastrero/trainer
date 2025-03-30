@@ -8,10 +8,10 @@ sealed interface NavDirection {
 
     sealed interface Screen : NavDirection {
         @Serializable
-        data object Main : NavDirection
+        data object Main : Screen
 
         @Serializable
-        data class PokemonDetail(val id: String) : NavDirection
+        data class PokemonDetail(val id: String) : Screen
     }
 
     @Serializable

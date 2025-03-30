@@ -14,4 +14,12 @@ class ConfigDataStore(
         preference.put(key, value)
     }
 
+    fun putString(key: String, value: String) {
+        preference.put(key, value)
+    }
+
+    fun getString(key: String, defaultValue: String): String? {
+        return preference.getString(key, defaultValue)
+    }
+
 }

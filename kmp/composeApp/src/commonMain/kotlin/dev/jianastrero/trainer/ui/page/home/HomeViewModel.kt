@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.jianastrero.trainer.data.usecase.GetNextPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.LikePokemonUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
+import dev.jianastrero.trainer.data.usecase.SetLastSeenPokemonIdUseCase
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -17,6 +18,7 @@ class HomeViewModel(
     private val setDarkModeUseCase: SetDarkModeUseCase,
     private val getPokemonsUseCase: GetNextPokemonsUseCase,
     private val likePokemonUseCase: LikePokemonUseCase,
+    private val setLastSeenPokemonIdUseCase: SetLastSeenPokemonIdUseCase,
 ) : ViewModel() {
 
     private val _pokemons = MutableStateFlow(emptyList<Pokemon>())
@@ -43,6 +45,9 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 removePokemon(pokemon)
+                pokemons.value.firstOrNull()?.let {
+                    setLastSeenPokemonId(it.id)
+                }
                 likePokemonUseCase(pokemon.id)
             }
         }
@@ -52,12 +57,19 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 removePokemon(pokemon)
+                pokemons.value.firstOrNull()?.let {
+                    setLastSeenPokemonId(it.id)
+                }
             }
         }
     }
 
     private suspend fun removePokemon(pokemon: Pokemon) {
         _pokemons.emit(_pokemons.value - pokemon)
+    }
+
+    private suspend fun setLastSeenPokemonId(pokemonId: String) {
+        setLastSeenPokemonIdUseCase(pokemonId)
     }
 
 }
