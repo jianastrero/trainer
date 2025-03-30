@@ -15,7 +15,7 @@ enum class BottomNavItem(
     val activeIcon: DrawableResource,
     val inactiveIcon: DrawableResource
 ) {
-    Home(
+    Swipe(
         label = Res.string.swipe,
         activeIcon = Res.drawable.ic_home_active,
         inactiveIcon = Res.drawable.ic_home_inactive
@@ -27,6 +27,6 @@ enum class BottomNavItem(
     );
 
     companion object {
-        val navItems = arrayOf(Home, Matches)
+        val navItems = arrayOf(Swipe, Matches)
     }
 }

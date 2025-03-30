@@ -18,11 +18,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AppBarTemplate(
     onDarkModeToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    title: String? = null,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
             AppBar(
+                title = title,
                 onDarkModeToggle = onDarkModeToggle,
                 modifier = Modifier.fillMaxWidth()
             )

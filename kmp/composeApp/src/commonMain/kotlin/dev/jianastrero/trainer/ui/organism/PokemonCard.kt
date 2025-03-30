@@ -30,6 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -72,6 +73,7 @@ fun PokemonCard(
     cardAction: CardAction? = null,
     onCardAction: (CardAction) -> Unit = {},
     enabled: Boolean = true,
+    fontSize: TextUnit = 32.sp
 ) {
     var size by remember { mutableStateOf(Size.Unspecified) }
 
@@ -152,7 +154,7 @@ fun PokemonCard(
         Text(
             text = name.capitalized,
             color = MaterialTheme.colors.onBackground,
-            fontSize = 32.sp,
+            fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             letterSpacing = 2.sp,
             lineHeight = 32.sp,

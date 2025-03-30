@@ -2,11 +2,11 @@ package dev.jianastrero.trainer.domain.nav
 
 import kotlinx.serialization.Serializable
 
-interface NavDirection {
+sealed interface NavDirection {
 
     data object Back : NavDirection
 
-    interface Screen : NavDirection {
+    sealed interface Screen : NavDirection {
         @Serializable
         data object Main : NavDirection
 
@@ -14,7 +14,9 @@ interface NavDirection {
         data class PokemonDetail(val id: String) : NavDirection
     }
 
-    interface BottomNav : NavDirection {
+    @Serializable
+    sealed interface BottomNav : NavDirection {
+
         @Serializable
         data object Swipe : BottomNav
 

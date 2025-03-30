@@ -50,7 +50,7 @@ fun BottomNav(
 private fun BottomNavPreview() {
     TrainerTheme {
         BottomNav(
-            selected = BottomNavItem.Home,
+            selected = BottomNavItem.Swipe,
             onSelectBottomNavItem = {},
             modifier = Modifier.fillMaxWidth()
         )

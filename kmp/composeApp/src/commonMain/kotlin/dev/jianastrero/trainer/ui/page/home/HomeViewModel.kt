@@ -3,6 +3,7 @@ package dev.jianastrero.trainer.ui.page.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.jianastrero.trainer.data.usecase.GetNextPokemonsUseCase
+import dev.jianastrero.trainer.data.usecase.LikePokemonUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,8 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val setDarkModeUseCase: SetDarkModeUseCase,
-    private val getPokemonsUseCase: GetNextPokemonsUseCase
+    private val getPokemonsUseCase: GetNextPokemonsUseCase,
+    private val likePokemonUseCase: LikePokemonUseCase,
 ) : ViewModel() {
 
     private val _pokemons = MutableStateFlow(emptyList<Pokemon>())
@@ -22,7 +24,9 @@ class HomeViewModel(
 
     fun setDarkMode(isDarkMode: Boolean) {
         viewModelScope.launch {
-            setDarkModeUseCase(isDarkMode)
+            runCatching {
+                setDarkModeUseCase(isDarkMode)
+            }
         }
     }
 
@@ -35,16 +39,25 @@ class HomeViewModel(
         }
     }
 
-    fun dislike(pokemon: Pokemon) {
+    fun like(pokemon: Pokemon) {
         viewModelScope.launch {
-            _pokemons.emit(_pokemons.value - pokemon)
+            runCatching {
+                removePokemon(pokemon)
+                likePokemonUseCase(pokemon.id)
+            }
         }
     }
 
-    fun like(pokemon: Pokemon) {
+    fun dislike(pokemon: Pokemon) {
         viewModelScope.launch {
-            _pokemons.emit(_pokemons.value - pokemon)
+            runCatching {
+                removePokemon(pokemon)
+            }
         }
+    }
+
+    private suspend fun removePokemon(pokemon: Pokemon) {
+        _pokemons.emit(_pokemons.value - pokemon)
     }
 
 }

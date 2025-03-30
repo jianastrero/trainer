@@ -18,7 +18,9 @@ class PokemonDetailsViewModel(
 
     fun setDarkMode(isDarkMode: Boolean) {
         viewModelScope.launch {
-            setDarkModeUseCase(isDarkMode)
+            runCatching {
+                setDarkModeUseCase(isDarkMode)
+            }
         }
     }
 
