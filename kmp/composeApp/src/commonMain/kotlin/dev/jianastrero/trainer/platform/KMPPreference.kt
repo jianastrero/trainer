@@ -6,7 +6,7 @@ class KMPPreference(private val kmpContext: KMPContext) {
         return kmpContext.getBoolean(key, defaultValue)
     }
 
-    fun getString(key: String, defaultValue: String): String? {
+    fun getString(key: String, defaultValue: String): String {
         return kmpContext.getString(key, defaultValue)
     }
 

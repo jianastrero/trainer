@@ -6,20 +6,20 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
 
 fun Modifier.skeleton(
     background: Color? = null,
     shimmer: Color? = null,
 ) = composed {
-    val background = background ?: MaterialTheme.colors.onBackground.copy(alpha = 0.1f)
-    val shimmer = shimmer ?: MaterialTheme.colors.background.copy(alpha = 0.6f)
+    val background = background ?: TrainerTheme.colors.onBackground.copy(alpha = 0.1f)
+    val shimmer = shimmer ?: TrainerTheme.colors.background.copy(alpha = 0.6f)
     val infiniteTransition = rememberInfiniteTransition("skeleton")
     val transition by infiniteTransition.animateFloat(
         initialValue = 0.0f,

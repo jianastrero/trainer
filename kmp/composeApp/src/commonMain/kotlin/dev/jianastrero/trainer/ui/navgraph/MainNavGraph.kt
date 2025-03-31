@@ -1,7 +1,6 @@
 package dev.jianastrero.trainer.ui.navgraph
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -52,13 +51,11 @@ fun MainNavGraph(
                 modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding()
-            ) { paddingValues ->
+            ) {
                 BottomNavGraph(
                     navController = bottomNavController,
                     mainNavController = mainNavController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }

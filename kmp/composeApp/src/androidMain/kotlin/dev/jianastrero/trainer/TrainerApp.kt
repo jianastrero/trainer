@@ -9,9 +9,16 @@ class TrainerApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        instance = this
+
         initKoin {
             androidContext(this@TrainerApp)
         }
+    }
+
+    companion object {
+        lateinit var instance: TrainerApp
+            private set
     }
 
 }

@@ -5,7 +5,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,15 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import dev.jianastrero.trainer.domain.ext.capitalized
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonResponse
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonTypeResponse
-import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.PokemonTypeNameResponse
 import dev.jianastrero.trainer.ui.atom.Skeleton
 import dev.jianastrero.trainer.ui.molecule.PokemonTypePills
 import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import dev.jianastrero.trainer.domain.enumeration.PokemonType as PokemonTypeEnum
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -57,7 +50,7 @@ fun PokemonHeader(
                 Skeleton(
                     modifier = Modifier
                         .size(240.dp, 48.dp)
-                        .clip(MaterialTheme.shapes.small)
+                        .clip(TrainerTheme.shapes.small)
                 )
                 FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -70,7 +63,7 @@ fun PokemonHeader(
                         Skeleton(
                             modifier = Modifier
                                 .size(96.dp, 26.dp)
-                                .clip(MaterialTheme.shapes.small)
+                                .clip(TrainerTheme.shapes.small)
                         )
                     }
                 }
@@ -80,6 +73,7 @@ fun PokemonHeader(
                     color = Light,
                     fontSize = 48.sp,
                     fontWeight = FontWeight.Black,
+                    style = TrainerTheme.typography.body1,
                 )
                 PokemonTypePills(
                     pokemonTypes = pokemon.types,

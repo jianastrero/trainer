@@ -8,7 +8,7 @@ import dev.jianastrero.trainer.domain.repository.LikedPokemonRepository
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 import org.koin.dsl.module
 
-val repositoryModule = module {
+val repositoryModule = module(true) {
     single<ConfigRepository> { ConfigRepositoryImpl(get()) }
     single<PokeApiRepository> { PokeApiRepositoryImpl(get(), get(), get(), get()) }
     single<LikedPokemonRepository> { LikedPokemonRepositoryImpl(get()) }

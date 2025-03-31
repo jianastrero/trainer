@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +30,7 @@ import dev.jianastrero.trainer.ui.atom.LoadingImage
 import dev.jianastrero.trainer.ui.atom.Skeleton
 import dev.jianastrero.trainer.ui.molecule.PageIndicators
 import dev.jianastrero.trainer.ui.theme.Light
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.absoluteValue
 
@@ -86,12 +86,12 @@ private fun SkeletonLoading(
         Skeleton(
             modifier = Modifier
                 .size(240.dp, 320.dp)
-                .clip(MaterialTheme.shapes.small)
+                .clip(TrainerTheme.shapes.small)
         )
         Skeleton(
             modifier = Modifier
                 .size(240.dp * 0.9f, 320.dp * 0.9f)
-                .clip(MaterialTheme.shapes.small)
+                .clip(TrainerTheme.shapes.small)
         )
     }
 }
@@ -148,9 +148,9 @@ private fun ImageViewPagerContent(
             currentPage = pagerState.currentPage,
             pageCount = images.size,
             activeColor = activePageIndicatorColor,
-            inactiveColor = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
+            inactiveColor = TrainerTheme.colors.onBackground.copy(alpha = 0.4f),
             spacing = pageIndicatorSpacing,
-            borderColor = MaterialTheme.colors.background,
+            borderColor = TrainerTheme.colors.background,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .height(32.dp)

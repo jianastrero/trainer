@@ -1,10 +1,10 @@
 package dev.jianastrero.trainer.ui.template
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,21 +18,20 @@ fun BottomNavTemplate(
     selected: BottomNavItem,
     onSelectBottomNavItem: (BottomNavItem) -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable () -> Unit
 ) {
-    Scaffold(
-        bottomBar = {
-            BottomNav(
-                selected = selected,
-                onSelectBottomNavItem = onSelectBottomNavItem,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(64.dp)
-            )
-        },
-        content = content,
-        modifier = modifier,
-    )
+    Column(modifier = modifier) {
+        Box(modifier = Modifier.weight(1f)) {
+            content()
+        }
+        BottomNav(
+            selected = selected,
+            onSelectBottomNavItem = onSelectBottomNavItem,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(64.dp)
+        )
+    }
 }
 
 @Preview

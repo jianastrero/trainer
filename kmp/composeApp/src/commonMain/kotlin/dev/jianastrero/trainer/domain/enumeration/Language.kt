@@ -1,7 +1,9 @@
 package dev.jianastrero.trainer.domain.enumeration
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 enum class Language(val code: String) {
     @SerialName("en") English("en"),
     @SerialName("ja") Japanese("ja"),

@@ -5,6 +5,6 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val roomModule: Module = module {
+actual val roomModule: Module = module(true) {
     single { getTrainerDatabase(androidApplication()) }
 }

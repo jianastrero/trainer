@@ -16,5 +16,6 @@ fun initKoin(appDeclaration: (KoinApplication.() -> Unit)? = null) {
             viewModelModule
         )
         appDeclaration?.invoke(this)
+        this.createEagerInstances()
     }
 }

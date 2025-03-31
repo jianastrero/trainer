@@ -41,7 +41,7 @@ private fun PreviewPokemonTypePills() {
         PokemonTypePills(
             pokemonTypes = PokemonType.entries,
             modifier = Modifier
-                .background(MaterialTheme.colors.onBackground)
+                .background(TrainerTheme.colors.onBackground)
                 .padding(24.dp)
         )
     }

@@ -23,8 +23,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PageIndicator(
     active: Boolean,
     modifier: Modifier = Modifier,
-    activeColor: Color = MaterialTheme.colors.background,
-    inactiveCcolor: Color = MaterialTheme.colors.background.copy(alpha = 0.48f),
+    activeColor: Color = TrainerTheme.colors.background,
+    inactiveCcolor: Color = TrainerTheme.colors.background.copy(alpha = 0.48f),
     borderColor: Color? = null,
     shape: Shape = CircleShape,
 ) {

@@ -11,14 +11,14 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun trainerTypography(): Typography = Typography(
     subtitle1 = TextStyle(
-        color = MaterialTheme.colors.onBackground,
+        color = TrainerTheme.colors.onBackground,
         fontSize = 14.sp,
         fontWeight = FontWeight.Thin,
         lineHeight = 14.sp,
         textAlign = TextAlign.Center
     ),
     body1 = TextStyle(
-        color = MaterialTheme.colors.onBackground,
+        color = TrainerTheme.colors.onBackground,
         fontSize = 16.sp,
         fontWeight = FontWeight.Light,
         lineHeight = 16.sp,

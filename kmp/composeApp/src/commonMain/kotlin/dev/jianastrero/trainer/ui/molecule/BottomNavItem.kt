@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.jianastrero.trainer.ui.theme.Dark
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -40,7 +38,7 @@ fun BottomNavItem(
     inactiveIcon: DrawableResource,
     modifier: Modifier = Modifier
 ) {
-    val color = MaterialTheme.colors.onBackground
+    val color = TrainerTheme.colors.onBackground
     val colorAnim by animateColorAsState(
         targetValue = if (isActive) color else color.copy(alpha = 0.6f),
         animationSpec = tween()
@@ -71,7 +69,7 @@ fun BottomNavItem(
             fontWeight = FontWeight(weightAnim),
             letterSpacing = letterSpacingAnim.sp,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.subtitle1
+            style = TrainerTheme.typography.subtitle1
         )
     }
 }
@@ -79,7 +77,7 @@ fun BottomNavItem(
 @Preview
 @Composable
 private fun BottomNavItemPreview() {
-    TrainerTheme(isDarkMode = true) {
+    TrainerTheme {
         Row(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.padding(12.dp)

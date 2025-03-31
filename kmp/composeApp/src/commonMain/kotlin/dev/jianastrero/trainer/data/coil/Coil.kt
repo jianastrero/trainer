@@ -12,6 +12,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import dev.jianastrero.trainer.platform.KMPContext
 import dev.jianastrero.trainer.platform.cachePath
+import dev.jianastrero.trainer.ui.theme.LocalKMPContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.koin.compose.koinInject
@@ -22,7 +23,7 @@ private data object ImageLoaderTokens {
 }
 
 @Composable
-fun rememberImageLoader(kmpContext: KMPContext = koinInject()): ImageLoader {
+fun rememberImageLoader(kmpContext: KMPContext = LocalKMPContext.current): ImageLoader {
     val platformContext = LocalPlatformContext.current
     val imageLoader = remember(kmpContext) {
         val builder = ImageLoader.Builder(platformContext)

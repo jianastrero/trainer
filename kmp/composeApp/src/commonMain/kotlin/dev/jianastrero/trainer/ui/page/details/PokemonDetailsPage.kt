@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -31,7 +30,7 @@ import dev.jianastrero.trainer.ui.template.BackButtonTemplate
 import dev.jianastrero.trainer.ui.theme.Light
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 private data object PokemonDetailsPageTokens {
     const val REVEAL_ANIM_DURATION = 1000
@@ -42,14 +41,14 @@ fun PokemonDetailsPage(
     navigate: (NavDirection) -> Unit,
     pokemonId: String,
     modifier: Modifier = Modifier,
-    viewModel: PokemonDetailsViewModel = koinInject(),
+    viewModel: PokemonDetailsViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     val background by animateColorAsState(
         if (state.pokemon == null) {
-            MaterialTheme.colors.background
+            TrainerTheme.colors.background
         } else {
-            state.pokemon?.primaryType?.color ?: MaterialTheme.colors.background
+            state.pokemon?.primaryType?.color ?: TrainerTheme.colors.background
         },
         animationSpec = tween(PokemonDetailsPageTokens.REVEAL_ANIM_DURATION)
     )
@@ -77,17 +76,15 @@ fun PokemonDetailsPage(
         modifier = modifier
             .background(
                 radialColor = background,
-                backgroundColor = MaterialTheme.colors.background,
+                backgroundColor = TrainerTheme.colors.background,
                 radius = 0.8f,
                 radiusBias = RadialGradientTokens.Bias.Height
             )
             .systemBarsPadding()
-    ) { paddingValues ->
+    ) {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         ) {
             item {
                 PokemonHeader(

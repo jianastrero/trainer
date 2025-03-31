@@ -1,5 +1,6 @@
 package dev.jianastrero.trainer.data.database
 
+import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
@@ -25,6 +26,7 @@ import kotlinx.coroutines.IO
     version = 1
 )
 @TypeConverters(Converters::class)
+@ConstructedBy(TrainerDatabaseConstructor::class)
 abstract class TrainerDatabase : RoomDatabase() {
     abstract fun pokemonDataStore(): PokemonDataStore
     abstract fun pokemonCardDataStore(): PokemonCardDataStore

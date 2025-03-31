@@ -10,7 +10,7 @@ import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.data.usecase.SetLastSeenPokemonIdUseCase
 import org.koin.dsl.module
 
-val useCaseModule = module {
+val useCaseModule = module(true) {
     factory { GetNextPokemonsUseCase(get(), get()) }
     factory { GetPokemonUseCase(get()) }
     factory { IsDarkModeUseCase(get()) }

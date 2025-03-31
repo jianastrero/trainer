@@ -1,11 +1,9 @@
 package dev.jianastrero.trainer.ui.template
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,19 +17,18 @@ fun AppBarTemplate(
     onDarkModeToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     title: String? = null,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable () -> Unit
 ) {
-    Scaffold(
-        topBar = {
-            AppBar(
-                title = title,
-                onDarkModeToggle = onDarkModeToggle,
-                modifier = Modifier.fillMaxWidth()
-            )
-        },
-        content = content,
-        modifier = modifier,
-    )
+    Column(modifier = modifier) {
+        AppBar(
+            title = title,
+            onDarkModeToggle = onDarkModeToggle,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Box(modifier = Modifier.weight(1f)) {
+            content()
+        }
+    }
 }
 
 @Preview
@@ -41,9 +38,10 @@ private fun AppBarsTemplatePreview() {
         AppBarTemplate(
             onDarkModeToggle = {}
         ) {
-            Box(modifier = Modifier.fillMaxSize().padding(it)) {
+            Box(modifier = Modifier.fillMaxSize()) {
                 Text(
                     "Content",
+                    style = TrainerTheme.typography.body1,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }

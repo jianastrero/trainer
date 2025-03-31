@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,13 +21,14 @@ import dev.jianastrero.trainer.domain.nav.NavDirection
 import dev.jianastrero.trainer.ui.organism.CardAction
 import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
-import org.koin.compose.koinInject
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MatchesPage(
     navigate: (NavDirection) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: MatchesViewModel = koinInject(),
+    viewModel: MatchesViewModel = koinViewModel(),
 ) {
     val likedPokemons by viewModel.likedPokemons.collectAsState()
 
@@ -40,7 +40,7 @@ fun MatchesPage(
         title = "Matches",
         onDarkModeToggle = viewModel::setDarkMode,
         modifier = modifier,
-    ) { contentPadding ->
+    ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -49,15 +49,13 @@ fun MatchesPage(
                 horizontal = 12.dp,
                 vertical = 24.dp
             ),
-            modifier = Modifier
-                .padding(contentPadding)
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             items(likedPokemons) { pokemon ->
                 PokemonCard(
                     name = pokemon.name,
                     imageUrl = pokemon.officialArtwork,
-                    color = pokemon.primaryType?.color ?: MaterialTheme.colors.onBackground,
+                    color = pokemon.primaryType?.color ?: TrainerTheme.colors.onBackground,
                     fontSize = 16.sp,
                     onCardAction = {
                         if (it is CardAction.View) {

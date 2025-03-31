@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,15 +31,16 @@ fun LabelAndValue(
     ) {
         Text(
             text = label,
-            color = MaterialTheme.colors.onBackground.copy(alpha = 0.72f),
+            color = TrainerTheme.colors.onBackground.copy(alpha = 0.72f),
             fontSize = 14.sp,
             fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Start,
+            style = TrainerTheme.typography.body1,
             modifier = Modifier
         )
         Spacer(
             modifier = Modifier
-                .background(MaterialTheme.colors.onBackground.copy(alpha = 0.24f))
+                .background(TrainerTheme.colors.onBackground.copy(alpha = 0.24f))
                 .height(1.dp)
                 .weight(1f)
         )
@@ -55,10 +55,11 @@ fun LabelAndValue(
             } else {
                 Text(
                     text = text,
-                    color = MaterialTheme.colors.onBackground,
+                    color = TrainerTheme.colors.onBackground,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.End,
+                    style = TrainerTheme.typography.body1,
                     modifier = Modifier
                 )
             }

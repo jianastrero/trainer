@@ -21,8 +21,8 @@ fun PageIndicators(
     currentPage: Int,
     pageCount: Int,
     modifier: Modifier = Modifier,
-    activeColor: Color = MaterialTheme.colors.background,
-    inactiveColor: Color = MaterialTheme.colors.background.copy(alpha = 0.48f),
+    activeColor: Color = TrainerTheme.colors.background,
+    inactiveColor: Color = TrainerTheme.colors.background.copy(alpha = 0.48f),
     borderColor: Color? = null,
     spacing: Dp = 12.dp
 ) {

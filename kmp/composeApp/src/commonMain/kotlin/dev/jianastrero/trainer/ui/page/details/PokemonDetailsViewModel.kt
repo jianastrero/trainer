@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.jianastrero.trainer.data.usecase.GetPokemonUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -17,7 +19,7 @@ class PokemonDetailsViewModel(
     val state = _state.asStateFlow()
 
     fun setDarkMode(isDarkMode: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 setDarkModeUseCase(isDarkMode)
             }
@@ -25,7 +27,7 @@ class PokemonDetailsViewModel(
     }
 
     fun getPokemon(pokemonId: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 getPokemonUseCase(pokemonId).also { pokemon ->
                     _state.emit(state.value.copy(pokemon = pokemon.pokemon, pokemonCards = pokemon.cards))

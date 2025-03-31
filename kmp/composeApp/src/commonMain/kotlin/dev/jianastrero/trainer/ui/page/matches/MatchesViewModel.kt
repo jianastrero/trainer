@@ -6,6 +6,8 @@ import dev.jianastrero.trainer.data.usecase.DislikePokemonUseCase
 import dev.jianastrero.trainer.data.usecase.GetLikedPokemonsUseCase
 import dev.jianastrero.trainer.data.usecase.SetDarkModeUseCase
 import dev.jianastrero.trainer.domain.entity.Pokemon
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -20,7 +22,7 @@ class MatchesViewModel(
     val likedPokemons = _likedPokemons.asStateFlow()
 
     fun setDarkMode(isDarkMode: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 setDarkModeUseCase(isDarkMode)
             }
@@ -28,13 +30,13 @@ class MatchesViewModel(
     }
 
     fun getLikedPokemons() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             suspendedGetLikedPokemons()
         }
     }
 
     fun dislikePokemon(pokemon: Pokemon) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 dislikePokemonUseCase(pokemon.id)
                 suspendedGetLikedPokemons()

@@ -56,6 +56,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.core.coroutines)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.vm)
 
             // Ktor
             implementation(libs.ktor.client.core)
@@ -73,6 +74,9 @@ kotlin {
             // Coil
             implementation(libs.coil)
             implementation(libs.coil.network.ktor)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

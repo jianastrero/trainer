@@ -8,6 +8,8 @@ import dev.jianastrero.trainer.domain.entity.relation.PokemonAndCards
 import dev.jianastrero.trainer.domain.model.NextPokemons
 import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.toEntity
 import dev.jianastrero.trainer.domain.model.pokeapi.response.species.genus
+import dev.jianastrero.trainer.domain.model.pokemontcg.response.PokemonTcgPaginatedResponse
+import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.PokemonCardResponse
 import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.toEntity
 import dev.jianastrero.trainer.domain.repository.PokeApiRepository
 
@@ -32,12 +34,14 @@ class PokeApiRepositoryImpl(
 
         return runCatching {
             val response = pokemonRemote.getPokemonList(offset = offset, limit = limit)
-            val remotePokemons = response.results.map { pokemonItem ->
-                val pokemonResponse = pokemonRemote.getPokemon(pokemonItem.id)
-                val speciesResponse = pokemonRemote.getSpecies(pokemonItem.id)
-                pokemonResponse.toEntity(
-                    species = speciesResponse.genus
-                )
+            val remotePokemons = response.results.mapNotNull { pokemonItem ->
+                runCatching {
+                    val pokemonResponse = pokemonRemote.getPokemon(pokemonItem.id)
+                    val speciesResponse = pokemonRemote.getSpecies(pokemonItem.id)
+                    pokemonResponse.toEntity(
+                        species = speciesResponse.genus
+                    )
+                }.getOrNull()
             }
             pokemonDataStore.insert(remotePokemons)
 
@@ -46,6 +50,8 @@ class PokeApiRepositoryImpl(
                 nextOffset = offset + response.results.size,
                 pokemons = remotePokemons
             )
+        }.onFailure {
+            println("JIANDDEBUG -> error: ${it}")
         }.getOrElse {
             NextPokemons(
                 hasNext = false,
@@ -59,7 +65,10 @@ class PokeApiRepositoryImpl(
         val localPokemonAndCards = pokemonDataStore.get(id)
         var localPokemon = localPokemonAndCards?.pokemon
         var localCards = localPokemonAndCards?.cards
-        if (localPokemon != null && localCards != null && localCards.isNotEmpty()) return localPokemonAndCards
+        if (localPokemon != null && !localCards.isNullOrEmpty()) return PokemonAndCards(
+            pokemon = localPokemon,
+            cards = localCards
+        )
 
         // if localPokemon is null, fetch from remote
         if (localPokemon == null) {
@@ -69,7 +78,7 @@ class PokeApiRepositoryImpl(
         }
 
         // if localCards is null, fetch from local
-        if (localCards == null || localCards.isEmpty()) {
+        if (localCards.isNullOrEmpty()) {
             val localCards = cardDataStore.get(localPokemon.name, 0, 1000)
 
             if (localCards.isNotEmpty()) return PokemonAndCards(
@@ -80,8 +89,17 @@ class PokeApiRepositoryImpl(
 
         // if localCards is empty, fetch from remote
         if (localCards != null && localCards.isEmpty()) {
-            localCards = cardRemote.getPokemonCards(localPokemon.name, 1, 1000)
-                .result
+            val remoteCards = mutableListOf<PokemonCardResponse>()
+            var currentPage = 1
+            var result: PokemonTcgPaginatedResponse<PokemonCardResponse>
+
+            do {
+                result = cardRemote.getPokemonCards(localPokemon.name, currentPage, 20)
+                remoteCards.addAll(result.result)
+                currentPage = result.page + 1
+            } while (result.result.isNotEmpty())
+
+            localCards = remoteCards
                 .map { response ->
                     response.toEntity(
                         pokemonId = localPokemon.id,

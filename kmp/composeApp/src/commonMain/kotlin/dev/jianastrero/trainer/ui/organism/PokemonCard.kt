@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -117,27 +116,27 @@ fun PokemonCard(
             }
             .shadow(
                 elevation = if (enabled) animShadow else 0.dp,
-                shape = MaterialTheme.shapes.medium,
+                shape = TrainerTheme.shapes.medium,
                 ambientColor = color,
                 spotColor = color
             )
             .background(
                 radialColor = color,
-                backgroundColor = MaterialTheme.colors.background,
+                backgroundColor = TrainerTheme.colors.background,
                 radiusBias = RadialGradientTokens.Bias.Height,
-                shape = MaterialTheme.shapes.medium
+                shape = TrainerTheme.shapes.medium
             )
             .then(name.isEmpty()) {
                 Modifier
-                    .clip(MaterialTheme.shapes.medium)
+                    .clip(TrainerTheme.shapes.medium)
                     .skeleton()
             }
             .border(
                 width = 1.dp,
                 color = color,
-                shape = MaterialTheme.shapes.medium
+                shape = TrainerTheme.shapes.medium
             )
-            .clip(MaterialTheme.shapes.medium)
+            .clip(TrainerTheme.shapes.medium)
             .clickable(enabled = enabled) {
                 onCardAction(CardAction.View)
             }
@@ -153,12 +152,13 @@ fun PokemonCard(
         )
         Text(
             text = name.capitalized,
-            color = MaterialTheme.colors.onBackground,
+            color = TrainerTheme.colors.onBackground,
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             letterSpacing = 2.sp,
             lineHeight = 32.sp,
             textAlign = TextAlign.Center,
+            style = TrainerTheme.typography.body1,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(

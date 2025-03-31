@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +15,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.ui.atom.DarkModeToggle
 import dev.jianastrero.trainer.ui.theme.TrainerTheme
+import org.jetbrains.compose.resources.painterResource
+import trainer.composeapp.generated.resources.Res
+import trainer.composeapp.generated.resources.ic_arrow_back
 
 @Composable
 fun BackButtonAppBar(
@@ -36,9 +36,9 @@ fun BackButtonAppBar(
             )
     ) {
         Icon(
-            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+            painter = painterResource(Res.drawable.ic_arrow_back),
             contentDescription = "Back",
-            tint = MaterialTheme.colors.onBackground,
+            tint = TrainerTheme.colors.onBackground,
             modifier = Modifier
                 .size(32.dp)
                 .padding(4.dp)

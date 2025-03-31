@@ -1,7 +1,6 @@
 package dev.jianastrero.trainer.data.ktor
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -16,9 +15,11 @@ import kotlinx.serialization.json.Json
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
+expect val defaultHttpClient: HttpClient
+
 class KtorClient(private val baseUrl: String) {
 
-    val client = HttpClient(CIO) {
+    val client = defaultHttpClient.config {
         expectSuccess = true
         defaultRequest {
             url(baseUrl)

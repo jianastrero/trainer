@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,10 +44,11 @@ fun AppBar(
         } else {
             Text(
                 text = title,
-                color = MaterialTheme.colors.onBackground,
+                color = TrainerTheme.colors.onBackground,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 lineHeight = 16.sp,
+                style = TrainerTheme.typography.body1,
                 modifier = Modifier
                     .height(32.dp)
                     .padding(4.dp)

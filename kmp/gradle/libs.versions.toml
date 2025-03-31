@@ -8,21 +8,21 @@ androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.2.1"
 androidx-core-ktx = "1.15.0"
 androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.8.4"
+androidx-lifecycle = "2.8.2"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.3"
 junit = "4.13.2"
 kotlin = "2.1.10"
-koin-bom = "4.0.2"
+koin-bom = "4.0.0"
 ktor = "3.1.0"
 coroutines = "1.10.1"
 kotlinx-serialization = "2.1.0"
 kotlinx-serialization-json = "1.8.0"
 coil = "3.1.0"
 ksp = "2.1.0-1.0.29"
-androidx-room = "2.7.0-rc02"
-compose-navigation = "2.8.0-alpha13"
+androidx-room = "2.7.0-rc03"
+compose-navigation = "2.8.0-alpha12"
 sqlite = "2.5.0-SNAPSHOT"
 
 [libraries]
@@ -46,10 +46,12 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-android = { module = "io.insert-koin:koin-android" }
+koin-compose-vm = { module = "io.insert-koin:koin-compose-viewmodel" }
 
 # Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }

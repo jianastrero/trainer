@@ -34,20 +34,20 @@ fun SwipeButton(
             .alpha(if (enabled) 1f else 0.4f)
             .shadow(
                 elevation = 2.dp,
-                shape = MaterialTheme.shapes.large,
-                ambientColor = MaterialTheme.colors.primary,
-                spotColor = MaterialTheme.colors.primary
+                shape = TrainerTheme.shapes.large,
+                ambientColor = TrainerTheme.colors.primary,
+                spotColor = TrainerTheme.colors.primary
             )
             .background(
-                color = MaterialTheme.colors.background,
-                shape = MaterialTheme.shapes.large
+                color = TrainerTheme.colors.background,
+                shape = TrainerTheme.shapes.large
             )
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.primary.copy(alpha = 0.1f),
-                shape = MaterialTheme.shapes.medium
+                color = TrainerTheme.colors.primary.copy(alpha = 0.1f),
+                shape = TrainerTheme.shapes.medium
             )
-            .clip(MaterialTheme.shapes.large)
+            .clip(TrainerTheme.shapes.large)
             .clickable(enabled = enabled, onClick = onClick)
     ) {
         Image(

@@ -25,7 +25,7 @@ class HomeViewModel(
     val pokemons = _pokemons.asStateFlow()
 
     fun setDarkMode(isDarkMode: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 setDarkModeUseCase(isDarkMode)
             }
@@ -42,7 +42,7 @@ class HomeViewModel(
     }
 
     fun like(pokemon: Pokemon) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 removePokemon(pokemon)
                 pokemons.value.firstOrNull()?.let {
@@ -54,7 +54,7 @@ class HomeViewModel(
     }
 
     fun dislike(pokemon: Pokemon) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 removePokemon(pokemon)
                 pokemons.value.firstOrNull()?.let {

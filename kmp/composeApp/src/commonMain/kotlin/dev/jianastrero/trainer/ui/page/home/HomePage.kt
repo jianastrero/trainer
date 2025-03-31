@@ -1,11 +1,9 @@
 package dev.jianastrero.trainer.ui.page.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -16,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.jianastrero.trainer.domain.entity.Pokemon
 import dev.jianastrero.trainer.domain.entity.primaryType
@@ -26,7 +23,8 @@ import dev.jianastrero.trainer.ui.molecule.SwipeButtons
 import dev.jianastrero.trainer.ui.organism.CardAction
 import dev.jianastrero.trainer.ui.organism.PokemonCard
 import dev.jianastrero.trainer.ui.template.AppBarTemplate
-import org.koin.compose.koinInject
+import dev.jianastrero.trainer.ui.theme.TrainerTheme
+import org.koin.compose.viewmodel.koinViewModel
 
 private data object HomePageTokens {
     const val MIN_POKEMONS = 10
@@ -36,7 +34,7 @@ private data object HomePageTokens {
 fun HomePage(
     navigate: (NavDirection) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = koinInject(),
+    viewModel: HomeViewModel = koinViewModel(),
 ) {
     val pokemons by viewModel.pokemons.collectAsState()
 
@@ -48,8 +46,8 @@ fun HomePage(
 
     AppBarTemplate(
         onDarkModeToggle = viewModel::setDarkMode,
-        modifier = modifier.background(Color.Red)
-    ) { paddingValues ->
+        modifier = modifier
+    ) {
         HomePageContent(
             pokemons = pokemons,
             onView = {
@@ -61,9 +59,7 @@ fun HomePage(
                     SwipeAction.Dislike -> viewModel.dislike(pokemon)
                 }
             },
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
@@ -135,18 +131,18 @@ private fun PokemonCards(
             enabled = false,
             name = secondPokemon?.name.orEmpty(),
             imageUrl = secondPokemon?.officialArtwork.orEmpty(),
-            color = secondPokemon?.primaryType?.color ?: MaterialTheme.colors.onBackground,
+            color = secondPokemon?.primaryType?.color ?: TrainerTheme.colors.onBackground,
         )
         PokemonCard(
             name = firstPokemon?.name.orEmpty(),
             imageUrl = firstPokemon?.officialArtwork.orEmpty(),
-            color = firstPokemon?.primaryType?.color ?: MaterialTheme.colors.onBackground,
+            color = firstPokemon?.primaryType?.color ?: TrainerTheme.colors.onBackground,
             cardAction = cardAction,
             onCardAction = onCardAction@{ action ->
                 val swipeAction = when (action) {
                     CardAction.SwipeRight -> SwipeAction.Like
                     CardAction.SwipeLeft -> SwipeAction.Dislike
-                    CardAction.View -> return@onCardAction onView(firstPokemon?.id?.toString().orEmpty())
+                    CardAction.View -> return@onCardAction onView(firstPokemon?.id.orEmpty())
                 }
                 val pokemon = firstPokemon ?: return@onCardAction
 

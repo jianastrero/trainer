@@ -5,6 +5,6 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import platform.darwin.NSObject
 
-actual val roomModule: Module = module {
+actual val roomModule: Module = module(true) {
     single { getTrainerDatabase(NSObject()) }
 }
