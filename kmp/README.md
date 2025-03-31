@@ -27,3 +27,15 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 | Home                                                 | Matches                                                 | Detail                                                 |
 |------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
 | <img src="../screenshots/ios/home.png" width="256"/> | <img src="../screenshots/ios/matches.png" width="256"/> | <img src="../screenshots/ios/detail.png" width="256"/> |
+
+## Getting Started
+1. Clone the repository
+2. Open the project in Android Studio or IntelliJ IDEA.
+3. Open the terminal and run the following command to build the project:
+   ```bash
+   ./gradlew build
+   ```
+4. To run the Android app, open the `composeApp` module in Android Studio and click on the "Run" button.
+5. To run the iOS app, open the `iosApp` module in Xcode and click on the "Run" button.
+6. To run the iOS app on a simulator, make sure you have the latest version of Xcode installed and select a simulator from the list of available devices.
+7. To run the iOS app on a physical device, make sure you have a valid Apple Developer account and follow the instructions in Xcode to set up code signing and provisioning profiles.
