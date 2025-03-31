@@ -19,6 +19,11 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 ## Screen Shots
 ## Android
-| Home | Matches | Detail |
-| ---- | ------- | ------ |
-| <img src="../screenshots/android/home.png" width="256"/> | <img src="../screenshots/android/matches.png" width="256"/> | <img src="../screenshots/android/detail.png" width="256"/>
+| Home                                                     | Matches                                                     | Detail                                                     |
+|----------------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------|
+| <img src="../screenshots/android/home.png" width="256"/> | <img src="../screenshots/android/matches.png" width="256"/> | <img src="../screenshots/android/detail.png" width="256"/> |
+
+## iOS
+| Home                                                 | Matches                                                 | Detail                                                 |
+|------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
+| <img src="../screenshots/ios/home.png" width="256"/> | <img src="../screenshots/ios/matches.png" width="256"/> | <img src="../screenshots/ios/detail.png" width="256"/> |
