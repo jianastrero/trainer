@@ -4,8 +4,7 @@
 This is a React Native project targeting Android and iOS.
 <hr/>
 
-Trainér is the dating app for Pokemon enthusiasts! Discover and connect with Pokemon in your area. Swipe right on those
-you're attracted to and left on those you're not. With Trainér, you'll never have to catch 'em all alone again!
+Trainér is the dating app for Pokemon enthusiasts! Discover and connect with Pokemon in your area. Save your favorite Pokemon by viewing their profiles. With Trainér, you'll never have to catch 'em all alone again!
 
 # Getting Started
 
