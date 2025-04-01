@@ -31,20 +31,16 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 ## Libraries Used
 ### AndroidX
 - [Activity Compose](https://mvnrepository.com/artifact/androidx.activity/activity-compose)
-- [Material Components](https://mvnrepository.com/artifact/com.google.android.material/material)
 - [Navigation Compose](https://mvnrepository.com/artifact/androidx.navigation/navigation-compose)
 - [Lifecycle Runtime Compose](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-compose)
-- [AndroidX AppCompat](https://mvnrepository.com/artifact/androidx.appcompat/appcompat)
-- [AndroidX ConstraintLayout](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout)
-- [AndroidX Core KTX](https://mvnrepository.com/artifact/androidx.core/core-ktx)
 - [Lifecycle ViewModel](https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel)
 
 ### Test
-- [JUnit](https://mvnrepository.com/artifact/junit/junit)
 - [Kotlin Test](https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test)
-- [Kotlin Test JUnit](https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test-junit)
-- [AndroidX Espresso Core](https://mvnrepository.com/artifact/androidx.test.espresso/espresso-core)
-- [AndroidX Test JUnit](https://mvnrepository.com/artifact/androidx.test.ext/junit)
+- [Kotlin Test Annotations](https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test-annotations-common)
+- [Kotlinx Coroutines Test](https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-test)
+- [Mockmp](https://github.com/kosi-libs/MocKMP)
+- [Kover Test Coverage](https://github.com/Kotlin/kotlinx-kover)
 
 ### Kotlinx
 - [Kotlinx Coroutines Core](https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core)
@@ -73,7 +69,7 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 ### Coil
 - [Coil Compose](https://mvnrepository.com/artifact/io.coil-kt/coil-compose)
-- [Coil Network Ktor](https://mvnrepository.com/artifact/io.coil-kt/coil-network-ktor3)
+- [Coil Network Ktor](https://mvnrepository.com/artifact/io.coil-kt.coil3/coil-network-ktor3)
 
 ## Prerequisites
 - [Android Studio](https://developer.android.com/studio) or [IntelliJ IDEA](https://www.jetbrains.com/idea/)

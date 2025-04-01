@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokemonHeaderKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.organism</a>
+</div>
+
+<h1>Coverage Summary for Class: PokemonHeaderKt (dev.jianastrero.trainer.ui.organism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokemonHeaderKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/198)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.organism
+&nbsp;
+&nbsp;import androidx.compose.animation.AnimatedContent
+&nbsp;import androidx.compose.animation.core.tween
+&nbsp;import androidx.compose.animation.fadeIn
+&nbsp;import androidx.compose.animation.fadeOut
+&nbsp;import androidx.compose.animation.togetherWith
+&nbsp;import androidx.compose.foundation.layout.Arrangement
+&nbsp;import androidx.compose.foundation.layout.Column
+&nbsp;import androidx.compose.foundation.layout.ExperimentalLayoutApi
+&nbsp;import androidx.compose.foundation.layout.FlowRow
+&nbsp;import androidx.compose.foundation.layout.fillMaxWidth
+&nbsp;import androidx.compose.foundation.layout.padding
+&nbsp;import androidx.compose.foundation.layout.size
+&nbsp;import androidx.compose.material.Text
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.draw.clip
+&nbsp;import androidx.compose.ui.text.font.FontWeight
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import androidx.compose.ui.unit.sp
+&nbsp;import dev.jianastrero.trainer.domain.entity.Pokemon
+&nbsp;import dev.jianastrero.trainer.domain.ext.capitalized
+&nbsp;import dev.jianastrero.trainer.ui.atom.Skeleton
+&nbsp;import dev.jianastrero.trainer.ui.molecule.PokemonTypePills
+&nbsp;import dev.jianastrero.trainer.ui.theme.Light
+&nbsp;import dev.jianastrero.trainer.ui.theme.TrainerTheme
+&nbsp;
+&nbsp;@OptIn(ExperimentalLayoutApi::class)
+&nbsp;@Composable
+&nbsp;fun PokemonHeader(
+&nbsp;    pokemon: Pokemon?,
+<b class="nc">&nbsp;    modifier: Modifier = Modifier,</b>
+<b class="nc">&nbsp;    revealDuration: Int = 1000,</b>
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    AnimatedContent(</b>
+<b class="nc">&nbsp;        targetState = pokemon,</b>
+<b class="nc">&nbsp;        label = &quot;PokemonHeader&quot;,</b>
+<b class="nc">&nbsp;        transitionSpec = {</b>
+<b class="nc">&nbsp;            fadeIn(tween(revealDuration)) togetherWith fadeOut(tween(revealDuration))</b>
+&nbsp;        },
+<b class="nc">&nbsp;        modifier = modifier</b>
+&nbsp;    ) { pokemon -&gt;
+&nbsp;        Column(
+&nbsp;            verticalArrangement = Arrangement.spacedBy(8.dp),
+&nbsp;            modifier = Modifier.fillMaxWidth()
+&nbsp;        ) {
+&nbsp;            if (pokemon == null) {
+&nbsp;                Skeleton(
+&nbsp;                    modifier = Modifier
+&nbsp;                        .size(240.dp, 48.dp)
+&nbsp;                        .clip(TrainerTheme.shapes.small)
+&nbsp;                )
+&nbsp;                FlowRow(
+&nbsp;                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+&nbsp;                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+&nbsp;                    modifier = Modifier
+&nbsp;                        .fillMaxWidth()
+&nbsp;                        .padding(horizontal = 8.dp)
+&nbsp;                ) {
+&nbsp;                    repeat(2) {
+&nbsp;                        Skeleton(
+&nbsp;                            modifier = Modifier
+&nbsp;                                .size(96.dp, 26.dp)
+&nbsp;                                .clip(TrainerTheme.shapes.small)
+&nbsp;                        )
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                Text(
+&nbsp;                    text = pokemon.name.capitalized,
+&nbsp;                    color = Light,
+&nbsp;                    fontSize = 48.sp,
+&nbsp;                    fontWeight = FontWeight.Black,
+&nbsp;                    style = TrainerTheme.typography.body1,
+&nbsp;                )
+&nbsp;                PokemonTypePills(
+&nbsp;                    pokemonTypes = pokemon.types,
+&nbsp;                    modifier = Modifier.padding(horizontal = 8.dp)
+&nbsp;                )
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

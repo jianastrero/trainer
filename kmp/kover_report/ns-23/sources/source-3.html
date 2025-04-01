@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > CommonMainString0</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">trainer.composeapp.generated.resources</a>
+</div>
+
+<h1>Coverage Summary for Class: CommonMainString0 (trainer.composeapp.generated.resources)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">CommonMainString0</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;@file:OptIn(org.jetbrains.compose.resources.InternalResourceApi::class)
+&nbsp;
+&nbsp;package trainer.composeapp.generated.resources
+&nbsp;
+&nbsp;import kotlin.OptIn
+&nbsp;import kotlin.String
+&nbsp;import kotlin.collections.MutableMap
+&nbsp;import org.jetbrains.compose.resources.InternalResourceApi
+&nbsp;import org.jetbrains.compose.resources.StringResource
+&nbsp;
+&nbsp;private object CommonMainString0 {
+&nbsp;  public val app_name: StringResource by 
+<b class="nc">&nbsp;      lazy { init_app_name() }</b>
+&nbsp;
+&nbsp;  public val matches: StringResource by 
+<b class="nc">&nbsp;      lazy { init_matches() }</b>
+&nbsp;
+&nbsp;  public val swipe: StringResource by 
+<b class="nc">&nbsp;      lazy { init_swipe() }</b>
+&nbsp;
+&nbsp;  public val toggle_dark_mode: StringResource by 
+<b class="nc">&nbsp;      lazy { init_toggle_dark_mode() }</b>
+&nbsp;}
+&nbsp;
+&nbsp;@InternalResourceApi
+&nbsp;internal fun _collectCommonMainString0Resources(map: MutableMap&lt;String, StringResource&gt;) {
+&nbsp;  map.put(&quot;app_name&quot;, CommonMainString0.app_name)
+&nbsp;  map.put(&quot;matches&quot;, CommonMainString0.matches)
+&nbsp;  map.put(&quot;swipe&quot;, CommonMainString0.swipe)
+&nbsp;  map.put(&quot;toggle_dark_mode&quot;, CommonMainString0.toggle_dark_mode)
+&nbsp;}
+&nbsp;
+&nbsp;internal val Res.string.app_name: StringResource
+&nbsp;  get() = CommonMainString0.app_name
+&nbsp;
+&nbsp;private fun init_app_name(): StringResource = org.jetbrains.compose.resources.StringResource(
+&nbsp;  &quot;string:app_name&quot;, &quot;app_name&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/trainer.composeapp.generated.resources/values/strings.commonMain.cvr&quot;, 10,
+&nbsp;    28),
+&nbsp;    )
+&nbsp;)
+&nbsp;
+&nbsp;internal val Res.string.matches: StringResource
+&nbsp;  get() = CommonMainString0.matches
+&nbsp;
+&nbsp;private fun init_matches(): StringResource = org.jetbrains.compose.resources.StringResource(
+&nbsp;  &quot;string:matches&quot;, &quot;matches&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/trainer.composeapp.generated.resources/values/strings.commonMain.cvr&quot;, 39,
+&nbsp;    27),
+&nbsp;    )
+&nbsp;)
+&nbsp;
+&nbsp;internal val Res.string.swipe: StringResource
+&nbsp;  get() = CommonMainString0.swipe
+&nbsp;
+&nbsp;private fun init_swipe(): StringResource = org.jetbrains.compose.resources.StringResource(
+&nbsp;  &quot;string:swipe&quot;, &quot;swipe&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/trainer.composeapp.generated.resources/values/strings.commonMain.cvr&quot;, 67,
+&nbsp;    21),
+&nbsp;    )
+&nbsp;)
+&nbsp;
+&nbsp;internal val Res.string.toggle_dark_mode: StringResource
+&nbsp;  get() = CommonMainString0.toggle_dark_mode
+&nbsp;
+&nbsp;private fun init_toggle_dark_mode(): StringResource =
+&nbsp;    org.jetbrains.compose.resources.StringResource(
+&nbsp;  &quot;string:toggle_dark_mode&quot;, &quot;toggle_dark_mode&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/trainer.composeapp.generated.resources/values/strings.commonMain.cvr&quot;, 89,
+&nbsp;    48),
+&nbsp;    )
+&nbsp;)
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

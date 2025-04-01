@@ -1,0 +1,137 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > DataStoreModuleKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.di</a>
+</div>
+
+<h1>Coverage Summary for Class: DataStoreModuleKt (dev.jianastrero.trainer.di)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataStoreModuleKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.di
+&nbsp;
+&nbsp;import dev.jianastrero.trainer.data.database.TrainerDatabase
+&nbsp;import dev.jianastrero.trainer.data.datastore.ConfigDataStoreImpl
+&nbsp;import dev.jianastrero.trainer.data.datastore.LikedPokemonDataStore
+&nbsp;import dev.jianastrero.trainer.data.datastore.PokemonCardDataStore
+&nbsp;import dev.jianastrero.trainer.data.datastore.PokemonDataStore
+&nbsp;import dev.jianastrero.trainer.domain.datastore.ConfigDataStore
+&nbsp;import org.koin.dsl.module
+&nbsp;
+<b class="nc">&nbsp;val dataStoreModule = module(true) {</b>
+<b class="nc">&nbsp;    single&lt;ConfigDataStore&gt; { ConfigDataStoreImpl(get()) }</b>
+<b class="nc">&nbsp;    single&lt;PokemonDataStore&gt; { get&lt;TrainerDatabase&gt;().pokemonDataStore() }</b>
+<b class="nc">&nbsp;    single&lt;PokemonCardDataStore&gt; { get&lt;TrainerDatabase&gt;().pokemonCardDataStore() }</b>
+<b class="nc">&nbsp;    single&lt;LikedPokemonDataStore&gt; { get&lt;TrainerDatabase&gt;().likedPokemonDataStore() }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

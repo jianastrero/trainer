@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > GradientKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.modifier</a>
+</div>
+
+<h1>Coverage Summary for Class: GradientKt (dev.jianastrero.trainer.ui.modifier)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradientKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GradientKt$background$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.5%
+  </span>
+  <span class="absValue">
+    (4/160)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GradientKt$background$1$WhenMappings</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (4/180)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.modifier
+&nbsp;
+&nbsp;import androidx.compose.foundation.background
+&nbsp;import androidx.compose.runtime.getValue
+&nbsp;import androidx.compose.runtime.mutableStateOf
+&nbsp;import androidx.compose.runtime.remember
+&nbsp;import androidx.compose.runtime.setValue
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.composed
+&nbsp;import androidx.compose.ui.geometry.Offset
+&nbsp;import androidx.compose.ui.geometry.Size
+&nbsp;import androidx.compose.ui.geometry.center
+&nbsp;import androidx.compose.ui.graphics.Brush
+&nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.graphics.RectangleShape
+&nbsp;import androidx.compose.ui.graphics.Shape
+&nbsp;import androidx.compose.ui.layout.onGloballyPositioned
+&nbsp;import androidx.compose.ui.unit.toSize
+&nbsp;
+&nbsp;data object RadialGradientTokens {
+&nbsp;    const val GRADIENT_RADIUS = 0.9f
+&nbsp;
+&nbsp;    enum class Bias {
+&nbsp;        Width,
+&nbsp;        Height
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;fun Modifier.background(
+&nbsp;    radialColor: Color,
+&nbsp;    backgroundColor: Color,
+<b class="nc">&nbsp;    radius: Float = RadialGradientTokens.GRADIENT_RADIUS,</b>
+<b class="nc">&nbsp;    radiusBias: RadialGradientTokens.Bias = RadialGradientTokens.Bias.Width,</b>
+<b class="nc">&nbsp;    shape: Shape = RectangleShape</b>
+<b class="nc">&nbsp;): Modifier = composed {</b>
+<b class="nc">&nbsp;    var size by remember { mutableStateOf(Size.Unspecified) }</b>
+&nbsp;
+<b class="nc">&nbsp;    this.onGloballyPositioned {</b>
+<b class="nc">&nbsp;        size = it.size.toSize()</b>
+<b class="nc">&nbsp;    }.background(</b>
+<b class="nc">&nbsp;        brush = Brush.radialGradient(</b>
+<b class="nc">&nbsp;            0f to radialColor,</b>
+<b class="nc">&nbsp;            1f to backgroundColor,</b>
+<b class="nc">&nbsp;            center = if (size == Size.Unspecified) Offset.Zero else size.center.copy(y = 0f),</b>
+<b class="nc">&nbsp;            radius = if (size == Size.Unspecified) Float.POSITIVE_INFINITY</b>
+&nbsp;            else {
+<b class="nc">&nbsp;                when (radiusBias) {</b>
+<b class="nc">&nbsp;                    RadialGradientTokens.Bias.Width -&gt; size.width</b>
+<b class="nc">&nbsp;                    RadialGradientTokens.Bias.Height -&gt; size.height</b>
+<b class="nc">&nbsp;                } * radius</b>
+&nbsp;            }
+&nbsp;        ),
+<b class="nc">&nbsp;        shape = shape</b>
+&nbsp;    )
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

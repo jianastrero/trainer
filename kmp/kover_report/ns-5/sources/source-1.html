@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > ConfigDataStoreImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.data.datastore</a>
+</div>
+
+<h1>Coverage Summary for Class: ConfigDataStoreImpl (dev.jianastrero.trainer.data.datastore)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConfigDataStoreImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.data.datastore
+&nbsp;
+&nbsp;import dev.jianastrero.trainer.domain.datastore.ConfigDataStore
+&nbsp;import dev.jianastrero.trainer.platform.KMPPreference
+&nbsp;
+<b class="nc">&nbsp;class ConfigDataStoreImpl(</b>
+<b class="nc">&nbsp;    private val preference: KMPPreference</b>
+&nbsp;) : ConfigDataStore {
+&nbsp;
+&nbsp;    override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+<b class="nc">&nbsp;        return preference.getBoolean(key, defaultValue)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun putBoolean(key: String, value: Boolean) {
+<b class="nc">&nbsp;        preference.put(key, value)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun putString(key: String, value: String) {
+<b class="nc">&nbsp;        preference.put(key, value)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun getString(key: String, defaultValue: String): String {
+<b class="nc">&nbsp;        return preference.getString(key, defaultValue)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun putInt(key: String, value: Int) {
+<b class="nc">&nbsp;        preference.put(key, value)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun getInt(key: String, defaultValue: Int): Int {
+<b class="nc">&nbsp;        return preference.getInt(key, defaultValue)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

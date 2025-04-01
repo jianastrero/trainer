@@ -1,0 +1,319 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > MainNavGraphKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.navgraph</a>
+</div>
+
+<h1>Coverage Summary for Class: MainNavGraphKt (dev.jianastrero.trainer.ui.navgraph)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainNavGraphKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/291)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MainNavGraphKt$MainNavGraph$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.2%
+  </span>
+  <span class="absValue">
+    (4/96)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MainNavGraphKt$MainNavGraph$1$1$1$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MainNavGraphKt$MainNavGraph$1$1$1$WhenMappings</td>
+    <td class="coverageStat"/>
+  </tr>
+  <tr>
+    <td class="name">MainNavGraphKt$MainNavGraph$1$1$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.9%
+  </span>
+  <span class="absValue">
+    (4/447)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.navgraph
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.fillMaxSize
+&nbsp;import androidx.compose.foundation.layout.systemBarsPadding
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.navigation.NavHostController
+&nbsp;import androidx.navigation.compose.NavHost
+&nbsp;import androidx.navigation.compose.composable
+&nbsp;import androidx.navigation.compose.rememberNavController
+&nbsp;import androidx.navigation.toRoute
+&nbsp;import dev.jianastrero.trainer.domain.enumeration.BottomNavItem
+&nbsp;import dev.jianastrero.trainer.domain.nav.NavDirection
+&nbsp;import dev.jianastrero.trainer.ui.page.details.PokemonDetailsPage
+&nbsp;import dev.jianastrero.trainer.ui.template.BottomNavTemplate
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun MainNavGraph(
+&nbsp;    mainNavController: NavHostController,
+&nbsp;    selectedBottomNavItem: BottomNavItem,
+&nbsp;    setSelectedBottomNavItem: (BottomNavItem) -&gt; Unit,
+<b class="nc">&nbsp;    modifier: Modifier = Modifier</b>
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    val navigate: (NavDirection) -&gt; Unit = { direction -&gt;</b>
+<b class="nc">&nbsp;        when (direction) {</b>
+<b class="nc">&nbsp;            is NavDirection.Back -&gt; {</b>
+<b class="nc">&nbsp;                mainNavController.popBackStack()</b>
+&nbsp;            }
+<b class="nc">&nbsp;            else -&gt; mainNavController.navigate(direction)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    NavHost(</b>
+<b class="nc">&nbsp;        navController = mainNavController,</b>
+<b class="nc">&nbsp;        startDestination = NavDirection.Screen.Main,</b>
+<b class="nc">&nbsp;        modifier = modifier</b>
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        composable&lt;NavDirection.Screen.Main&gt; {</b>
+<b class="nc">&nbsp;            val bottomNavController = rememberNavController()</b>
+&nbsp;
+<b class="nc">&nbsp;            BottomNavTemplate(</b>
+<b class="nc">&nbsp;                selected = selectedBottomNavItem,</b>
+<b class="nc">&nbsp;                onSelectBottomNavItem = { bottomNavItem -&gt;</b>
+<b class="nc">&nbsp;                    val destination = when (bottomNavItem) {</b>
+<b class="nc">&nbsp;                        BottomNavItem.Swipe -&gt; NavDirection.BottomNav.Swipe</b>
+<b class="nc">&nbsp;                        BottomNavItem.Matches -&gt; NavDirection.BottomNav.Matches</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    bottomNavController.navigate(destination)</b>
+<b class="nc">&nbsp;                    setSelectedBottomNavItem(bottomNavItem)</b>
+&nbsp;                },
+<b class="nc">&nbsp;                modifier = Modifier</b>
+<b class="nc">&nbsp;                    .fillMaxSize()</b>
+<b class="nc">&nbsp;                    .systemBarsPadding()</b>
+<b class="nc">&nbsp;            ) {</b>
+<b class="nc">&nbsp;                BottomNavGraph(</b>
+<b class="nc">&nbsp;                    navController = bottomNavController,</b>
+<b class="nc">&nbsp;                    mainNavController = mainNavController,</b>
+<b class="nc">&nbsp;                    modifier = Modifier.fillMaxSize()</b>
+&nbsp;                )
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        composable&lt;NavDirection.Screen.PokemonDetail&gt; { backStackEntry -&gt;</b>
+<b class="nc">&nbsp;            val pokemon = backStackEntry.toRoute&lt;NavDirection.Screen.PokemonDetail&gt;()</b>
+&nbsp;
+<b class="nc">&nbsp;            PokemonDetailsPage(</b>
+<b class="nc">&nbsp;                navigate = navigate,</b>
+<b class="nc">&nbsp;                pokemonId = pokemon.id,</b>
+<b class="nc">&nbsp;                modifier = Modifier.fillMaxSize()</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

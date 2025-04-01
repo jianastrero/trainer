@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokemonSpeciesResponse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.domain.model.pokeapi.response.species</a>
+</div>
+
+<h1>Coverage Summary for Class: PokemonSpeciesResponse (dev.jianastrero.trainer.domain.model.pokeapi.response.species)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokemonSpeciesResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/308)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PokemonSpeciesResponse$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/309)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.domain.model.pokeapi.response.species
+&nbsp;
+&nbsp;
+&nbsp;import dev.jianastrero.trainer.domain.enumeration.Language
+&nbsp;import kotlinx.serialization.SerialName
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;
+<b class="nc">&nbsp;@Serializable</b>
+<b class="nc">&nbsp;data class PokemonSpeciesResponse(</b>
+<b class="nc">&nbsp;    @SerialName(&quot;base_happiness&quot;) val baseHappiness: Int,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;capture_rate&quot;) val captureRate: Int,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;flavor_text_entries&quot;) val flavorTextEntries: List&lt;PokemonSpeciesFlavorTextEntryResponse&gt;,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;genera&quot;) val genera: List&lt;PokemonSpeciesGeneraResponse&gt;,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;growth_rate&quot;) val growthRate: PokemonSpeciesGrowthRateResponse,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;habitat&quot;) val habitat: PokemonSpeciesHabitatResponse,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;id&quot;) val id: Int,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;is_baby&quot;) val isBaby: Boolean,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;is_legendary&quot;) val isLegendary: Boolean,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;is_mythical&quot;) val isMythical: Boolean,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;name&quot;) val name: String,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;order&quot;) val order: Int,</b>
+<b class="nc">&nbsp;    @SerialName(&quot;pal_park_encounters&quot;) val palParkEncounters: List&lt;PokemonSpeciesPalParkEncounter&gt;,</b>
+&nbsp;) {
+<b class="nc">&nbsp;    companion object {</b>
+<b class="nc">&nbsp;        val Sample = PokemonSpeciesResponse(</b>
+<b class="nc">&nbsp;            baseHappiness = 0,</b>
+<b class="nc">&nbsp;            captureRate = 0,</b>
+<b class="nc">&nbsp;            flavorTextEntries = emptyList(),</b>
+<b class="nc">&nbsp;            genera = emptyList(),</b>
+<b class="nc">&nbsp;            growthRate = PokemonSpeciesGrowthRateResponse(&quot;sample&quot;, &quot;sample&quot;),</b>
+<b class="nc">&nbsp;            habitat = PokemonSpeciesHabitatResponse(&quot;sample&quot;, &quot;sample&quot;),</b>
+<b class="nc">&nbsp;            id = 0,</b>
+<b class="nc">&nbsp;            isBaby = false,</b>
+<b class="nc">&nbsp;            isLegendary = false,</b>
+<b class="nc">&nbsp;            isMythical = false,</b>
+<b class="nc">&nbsp;            name = &quot;Sample&quot;,</b>
+<b class="nc">&nbsp;            order = 0,</b>
+<b class="nc">&nbsp;            palParkEncounters = emptyList()</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;val PokemonSpeciesResponse?.genus: String
+&nbsp;    get() = this?.genera
+&nbsp;        ?.firstOrNull { it.language.name == Language.English }
+&nbsp;        ?.genus
+&nbsp;        ?: &quot;Unknown&quot;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

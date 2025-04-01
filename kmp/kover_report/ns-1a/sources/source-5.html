@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokemonBaseStatsKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.molecule</a>
+</div>
+
+<h1>Coverage Summary for Class: PokemonBaseStatsKt (dev.jianastrero.trainer.ui.molecule)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokemonBaseStatsKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/209)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.molecule
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.Arrangement
+&nbsp;import androidx.compose.foundation.layout.Column
+&nbsp;import androidx.compose.foundation.layout.fillMaxWidth
+&nbsp;import androidx.compose.material.Text
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.text.font.FontWeight
+&nbsp;import androidx.compose.ui.text.style.TextAlign
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import androidx.compose.ui.unit.sp
+&nbsp;import dev.jianastrero.trainer.domain.enumeration.PokemonStat
+&nbsp;import dev.jianastrero.trainer.ui.atom.LabelAndValue
+&nbsp;import dev.jianastrero.trainer.ui.theme.TrainerTheme
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun PokemonBaseStats(
+&nbsp;    stats: Map&lt;PokemonStat, Int&gt;?,
+<b class="nc">&nbsp;    modifier: Modifier = Modifier</b>
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    Column(</b>
+<b class="nc">&nbsp;        verticalArrangement = Arrangement.spacedBy(8.dp),</b>
+<b class="nc">&nbsp;        modifier = modifier</b>
+&nbsp;    ) {
+<b class="nc">&nbsp;        Text(</b>
+<b class="nc">&nbsp;            text = &quot;Base Stats&quot;,</b>
+<b class="nc">&nbsp;            color = TrainerTheme.colors.onBackground.copy(alpha = 0.4f),</b>
+<b class="nc">&nbsp;            fontSize = 18.sp,</b>
+<b class="nc">&nbsp;            fontWeight = FontWeight.Black,</b>
+<b class="nc">&nbsp;            textAlign = TextAlign.Start,</b>
+<b class="nc">&nbsp;            style = TrainerTheme.typography.body1,</b>
+<b class="nc">&nbsp;            modifier = Modifier.fillMaxWidth()</b>
+&nbsp;        )
+<b class="nc">&nbsp;        PokemonStat.labels.forEach { stat -&gt;</b>
+<b class="nc">&nbsp;            LabelAndValue(</b>
+<b class="nc">&nbsp;                label = stat.label,</b>
+<b class="nc">&nbsp;                value = stats?.get(stat)?.toString(),</b>
+<b class="nc">&nbsp;                modifier = Modifier.fillMaxWidth()</b>
+&nbsp;            )
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

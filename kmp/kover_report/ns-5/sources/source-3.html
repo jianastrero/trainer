@@ -1,0 +1,297 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokemonCardDataStore_Impl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.data.datastore</a>
+</div>
+
+<h1>Coverage Summary for Class: PokemonCardDataStore_Impl (dev.jianastrero.trainer.data.datastore)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokemonCardDataStore_Impl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/142)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PokemonCardDataStore_Impl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PokemonCardDataStore_Impl$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/167)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.`data`.datastore
+&nbsp;
+&nbsp;import androidx.room.EntityInsertAdapter
+&nbsp;import androidx.room.RoomDatabase
+&nbsp;import androidx.room.util.getColumnIndexOrThrow
+&nbsp;import androidx.room.util.performSuspending
+&nbsp;import androidx.sqlite.SQLiteStatement
+&nbsp;import dev.jianastrero.trainer.domain.entity.PokemonCard
+&nbsp;import javax.`annotation`.processing.Generated
+&nbsp;import kotlin.Int
+&nbsp;import kotlin.String
+&nbsp;import kotlin.Suppress
+&nbsp;import kotlin.Unit
+&nbsp;import kotlin.collections.List
+&nbsp;import kotlin.collections.MutableList
+&nbsp;import kotlin.collections.mutableListOf
+&nbsp;import kotlin.reflect.KClass
+&nbsp;
+&nbsp;@Generated(value = [&quot;androidx.room.RoomProcessor&quot;])
+&nbsp;@Suppress(names = [&quot;UNCHECKED_CAST&quot;, &quot;DEPRECATION&quot;, &quot;REDUNDANT_PROJECTION&quot;, &quot;REMOVAL&quot;])
+<b class="nc">&nbsp;public class PokemonCardDataStore_Impl(</b>
+&nbsp;  __db: RoomDatabase,
+&nbsp;) : PokemonCardDataStore {
+&nbsp;  private val __db: RoomDatabase
+&nbsp;
+&nbsp;  private val __insertAdapterOfPokemonCard: EntityInsertAdapter&lt;PokemonCard&gt;
+<b class="nc">&nbsp;  init {</b>
+<b class="nc">&nbsp;    this.__db = __db</b>
+<b class="nc">&nbsp;    this.__insertAdapterOfPokemonCard = object : EntityInsertAdapter&lt;PokemonCard&gt;() {</b>
+&nbsp;      protected override fun createQuery(): String =
+<b class="nc">&nbsp;          &quot;INSERT OR ABORT INTO `pokemon_card` (`id`,`name`,`card`,`pokemonId`) VALUES (nullif(?, 0),?,?,?)&quot;</b>
+&nbsp;
+&nbsp;      protected override fun bind(statement: SQLiteStatement, entity: PokemonCard) {
+<b class="nc">&nbsp;        statement.bindLong(1, entity.id.toLong())</b>
+<b class="nc">&nbsp;        statement.bindText(2, entity.name)</b>
+<b class="nc">&nbsp;        statement.bindText(3, entity.card)</b>
+<b class="nc">&nbsp;        statement.bindText(4, entity.pokemonId)</b>
+&nbsp;      }
+&nbsp;    }
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  public override suspend fun insert(pokemonCards: List&lt;PokemonCard&gt;): Unit =
+<b class="nc">&nbsp;      performSuspending(__db, false, true) { _connection -&gt;</b>
+<b class="nc">&nbsp;    __insertAdapterOfPokemonCard.insert(_connection, pokemonCards)</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public override suspend fun `get`(
+&nbsp;    name: String,
+&nbsp;    offset: Int,
+&nbsp;    limit: Int,
+&nbsp;  ): List&lt;PokemonCard&gt; {
+<b class="nc">&nbsp;    val _sql: String = &quot;SELECT * FROM pokemon_card WHERE name = ? LIMIT ? OFFSET ?&quot;</b>
+<b class="nc">&nbsp;    return performSuspending(__db, true, false) { _connection -&gt;</b>
+<b class="nc">&nbsp;      val _stmt: SQLiteStatement = _connection.prepare(_sql)</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        var _argIndex: Int = 1</b>
+<b class="nc">&nbsp;        _stmt.bindText(_argIndex, name)</b>
+<b class="nc">&nbsp;        _argIndex = 2</b>
+<b class="nc">&nbsp;        _stmt.bindLong(_argIndex, limit.toLong())</b>
+<b class="nc">&nbsp;        _argIndex = 3</b>
+<b class="nc">&nbsp;        _stmt.bindLong(_argIndex, offset.toLong())</b>
+<b class="nc">&nbsp;        val _columnIndexOfId: Int = getColumnIndexOrThrow(_stmt, &quot;id&quot;)</b>
+<b class="nc">&nbsp;        val _columnIndexOfName: Int = getColumnIndexOrThrow(_stmt, &quot;name&quot;)</b>
+<b class="nc">&nbsp;        val _columnIndexOfCard: Int = getColumnIndexOrThrow(_stmt, &quot;card&quot;)</b>
+<b class="nc">&nbsp;        val _columnIndexOfPokemonId: Int = getColumnIndexOrThrow(_stmt, &quot;pokemonId&quot;)</b>
+<b class="nc">&nbsp;        val _result: MutableList&lt;PokemonCard&gt; = mutableListOf()</b>
+<b class="nc">&nbsp;        while (_stmt.step()) {</b>
+<b class="nc">&nbsp;          val _item: PokemonCard</b>
+<b class="nc">&nbsp;          val _tmpId: Int</b>
+<b class="nc">&nbsp;          _tmpId = _stmt.getLong(_columnIndexOfId).toInt()</b>
+<b class="nc">&nbsp;          val _tmpName: String</b>
+<b class="nc">&nbsp;          _tmpName = _stmt.getText(_columnIndexOfName)</b>
+<b class="nc">&nbsp;          val _tmpCard: String</b>
+<b class="nc">&nbsp;          _tmpCard = _stmt.getText(_columnIndexOfCard)</b>
+<b class="nc">&nbsp;          val _tmpPokemonId: String</b>
+<b class="nc">&nbsp;          _tmpPokemonId = _stmt.getText(_columnIndexOfPokemonId)</b>
+<b class="nc">&nbsp;          _item = PokemonCard(_tmpId,_tmpName,_tmpCard,_tmpPokemonId)</b>
+<b class="nc">&nbsp;          _result.add(_item)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        _result</b>
+&nbsp;      } finally {
+<b class="nc">&nbsp;        _stmt.close()</b>
+&nbsp;      }
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  public companion object {
+<b class="nc">&nbsp;    public fun getRequiredConverters(): List&lt;KClass&lt;*&gt;&gt; = emptyList()</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

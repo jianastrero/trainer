@@ -1,3 +1,4 @@
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -8,12 +9,33 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kover)
+    alias(libs.plugins.mockmp)
+}
+
+kover {
+    reports {
+        verify {
+            rule {
+                minBound(80)
+            }
+        }
+
+        filters {
+            includes {
+                packages(
+                    "dev.jianastrero.trainer.data.repository",
+                    "dev.jianastrero.trainer.data.usecase",
+                )
+            }
+        }
+    }
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -34,6 +56,9 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+        }
+        androidUnitTest.dependencies {
+            implementation(kotlin("test-junit"))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -75,9 +100,22 @@ kotlin {
             implementation(libs.coil)
             implementation(libs.coil.network.ktor)
         }
+        commonTest.dependencies {
+            // Test
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.test.annotations.common)
+            implementation(libs.kotlinx.coroutines.test)
+        }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+    }
+}
+
+mockmp {
+    onTest {
+        allTargets()
+        withHelper()
     }
 }
 
@@ -103,8 +141,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -118,4 +156,24 @@ dependencies {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+task("copyKoverHtmlReport") {
+    group = "verification"
+    description = "Copy Kover HTML report to the root project directory"
+
+    dependsOn("koverHtmlReport")
+    mustRunAfter("koverHtmlReport")
+
+    doLast {
+        val file = File(layout.buildDirectory.get().asFile, "/reports/kover/html")
+        copy {
+            from(file.absolutePath)
+            into("$rootDir/kover_report")
+        }
+    }
+}
+
+tasks.getByName("koverHtmlReport") {
+    finalizedBy("copyKoverHtmlReport")
 }

@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokeApiRepositoryImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.data.repository</a>
+</div>
+
+<h1>Coverage Summary for Class: PokeApiRepositoryImpl (dev.jianastrero.trainer.data.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokeApiRepositoryImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/590)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PokeApiRepositoryImpl$getNextPokemons$1</td>
+    <td class="coverageStat"/>
+  </tr>
+  <tr>
+    <td class="name">PokeApiRepositoryImpl$getPokemon$1</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/590)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.data.repository
+&nbsp;
+&nbsp;import dev.jianastrero.trainer.data.datastore.PokemonCardDataStore
+&nbsp;import dev.jianastrero.trainer.data.datastore.PokemonDataStore
+&nbsp;import dev.jianastrero.trainer.data.remote.PokeApiRemote
+&nbsp;import dev.jianastrero.trainer.data.remote.PokemonTcgRemote
+&nbsp;import dev.jianastrero.trainer.domain.entity.relation.PokemonAndCards
+&nbsp;import dev.jianastrero.trainer.domain.model.NextPokemons
+&nbsp;import dev.jianastrero.trainer.domain.model.pokeapi.response.pokemon.toEntity
+&nbsp;import dev.jianastrero.trainer.domain.model.pokeapi.response.species.genus
+&nbsp;import dev.jianastrero.trainer.domain.model.pokemontcg.response.PokemonTcgPaginatedResponse
+&nbsp;import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.PokemonCardResponse
+&nbsp;import dev.jianastrero.trainer.domain.model.pokemontcg.response.card.toEntity
+&nbsp;import dev.jianastrero.trainer.domain.repository.PokeApiRepository
+&nbsp;
+<b class="nc">&nbsp;class PokeApiRepositoryImpl(</b>
+<b class="nc">&nbsp;    private val pokemonRemote: PokeApiRemote,</b>
+<b class="nc">&nbsp;    private val cardRemote: PokemonTcgRemote,</b>
+<b class="nc">&nbsp;    private val pokemonDataStore: PokemonDataStore,</b>
+<b class="nc">&nbsp;    private val cardDataStore: PokemonCardDataStore,</b>
+&nbsp;) : PokeApiRepository {
+&nbsp;
+&nbsp;    override suspend fun getNextPokemons(
+&nbsp;        offset: Int,
+&nbsp;        limit: Int
+&nbsp;    ): NextPokemons {
+<b class="nc">&nbsp;        val localPokemons = pokemonDataStore.getPokemonStartingFromRowId(rowId = offset, limit = limit)</b>
+&nbsp;
+<b class="nc">&nbsp;        if (localPokemons.isNotEmpty()) return NextPokemons(</b>
+<b class="nc">&nbsp;            hasNext = true,</b>
+<b class="nc">&nbsp;            nextOffset = offset + localPokemons.size,</b>
+<b class="nc">&nbsp;            pokemons = localPokemons</b>
+&nbsp;        )
+&nbsp;
+<b class="nc">&nbsp;        return runCatching {</b>
+<b class="nc">&nbsp;            val response = pokemonRemote.getPokemonList(offset = offset, limit = limit)</b>
+<b class="nc">&nbsp;            val remotePokemons = response.results.mapNotNull { pokemonItem -&gt;</b>
+<b class="nc">&nbsp;                runCatching {</b>
+<b class="nc">&nbsp;                    val pokemonResponse = pokemonRemote.getPokemon(pokemonItem.id)</b>
+<b class="nc">&nbsp;                    val speciesResponse = pokemonRemote.getSpecies(pokemonItem.id)</b>
+<b class="nc">&nbsp;                    pokemonResponse.toEntity(</b>
+<b class="nc">&nbsp;                        species = speciesResponse.genus</b>
+<b class="nc">&nbsp;                    )</b>
+<b class="nc">&nbsp;                }.getOrNull()</b>
+&nbsp;            }
+<b class="nc">&nbsp;            pokemonDataStore.insert(remotePokemons)</b>
+&nbsp;
+<b class="nc">&nbsp;            NextPokemons(</b>
+<b class="nc">&nbsp;                hasNext = response.next != null,</b>
+<b class="nc">&nbsp;                nextOffset = offset + response.results.size,</b>
+<b class="nc">&nbsp;                pokemons = remotePokemons</b>
+<b class="nc">&nbsp;            )</b>
+<b class="nc">&nbsp;        }.onFailure {</b>
+<b class="nc">&nbsp;            println(&quot;JIANDDEBUG -&gt; error: ${it}&quot;)</b>
+<b class="nc">&nbsp;        }.getOrElse {</b>
+<b class="nc">&nbsp;            NextPokemons(</b>
+<b class="nc">&nbsp;                hasNext = false,</b>
+<b class="nc">&nbsp;                nextOffset = offset,</b>
+<b class="nc">&nbsp;                pokemons = emptyList()</b>
+<b class="nc">&nbsp;            )</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    override suspend fun getPokemon(id: String): PokemonAndCards {
+<b class="nc">&nbsp;        val localPokemonAndCards = pokemonDataStore.get(id)</b>
+<b class="nc">&nbsp;        var localPokemon = localPokemonAndCards?.pokemon</b>
+<b class="nc">&nbsp;        var localCards = localPokemonAndCards?.cards</b>
+<b class="nc">&nbsp;        if (localPokemon != null &amp;&amp; !localCards.isNullOrEmpty()) return PokemonAndCards(</b>
+<b class="nc">&nbsp;            pokemon = localPokemon,</b>
+<b class="nc">&nbsp;            cards = localCards</b>
+&nbsp;        )
+&nbsp;
+&nbsp;        // if localPokemon is null, fetch from remote
+<b class="nc">&nbsp;        if (localPokemon == null) {</b>
+<b class="nc">&nbsp;            val speciesResponse = pokemonRemote.getSpecies(id)</b>
+<b class="nc">&nbsp;            localPokemon = pokemonRemote.getPokemon(id).toEntity(species = speciesResponse.genus)</b>
+<b class="nc">&nbsp;            pokemonDataStore.insert(listOf(localPokemon))</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // if localCards is null, fetch from local
+<b class="nc">&nbsp;        if (localCards.isNullOrEmpty()) {</b>
+<b class="nc">&nbsp;            val localCards = cardDataStore.get(localPokemon.name, 0, 1000)</b>
+&nbsp;
+<b class="nc">&nbsp;            if (localCards.isNotEmpty()) return PokemonAndCards(</b>
+<b class="nc">&nbsp;                pokemon = localPokemon,</b>
+<b class="nc">&nbsp;                cards = localCards</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;
+&nbsp;        // if localCards is empty, fetch from remote
+<b class="nc">&nbsp;        if (localCards != null &amp;&amp; localCards.isEmpty()) {</b>
+<b class="nc">&nbsp;            val remoteCards = mutableListOf&lt;PokemonCardResponse&gt;()</b>
+<b class="nc">&nbsp;            var currentPage = 1</b>
+<b class="nc">&nbsp;            var result: PokemonTcgPaginatedResponse&lt;PokemonCardResponse&gt;</b>
+&nbsp;
+&nbsp;            do {
+<b class="nc">&nbsp;                result = cardRemote.getPokemonCards(localPokemon.name, currentPage, 20)</b>
+<b class="nc">&nbsp;                remoteCards.addAll(result.result)</b>
+<b class="nc">&nbsp;                currentPage = result.page + 1</b>
+<b class="nc">&nbsp;            } while (result.result.isNotEmpty())</b>
+&nbsp;
+<b class="nc">&nbsp;            localCards = remoteCards</b>
+<b class="nc">&nbsp;                .map { response -&gt;</b>
+<b class="nc">&nbsp;                    response.toEntity(</b>
+<b class="nc">&nbsp;                        pokemonId = localPokemon.id,</b>
+<b class="nc">&nbsp;                        name = localPokemon.name</b>
+<b class="nc">&nbsp;                    )</b>
+&nbsp;                }
+<b class="nc">&nbsp;            cardDataStore.insert(localCards)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return PokemonAndCards(</b>
+<b class="nc">&nbsp;            pokemon = localPokemon,</b>
+<b class="nc">&nbsp;            cards = localCards ?: emptyList()</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    override suspend fun getPokemonRowId(pokemonId: String): Int =
+<b class="nc">&nbsp;        pokemonDataStore.getRowId(pokemonId)</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:24</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > BackButtonAppBarKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.organism</a>
+</div>
+
+<h1>Coverage Summary for Class: BackButtonAppBarKt (dev.jianastrero.trainer.ui.organism)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">BackButtonAppBarKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/254)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.organism
+&nbsp;
+&nbsp;import androidx.compose.foundation.clickable
+&nbsp;import androidx.compose.foundation.layout.Arrangement
+&nbsp;import androidx.compose.foundation.layout.Row
+&nbsp;import androidx.compose.foundation.layout.Spacer
+&nbsp;import androidx.compose.foundation.layout.padding
+&nbsp;import androidx.compose.foundation.layout.size
+&nbsp;import androidx.compose.foundation.shape.CircleShape
+&nbsp;import androidx.compose.material.Icon
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.draw.clip
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import dev.jianastrero.trainer.ui.atom.DarkModeToggle
+&nbsp;import dev.jianastrero.trainer.ui.theme.TrainerTheme
+&nbsp;import org.jetbrains.compose.resources.painterResource
+&nbsp;import trainer.composeapp.generated.resources.Res
+&nbsp;import trainer.composeapp.generated.resources.ic_arrow_back
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun BackButtonAppBar(
+&nbsp;    onBack: () -&gt; Unit,
+&nbsp;    onDarkModeToggle: (Boolean) -&gt; Unit,
+<b class="nc">&nbsp;    modifier: Modifier = Modifier,</b>
+<b class="nc">&nbsp;    enabled: Boolean = true,</b>
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    Row(</b>
+<b class="nc">&nbsp;        horizontalArrangement = Arrangement.spacedBy(12.dp),</b>
+<b class="nc">&nbsp;        verticalAlignment = Alignment.CenterVertically,</b>
+<b class="nc">&nbsp;        modifier = modifier</b>
+<b class="nc">&nbsp;            .padding(</b>
+<b class="nc">&nbsp;                horizontal = 12.dp,</b>
+<b class="nc">&nbsp;                vertical = 8.dp</b>
+&nbsp;            )
+&nbsp;    ) {
+<b class="nc">&nbsp;        Icon(</b>
+<b class="nc">&nbsp;            painter = painterResource(Res.drawable.ic_arrow_back),</b>
+<b class="nc">&nbsp;            contentDescription = &quot;Back&quot;,</b>
+<b class="nc">&nbsp;            tint = TrainerTheme.colors.onBackground,</b>
+<b class="nc">&nbsp;            modifier = Modifier</b>
+<b class="nc">&nbsp;                .size(32.dp)</b>
+<b class="nc">&nbsp;                .padding(4.dp)</b>
+<b class="nc">&nbsp;                .clip(CircleShape)</b>
+<b class="nc">&nbsp;                .clickable(enabled = enabled, onClick = onBack)</b>
+&nbsp;        )
+<b class="nc">&nbsp;        Spacer(modifier = Modifier.weight(1f))</b>
+<b class="nc">&nbsp;        DarkModeToggle(</b>
+<b class="nc">&nbsp;            isDarkMode = TrainerTheme.isDarkMode,</b>
+<b class="nc">&nbsp;            onToggle = onDarkModeToggle,</b>
+<b class="nc">&nbsp;            modifier = Modifier</b>
+<b class="nc">&nbsp;                .size(32.dp)</b>
+<b class="nc">&nbsp;                .padding(4.dp)</b>
+&nbsp;        )
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

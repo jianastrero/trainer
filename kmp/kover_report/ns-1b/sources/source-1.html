@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > BottomNavGraphKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.navgraph</a>
+</div>
+
+<h1>Coverage Summary for Class: BottomNavGraphKt (dev.jianastrero.trainer.ui.navgraph)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">BottomNavGraphKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/259)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BottomNavGraphKt$BottomNavGraph$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BottomNavGraphKt$BottomNavGraph$1$1$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/291)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.navgraph
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.fillMaxSize
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.navigation.NavHostController
+&nbsp;import androidx.navigation.compose.NavHost
+&nbsp;import androidx.navigation.compose.composable
+&nbsp;import dev.jianastrero.trainer.domain.nav.NavDirection
+&nbsp;import dev.jianastrero.trainer.ui.page.home.HomePage
+&nbsp;import dev.jianastrero.trainer.ui.page.matches.MatchesPage
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun BottomNavGraph(
+&nbsp;    mainNavController: NavHostController,
+&nbsp;    navController: NavHostController,
+<b class="nc">&nbsp;    modifier: Modifier = Modifier,</b>
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    val navigate: (NavDirection) -&gt; Unit = { direction -&gt;</b>
+<b class="nc">&nbsp;        when (direction) {</b>
+<b class="nc">&nbsp;            is NavDirection.Back -&gt; {</b>
+<b class="nc">&nbsp;                mainNavController.popBackStack()</b>
+&nbsp;            }
+<b class="nc">&nbsp;            is NavDirection.Screen -&gt; {</b>
+<b class="nc">&nbsp;                mainNavController.navigate(direction)</b>
+&nbsp;            }
+<b class="nc">&nbsp;            else -&gt; navController.navigate(direction)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    NavHost(</b>
+<b class="nc">&nbsp;        navController = navController,</b>
+<b class="nc">&nbsp;        startDestination = NavDirection.BottomNav.Swipe,</b>
+<b class="nc">&nbsp;        modifier = modifier</b>
+<b class="nc">&nbsp;    ) {</b>
+<b class="nc">&nbsp;        composable&lt;NavDirection.BottomNav.Swipe&gt; {</b>
+<b class="nc">&nbsp;            HomePage(</b>
+<b class="nc">&nbsp;                navigate = navigate,</b>
+<b class="nc">&nbsp;                modifier = Modifier.fillMaxSize()</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        composable&lt;NavDirection.BottomNav.Matches&gt; {</b>
+<b class="nc">&nbsp;            MatchesPage(</b>
+<b class="nc">&nbsp;                navigate = navigate,</b>
+<b class="nc">&nbsp;                modifier = Modifier.fillMaxSize()</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

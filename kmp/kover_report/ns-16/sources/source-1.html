@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > KMPContext_androidKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.platform</a>
+</div>
+
+<h1>Coverage Summary for Class: KMPContext_androidKt (dev.jianastrero.trainer.platform)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">KMPContext_androidKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/288)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.platform
+&nbsp;
+&nbsp;import android.app.Application
+&nbsp;import android.content.Context.MODE_PRIVATE
+&nbsp;import android.content.SharedPreferences
+&nbsp;import androidx.core.content.edit
+&nbsp;import okio.Path
+&nbsp;import okio.Path.Companion.toOkioPath
+&nbsp;
+&nbsp;actual typealias KMPContext = Application
+&nbsp;
+&nbsp;actual fun KMPContext.getBoolean(
+&nbsp;    key: String,
+&nbsp;    defaultValue: Boolean
+&nbsp;): Boolean {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    return runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.getBoolean(key, defaultValue) ?: defaultValue</b>
+<b class="nc">&nbsp;    }.getOrElse { defaultValue }</b>
+&nbsp;}
+&nbsp;
+&nbsp;actual fun KMPContext.getString(
+&nbsp;    key: String,
+&nbsp;    defaultValue: String
+&nbsp;): String {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    return runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.getString(key, defaultValue) ?: defaultValue</b>
+<b class="nc">&nbsp;    }.getOrElse { defaultValue }</b>
+&nbsp;}
+&nbsp;
+&nbsp;actual fun KMPContext.getInt(
+&nbsp;    key: String,
+&nbsp;    defaultValue: Int
+&nbsp;): Int {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    return runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.getInt(key, defaultValue) ?: defaultValue</b>
+<b class="nc">&nbsp;    }.getOrElse { defaultValue }</b>
+&nbsp;}
+&nbsp;
+&nbsp;actual fun KMPContext.put(
+&nbsp;    key: String,
+&nbsp;    value: Boolean
+&nbsp;) {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.edit {</b>
+<b class="nc">&nbsp;            putBoolean(key, value)</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;actual fun KMPContext.put(
+&nbsp;    key: String,
+&nbsp;    value: String
+&nbsp;) {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.edit {</b>
+<b class="nc">&nbsp;            putString(key, value)</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;actual fun KMPContext.put(
+&nbsp;    key: String,
+&nbsp;    value: Int
+&nbsp;) {
+<b class="nc">&nbsp;    if (sharedPreferences == null) initSharedPreferences()</b>
+&nbsp;
+<b class="nc">&nbsp;    runCatching {</b>
+<b class="nc">&nbsp;        sharedPreferences?.edit {</b>
+<b class="nc">&nbsp;            putInt(key, value)</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;private const val PREFERENCE_NAME = &quot;trainer&quot;
+&nbsp;private var sharedPreferences: SharedPreferences? = null
+&nbsp;private fun KMPContext.initSharedPreferences() {
+<b class="nc">&nbsp;    sharedPreferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)</b>
+&nbsp;}
+&nbsp;
+&nbsp;actual val KMPContext.cachePath: Path?
+<b class="nc">&nbsp;    get() = runCatching { cacheDir.toOkioPath() }.getOrNull()</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

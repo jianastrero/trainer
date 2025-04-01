@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > PokemonType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.domain.enumeration</a>
+</div>
+
+<h1>Coverage Summary for Class: PokemonType (dev.jianastrero.trainer.domain.enumeration)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">PokemonType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/874)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PokemonType$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PokemonType$Companion$annotationImpl$kotlinx_serialization_json_JsonNames$0</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/879)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.domain.enumeration
+&nbsp;
+&nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import kotlinx.serialization.ExperimentalSerializationApi
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.json.JsonNames
+&nbsp;import org.jetbrains.compose.resources.DrawableResource
+&nbsp;import trainer.composeapp.generated.resources.Res
+&nbsp;import trainer.composeapp.generated.resources.bug
+&nbsp;import trainer.composeapp.generated.resources.dark
+&nbsp;import trainer.composeapp.generated.resources.dragon
+&nbsp;import trainer.composeapp.generated.resources.electric
+&nbsp;import trainer.composeapp.generated.resources.fairy
+&nbsp;import trainer.composeapp.generated.resources.fighting
+&nbsp;import trainer.composeapp.generated.resources.fire
+&nbsp;import trainer.composeapp.generated.resources.flying
+&nbsp;import trainer.composeapp.generated.resources.ghost
+&nbsp;import trainer.composeapp.generated.resources.grass
+&nbsp;import trainer.composeapp.generated.resources.ground
+&nbsp;import trainer.composeapp.generated.resources.ice
+&nbsp;import trainer.composeapp.generated.resources.normal
+&nbsp;import trainer.composeapp.generated.resources.poison
+&nbsp;import trainer.composeapp.generated.resources.psychic
+&nbsp;import trainer.composeapp.generated.resources.rock
+&nbsp;import trainer.composeapp.generated.resources.steel
+&nbsp;import trainer.composeapp.generated.resources.water
+&nbsp;
+<b class="nc">&nbsp;@OptIn(ExperimentalSerializationApi::class)</b>
+&nbsp;@Serializable
+<b class="nc">&nbsp;enum class PokemonType(</b>
+<b class="nc">&nbsp;    val color: Color,</b>
+<b class="nc">&nbsp;    val icon: DrawableResource?,</b>
+&nbsp;) {
+<b class="nc">&nbsp;    @JsonNames(&quot;normal&quot;, &quot;Normal&quot;) Normal(Color(0xFFA8A77A), Res.drawable.normal),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;fighting&quot;, &quot;Fighting&quot;) Fighting(Color(0xFFC22E28), Res.drawable.fighting),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;flying&quot;, &quot;Flying&quot;) Flying(Color(0xFFA98FF3), Res.drawable.flying),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;poison&quot;, &quot;Poison&quot;) Poison(Color(0xFFA33EA1), Res.drawable.poison),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;ground&quot;, &quot;Ground&quot;) Ground(Color(0xFFE2BF65), Res.drawable.ground),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;rock&quot;, &quot;Rock&quot;) Rock(Color(0xFFB6A136), Res.drawable.rock),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;bug&quot;, &quot;Bug&quot;) Bug(Color(0xFFA6B91A), Res.drawable.bug),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;ghost&quot;, &quot;Ghost&quot;) Ghost(Color(0xFF735797), Res.drawable.ghost),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;steel&quot;, &quot;Steel&quot;, &quot;Metal&quot;) Steel(Color(0xFFB7B7CE), Res.drawable.steel),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;fire&quot;, &quot;Fire&quot;) Fire(Color(0xFFEE8130), Res.drawable.fire),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;water&quot;, &quot;Water&quot;) Water(Color(0xFF6390F0), Res.drawable.water),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;grass&quot;, &quot;Grass&quot;) Grass(Color(0xFF7AC74C), Res.drawable.grass),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;electric&quot;, &quot;Electric&quot;, &quot;Lightning&quot;) Electric(Color(0xFFF7D02C), Res.drawable.electric),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;psychic&quot;, &quot;Psychic&quot;) Psychic(Color(0xFFF95587), Res.drawable.psychic),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;ice&quot;, &quot;Ice&quot;) Ice(Color(0xFF96D9D6), Res.drawable.ice),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;dragon&quot;, &quot;Dragon&quot;) Dragon(Color(0xFF6F35FC), Res.drawable.dragon),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;dark&quot;, &quot;Dark&quot;, &quot;Darkness&quot;) Dark(Color(0xFF705746), Res.drawable.dark),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;fairy&quot;, &quot;Fairy&quot;) Fairy(Color(0xFFD685AD), Res.drawable.fairy),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;stellar&quot;, &quot;Stellar&quot;) Stellar(Color(0xFF46647E), null),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;unknown&quot;, &quot;Unknown&quot;, &quot;Colorless&quot;) Unknown(Color(0xFF827E7A), null),</b>
+<b class="nc">&nbsp;    @JsonNames(&quot;shadow&quot;, &quot;Shadow&quot;) Shadow(Color(0xFF2B4463), null),</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>

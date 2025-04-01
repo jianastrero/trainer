@@ -1,0 +1,275 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>composeApp Coverage Report > HomePageTokens</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: composeApp<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.jianastrero.trainer.ui.page.home</a>
+</div>
+
+<h1>Coverage Summary for Class: HomePageTokens (dev.jianastrero.trainer.ui.page.home)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">HomePageTokens</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.jianastrero.trainer.ui.page.home
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.Box
+&nbsp;import androidx.compose.foundation.layout.fillMaxSize
+&nbsp;import androidx.compose.foundation.layout.fillMaxWidth
+&nbsp;import androidx.compose.foundation.layout.padding
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.runtime.LaunchedEffect
+&nbsp;import androidx.compose.runtime.collectAsState
+&nbsp;import androidx.compose.runtime.derivedStateOf
+&nbsp;import androidx.compose.runtime.getValue
+&nbsp;import androidx.compose.runtime.mutableStateOf
+&nbsp;import androidx.compose.runtime.remember
+&nbsp;import androidx.compose.runtime.setValue
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import dev.jianastrero.trainer.domain.entity.Pokemon
+&nbsp;import dev.jianastrero.trainer.domain.entity.primaryType
+&nbsp;import dev.jianastrero.trainer.domain.nav.NavDirection
+&nbsp;import dev.jianastrero.trainer.ui.molecule.SwipeAction
+&nbsp;import dev.jianastrero.trainer.ui.molecule.SwipeButtons
+&nbsp;import dev.jianastrero.trainer.ui.organism.CardAction
+&nbsp;import dev.jianastrero.trainer.ui.organism.PokemonCard
+&nbsp;import dev.jianastrero.trainer.ui.template.AppBarTemplate
+&nbsp;import dev.jianastrero.trainer.ui.theme.TrainerTheme
+&nbsp;import org.koin.compose.viewmodel.koinViewModel
+&nbsp;
+<b class="nc">&nbsp;private data object HomePageTokens {</b>
+&nbsp;    const val MIN_POKEMONS = 10
+&nbsp;}
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun HomePage(
+&nbsp;    navigate: (NavDirection) -&gt; Unit,
+&nbsp;    modifier: Modifier = Modifier,
+&nbsp;    viewModel: HomeViewModel = koinViewModel(),
+&nbsp;) {
+&nbsp;    val pokemons by viewModel.pokemons.collectAsState()
+&nbsp;
+&nbsp;    LaunchedEffect(pokemons) {
+&nbsp;        if (pokemons.size &lt;= HomePageTokens.MIN_POKEMONS) {
+&nbsp;            viewModel.getNextPokemons()
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    AppBarTemplate(
+&nbsp;        onDarkModeToggle = viewModel::setDarkMode,
+&nbsp;        modifier = modifier
+&nbsp;    ) {
+&nbsp;        HomePageContent(
+&nbsp;            pokemons = pokemons,
+&nbsp;            onView = {
+&nbsp;                navigate(NavDirection.Screen.PokemonDetail(it))
+&nbsp;            },
+&nbsp;            onSwipeAction = { action, pokemon -&gt;
+&nbsp;                when (action) {
+&nbsp;                    SwipeAction.Like -&gt; viewModel.like(pokemon)
+&nbsp;                    SwipeAction.Dislike -&gt; viewModel.dislike(pokemon)
+&nbsp;                }
+&nbsp;            },
+&nbsp;            modifier = Modifier.fillMaxSize()
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;@Composable
+&nbsp;private fun HomePageContent(
+&nbsp;    pokemons: List&lt;Pokemon&gt;,
+&nbsp;    onView: (pokemonId: String) -&gt; Unit,
+&nbsp;    onSwipeAction: (SwipeAction, Pokemon) -&gt; Unit,
+&nbsp;    modifier: Modifier = Modifier
+&nbsp;) {
+&nbsp;    var cardAction by remember { mutableStateOf&lt;CardAction?&gt;(null) }
+&nbsp;
+&nbsp;    Box(modifier = modifier) {
+&nbsp;        PokemonCards(
+&nbsp;            cardAction = cardAction,
+&nbsp;            onView = onView,
+&nbsp;            onCardAction = { cardAction = it},
+&nbsp;            onSwipeAction = onSwipeAction,
+&nbsp;            pokemons = pokemons,
+&nbsp;            modifier = Modifier
+&nbsp;                .padding(
+&nbsp;                    start = 32.dp,
+&nbsp;                    end = 32.dp,
+&nbsp;                    top = 8.dp,
+&nbsp;                    bottom = 50.dp
+&nbsp;                )
+&nbsp;                .fillMaxSize()
+&nbsp;        )
+&nbsp;
+&nbsp;        SwipeButtons(
+&nbsp;            enabled = cardAction == null &amp;&amp; pokemons.isNotEmpty(),
+&nbsp;            onAction = { action -&gt;
+&nbsp;                cardAction = when (action) {
+&nbsp;                    SwipeAction.Like -&gt; CardAction.SwipeRight
+&nbsp;                    SwipeAction.Dislike -&gt; CardAction.SwipeLeft
+&nbsp;                }
+&nbsp;            },
+&nbsp;            modifier = Modifier
+&nbsp;                .align(Alignment.BottomCenter)
+&nbsp;                .padding(12.dp)
+&nbsp;                .fillMaxWidth()
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;@Composable
+&nbsp;private fun PokemonCards(
+&nbsp;    cardAction: CardAction?,
+&nbsp;    onView: (String) -&gt; Unit,
+&nbsp;    onCardAction: (CardAction?) -&gt; Unit,
+&nbsp;    onSwipeAction: (SwipeAction, Pokemon) -&gt; Unit,
+&nbsp;    pokemons: List&lt;Pokemon&gt;,
+&nbsp;    modifier: Modifier = Modifier
+&nbsp;) {
+&nbsp;    val firstPokemon by remember(pokemons) {
+&nbsp;        derivedStateOf {
+&nbsp;            pokemons.firstOrNull()
+&nbsp;        }
+&nbsp;    }
+&nbsp;    var secondPokemon by remember { mutableStateOf&lt;Pokemon?&gt;(null) }
+&nbsp;
+&nbsp;    LaunchedEffect(pokemons, firstPokemon) {
+&nbsp;        secondPokemon = pokemons.getOrNull(1)
+&nbsp;    }
+&nbsp;
+&nbsp;    Box(modifier = modifier) {
+&nbsp;        PokemonCard(
+&nbsp;            enabled = false,
+&nbsp;            name = secondPokemon?.name.orEmpty(),
+&nbsp;            imageUrl = secondPokemon?.officialArtwork.orEmpty(),
+&nbsp;            color = secondPokemon?.primaryType?.color ?: TrainerTheme.colors.onBackground,
+&nbsp;        )
+&nbsp;        PokemonCard(
+&nbsp;            name = firstPokemon?.name.orEmpty(),
+&nbsp;            imageUrl = firstPokemon?.officialArtwork.orEmpty(),
+&nbsp;            color = firstPokemon?.primaryType?.color ?: TrainerTheme.colors.onBackground,
+&nbsp;            cardAction = cardAction,
+&nbsp;            onCardAction = onCardAction@{ action -&gt;
+&nbsp;                val swipeAction = when (action) {
+&nbsp;                    CardAction.SwipeRight -&gt; SwipeAction.Like
+&nbsp;                    CardAction.SwipeLeft -&gt; SwipeAction.Dislike
+&nbsp;                    CardAction.View -&gt; return@onCardAction onView(firstPokemon?.id.orEmpty())
+&nbsp;                }
+&nbsp;                val pokemon = firstPokemon ?: return@onCardAction
+&nbsp;
+&nbsp;                onSwipeAction(swipeAction, pokemon)
+&nbsp;                onCardAction(null)
+&nbsp;            },
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-01 21:08</div>
+</div>
+</body>
+</html>
