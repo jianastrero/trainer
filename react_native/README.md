@@ -28,10 +28,12 @@ The first time you create a new project, run the Ruby bundler to install CocoaPo
 
 ```sh
 bundle install
+
+# or
+gem install cocoapods
 ```
 
-Then, and every time you update your native dependencies, run:
-
+Then, navigate to the `ios` directory and run:
 ```sh
 bundle exec pod install
 ```
