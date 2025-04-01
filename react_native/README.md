@@ -6,11 +6,10 @@ This is a React Native project targeting Android and iOS.
 
 Trainér is the dating app for Pokemon enthusiasts! Discover and connect with Pokemon in your area. Save your favorite Pokemon by viewing their profiles. With Trainér, you'll never have to catch 'em all alone again!
 
-# Getting Started
-
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
-
 ## Build and run Trainér
+
+> **Note**: Make sure you have completed
+the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
 With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
 
