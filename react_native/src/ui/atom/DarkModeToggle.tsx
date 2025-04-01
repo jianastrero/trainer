@@ -6,22 +6,18 @@ export type DarkModeToggleProps = {
 };
 
 export function DarkModeToggle({style}: DarkModeToggleProps) {
-    const isDarkMode = useColorScheme() === 'dark';
     const theme = useTrainerTheme();
     const toggleSwitch = () => {
-        const newColorScheme = isDarkMode ? 'light' : 'dark';
+        const newColorScheme = theme.isDarkMode ? 'light' : 'dark';
         Appearance.setColorScheme(newColorScheme);
     };
 
     return (
         <TouchableOpacity
             style={[style, {padding: 10}]}
-            onPress={toggleSwitch}
-            accessibilityRole="button"
-            accessibilityLabel="Toggle dark mode"
-            accessibilityHint="Switch between light and dark mode" >
+            onPress={toggleSwitch} >
             <Image style={styles.icon}
-                   source={isDarkMode
+                   source={theme.isDarkMode
                        ? require("../../../assets/img/ic_dark_mode.png")
                        : require("../../../assets/img/ic_light_mode.png")}
                    resizeMode={"contain"}
