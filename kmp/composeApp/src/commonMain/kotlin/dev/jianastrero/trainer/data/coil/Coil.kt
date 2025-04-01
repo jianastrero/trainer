@@ -7,20 +7,19 @@ import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.disk.DiskCache
 import coil3.memory.MemoryCache
-import coil3.request.ErrorResult
-import coil3.request.ImageRequest
 import coil3.request.crossfade
 import dev.jianastrero.trainer.platform.KMPContext
 import dev.jianastrero.trainer.platform.cachePath
 import dev.jianastrero.trainer.ui.theme.LocalKMPContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import org.koin.compose.koinInject
 
 private data object ImageLoaderTokens {
     const val MEMORY_CACHE = 10L * 1024 * 1024 // 10mb in bytes
     const val DISK_CACHE = 2L * 1024 * 1024 * 1024 // 2gb in bytes
 }
+
+expect class ImageLoaderEventListener() : EventListener
 
 @Composable
 fun rememberImageLoader(kmpContext: KMPContext = LocalKMPContext.current): ImageLoader {
@@ -48,22 +47,7 @@ fun rememberImageLoader(kmpContext: KMPContext = LocalKMPContext.current): Image
         }
 
         builder
-            .eventListener(
-                object : EventListener() {
-                    override fun onError(request: ImageRequest, result: ErrorResult) {
-                        super.onError(request, result)
-
-                        val memoryCacheKey = result.request.memoryCacheKey
-                        if (memoryCacheKey != null) {
-                            request.memoryCacheKey?.removeSurrounding(memoryCacheKey)
-                        }
-                        val diskCacheKey = result.request.diskCacheKey
-                        if (diskCacheKey != null) {
-                            request.diskCacheKey?.removeSurrounding(diskCacheKey)
-                        }
-                    }
-                }
-            )
+            .eventListener(ImageLoaderEventListener())
             .build()
     }
 
