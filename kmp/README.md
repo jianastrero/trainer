@@ -1,6 +1,6 @@
 # <img src="../trainer_logo.png" width="24" heigh="24"/> Trainér
 <hr/>
-This is a Kotlin Multiplatform project targeting Android, iOS.
+This is a Kotlin Multiplatform project targeting Android and iOS.
 <hr/>
 Trainér is the dating app for Pokemon enthusiasts! Discover and connect with Pokemon in your area. Swipe right on those you're attracted to and left on those you're not. With Trainér, you'll never have to catch 'em all alone again!
 
