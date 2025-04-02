@@ -1,7 +1,9 @@
 import {Model} from "@nozbe/watermelondb";
 import {field, text, writer} from "@nozbe/watermelondb/decorators";
-import {allPokemonStats, PokemonStat, getPokemonStatFromString} from "../model/enumeration/PokemonStat.ts";
-import {getPokemonTypeFromString, PokemonType} from "../model/enumeration/PokemonType.ts";
+import {PokemonResponse} from "../model/pokeapi/response/PokemonResponse.ts";
+import PokemonSpeciesResponse from "../model/pokeapi/response/PokemonSpeciesResponse.ts";
+import {PokemonStat, PokemonStatItem} from "../model/enumeration/PokemonStat.ts";
+import {PokemonType} from "../model/enumeration/PokemonType.ts";
 
 export default class Pokemon extends Model {
     static table = 'pokemons';
@@ -23,25 +25,29 @@ export default class Pokemon extends Model {
         });
     }
 
-    getStats(): Map<PokemonStat, number> {
+    getStatList(): PokemonStatItem[] {
         const jsonObject = JSON.parse(this.stats);
         if (!jsonObject) {
-            return new Map<PokemonStat, number>();
+            return [];
         }
+        console.log("getStatList -> jsonObject", jsonObject);
 
-        const statsMap = new Map<PokemonStat, number>();
+        const list: PokemonStatItem[] = [];
         Object.entries(jsonObject).forEach(([key, value]) => {
-            const stat = getPokemonStatFromString(key);
+            const stat = PokemonStat.getFromString(key);
 
             if (stat && typeof value === "number") {
-                statsMap.set(stat, value);
+                list.push({
+                    stat: stat,
+                    baseStat: value
+                });
             }
         });
 
-        return statsMap;
+        return list;
     }
 
-    getAbilities(): string[] {
+    getAbilityList(): string[] {
         const jsonList = JSON.parse(this.abilities);
         if (!jsonList) {
             return [];
@@ -50,7 +56,7 @@ export default class Pokemon extends Model {
         return jsonList;
     }
 
-    getTypes(): PokemonType[] {
+    getTypeList(): PokemonType[] {
         const jsonList = JSON.parse(this.types);
         if (!jsonList) {
             return [];
@@ -58,12 +64,40 @@ export default class Pokemon extends Model {
 
         const typesList: PokemonType[] = [];
         jsonList.forEach((type: string) => {
-            const pokemonType = getPokemonTypeFromString(type);
+            const pokemonType = PokemonType.getFromString(type);
             if (pokemonType) {
                 typesList.push(pokemonType);
             }
         });
 
         return typesList;
+    }
+
+    static fromPokeApiResponse(pokemon: PokemonResponse, species: PokemonSpeciesResponse): Pokemon {
+        const stats: PokemonStatItem[] = [];
+        pokemon.stats.forEach((stat) => {
+            const statName = PokemonStat.getFromString(stat.stat.name);
+            if (statName) {
+                stats.push({
+                    stat: statName,
+                    baseStat: stat.base_stat
+                });
+            }
+        });
+
+        const types = pokemon.types.map((type) => type.type.name);
+
+        return {
+            pokemonId: pokemon.id,
+            name: pokemon.name,
+            officialArtwork: pokemon.sprites.other["official-artwork"].front_default,
+            stats: JSON.stringify(stats),
+            types: JSON.stringify(types),
+            heightCm: pokemon.height,
+            weightKg: pokemon.weight,
+            species: species.genera.find((genus) => genus.language.name === "en")?.genus || "",
+            abilities: JSON.stringify(pokemon.abilities.map((ability) => ability.ability.name)),
+            isFavorite: false
+        } as Pokemon;
     }
 }

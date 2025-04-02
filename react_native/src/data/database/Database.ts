@@ -5,7 +5,7 @@ import {TrainerMigrations} from "./Migrations.ts";
 import {Database} from "@nozbe/watermelondb";
 import Pokemon from "../../domain/entity/Pokemon.ts";
 
-const adapter = new SQLiteAdapter({
+const trainerAdapter = new SQLiteAdapter({
     schema: TrainerSchema,
     migrations: TrainerMigrations,
     jsi: true,
@@ -15,6 +15,6 @@ const adapter = new SQLiteAdapter({
 });
 
 export const trainerDatabase = new Database({
-    adapter,
+    adapter: trainerAdapter,
     modelClasses: [Pokemon],
 });

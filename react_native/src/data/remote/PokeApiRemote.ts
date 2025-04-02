@@ -15,10 +15,12 @@ export default function usePokeApiRemote() {
         const response = await axios.get<PaginatedPokeApiResponse<PokemonItemResponse>>(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`);
         return response.data.results;
     };
+
     const getPokemonById = async (pokemonId: string): Promise<PokemonResponse> => {
         const response = await axios.get<PokemonResponse>(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         return response.data;
     }
+
     const getPokemonSpeciesById = async (pokemonId: string): Promise<PokemonSpeciesResponse> => {
         const response = await axios.get<PokemonSpeciesResponse>(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
         return response.data;

@@ -1,75 +1,66 @@
+import Pokemon from "../../entity/Pokemon.ts";
 
-export enum PokemonType {
-    Normal = 'Normal',
-    Fighting = 'Fighting',
-    Flying = 'Flying',
-    Poison = 'Poison',
-    Ground = 'Ground',
-    Rock = 'Rock',
-    Bug = 'Bug',
-    Ghost = 'Ghost',
-    Steel = 'Steel',
-    Fire = 'Fire',
-    Water = 'Water',
-    Grass = 'Grass',
-    Electric = 'Electric',
-    Psychic = 'Psychic',
-    Ice = 'Ice',
-    Dragon = 'Dragon',
-    Dark = 'Dark',
-    Fairy = 'Fairy',
-    Stellar = 'Stellar',
-    Unknown = 'Unknown',
-    Shadow = 'Shadow',
-}
+export class PokemonType {
+    public label: string;
+    public color: string;
 
-export function getTypeColor(type: PokemonType) {
-    switch (type) {
-        case PokemonType.Normal:
-            return '#A8A77A';
-        case PokemonType.Fighting:
-            return '#C22E28';
-        case PokemonType.Flying:
-            return '#A98FF3';
-        case PokemonType.Poison:
-            return '#A33EA1';
-        case PokemonType.Ground:
-            return '#E2BF65';
-        case PokemonType.Rock:
-            return '#B6A136';
-        case PokemonType.Bug:
-            return '#A6B91A';
-        case PokemonType.Ghost:
-            return '#735797';
-        case PokemonType.Steel:
-            return '#B7B7CE';
-        case PokemonType.Fire:
-            return '#EE8130';
-        case PokemonType.Water:
-            return '#6390F0';
-        case PokemonType.Grass:
-            return '#7AC74C';
-        case PokemonType.Electric:
-            return '#F7D02C';
-        case PokemonType.Psychic:
-            return '#F95587';
-        case PokemonType.Ice:
-            return '#96D9D6';
-        case PokemonType.Dragon:
-            return '#6F35FC';
-        case PokemonType.Dark:
-            return '#705746';
-        case PokemonType.Fairy:
-            return '#D685AD';
-        default:
-            return '#827E7A'; // Unknown type
+    protected constructor(label: string, color: string) {
+        this.label = label;
+        this.color = color;
     }
-}
 
-export function getPokemonTypeFromString(type: string): PokemonType | null {
-    const typeUpper = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-    if (typeUpper in PokemonType) {
-        return PokemonType[typeUpper as keyof typeof PokemonType];
+    public static Test = new PokemonType('Test', '#000000');
+
+    public static Normal: PokemonType = new PokemonType('Normal', '#A8A77A');
+    public static Fighting: PokemonType = new PokemonType('Fighting', '#C22E28');
+    public static Flying: PokemonType = new PokemonType('Flying', '#A98FF3');
+    public static Poison: PokemonType = new PokemonType('Poison', '#A33EA1');
+    public static Ground: PokemonType = new PokemonType('Ground', '#E2BF65');
+    public static Rock: PokemonType = new PokemonType('Rock', '#B6A136');
+    public static Bug: PokemonType = new PokemonType('Bug', '#A6B91A');
+    public static Ghost: PokemonType = new PokemonType('Ghost', '#735797');
+    public static Steel: PokemonType = new PokemonType('Steel', '#B7B7CE');
+    public static Fire: PokemonType = new PokemonType('Fire', '#EE8130');
+    public static Water: PokemonType = new PokemonType('Water', '#6390F0');
+    public static Grass: PokemonType = new PokemonType('Grass', '#7AC74C');
+    public static Electric: PokemonType = new PokemonType('Electric', '#F7D02C');
+    public static Psychic: PokemonType = new PokemonType('Psychic', '#F95587');
+    public static Ice: PokemonType = new PokemonType('Ice', '#96D9D6');
+    public static Dragon: PokemonType = new PokemonType('Dragon', '#6F35FC');
+    public static Dark: PokemonType = new PokemonType('Dark', '#705746');
+    public static Fairy: PokemonType = new PokemonType('Fairy', '#D685AD');
+    public static Stellar: PokemonType = new PokemonType('Stellar', '#46647E');
+    public static Unknown: PokemonType = new PokemonType('Unknown', '#827E7A');
+    public static Shadow: PokemonType = new PokemonType('Shadow', '#2B4463');
+
+    public static all(): PokemonType[] {
+        return [
+            PokemonType.Normal,
+            PokemonType.Fighting,
+            PokemonType.Flying,
+            PokemonType.Poison,
+            PokemonType.Ground,
+            PokemonType.Rock,
+            PokemonType.Bug,
+            PokemonType.Ghost,
+            PokemonType.Steel,
+            PokemonType.Fire,
+            PokemonType.Water,
+            PokemonType.Grass,
+            PokemonType.Electric,
+            PokemonType.Psychic,
+            PokemonType.Ice,
+            PokemonType.Dragon,
+            PokemonType.Dark,
+            PokemonType.Fairy,
+            PokemonType.Stellar,
+            PokemonType.Unknown,
+            PokemonType.Shadow
+        ];
     }
-    return null;
+
+    public static getFromString(type: string): PokemonType {
+        const typeLower = type.toLowerCase();
+        return PokemonType.all().find((t) => t.label.toLowerCase() === typeLower) || this.Unknown;
+    }
 }

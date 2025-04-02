@@ -6,7 +6,7 @@ export interface PokemonResponse {
     game_indices: Index[]
     height: number
     held_items: any[]
-    id: number
+    id: string
     is_default: boolean
     location_area_encounters: string
     moves: Mfe[]

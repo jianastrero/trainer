@@ -20,15 +20,3 @@ export const TrainerSchema = appSchema({
         })
     ],
 });
-
-/*
-    @PrimaryKey val id: String,
-    val name: String,
-    val officialArtwork: String,
-    val stats: Map<PokemonStat, Int>,
-    val types: List<PokemonType>,
-    val heightCm: Float,
-    val weightKg: Float,
-    val species: String,
-    val abilities: List<String>,
- */

@@ -1,14 +1,18 @@
-export default interface PokemonItemResponse {
-    name: string
-    url: string
-}
+export default class PokemonItemResponse {
+    public name: string
+    public url: string
 
-export function getPokemonItemImageUrl(item: PokemonItemResponse): string {
-    const splits = item.url.split('/');
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonItemId(item)}.png`;
-}
+    constructor(name: string, url: string) {
+        this.name = name;
+        this.url = url;
+    }
 
-function getPokemonItemId(item: PokemonItemResponse): string {
-    const splits = item.url.split('/');
-    return splits[splits.length - 2];
+    public getId(): string {
+        const splits = this.url.split('/');
+        return splits[splits.length - 2];
+    }
+
+    public getImageUrl(): string {
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.getId()}.png`;
+    }
 }
