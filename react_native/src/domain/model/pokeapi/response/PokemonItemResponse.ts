@@ -7,12 +7,12 @@ export default class PokemonItemResponse {
         this.url = url;
     }
 
-    public getId(): string {
+    getId(): string {
         const splits = this.url.split('/');
         return splits[splits.length - 2];
     }
 
-    public getImageUrl(): string {
+    getImageUrl(): string {
         return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.getId()}.png`;
     }
 }

@@ -1,4 +1,5 @@
-import {StatusBar, View, StyleSheet, FlatList,} from "react-native";
+import {StatusBar, View, StyleSheet, FlatList} from "react-native";
+import {SafeAreaView} from "react-native-safe-area-context";
 import useTrainerTheme from "../../theme/TrainerTheme.ts";
 import {AppBarTemplate} from "../../template/AppBarTemplate.tsx";
 import {PokemonListItem} from "../../molecule/PokemonListItem.tsx";
@@ -19,7 +20,7 @@ export default function HomePage() {
     }, []);
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <StatusBar barStyle={theme.isDarkMode ? 'light-content' : 'dark-content'}/>
             <AppBarTemplate style={styles.pageContainer}>
                 <FlatList
@@ -33,9 +34,9 @@ export default function HomePage() {
                             />
                         )
                     }
-                style={styles.listContainer}/>
+                    style={styles.listContainer}/>
             </AppBarTemplate>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '100%',
         height: '100%',
-        paddingTop: StatusBar.currentHeight,
+        // paddingTop: StatusBar.currentHeight
     },
     pageContainer: {
         width: '100%',

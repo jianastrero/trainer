@@ -1,4 +1,4 @@
-import {trainerDatabase} from "../database/Database.ts";
+import {getPokemonCollection, getTrainerDatabase} from "../database/Database.ts";
 import Pokemon from "../../domain/entity/Pokemon.ts";
 import {Q} from "@nozbe/watermelondb";
 
@@ -10,18 +10,17 @@ interface PokemonDataStore {
 }
 
 export default function usePokemonDataStore(): PokemonDataStore {
-    const pokemonCollection = trainerDatabase.get<Pokemon>("pokemons");
 
     const getPokemonList = async (): Promise<Pokemon[]> => {
-        return await pokemonCollection.query().fetch();
+        return await getPokemonCollection().query().fetch();
     };
 
     const getFavoritePokemons = async (): Promise<Pokemon[]> => {
-        return await pokemonCollection.query(Q.where("is_favorite", true)).fetch();
+        return await getPokemonCollection().query(Q.where("is_favorite", true)).fetch();
     };
 
     const getPokemonById = async (pokemonId: string): Promise<Pokemon | null> => {
-        const list = await pokemonCollection.query(
+        const list = await getPokemonCollection().query(
             Q.where("pokemon_id", pokemonId)
         ).fetch();
 
@@ -33,8 +32,8 @@ export default function usePokemonDataStore(): PokemonDataStore {
     };
 
     const createPokemon = async (pokemon: Pokemon): Promise<void> => {
-        await trainerDatabase.write(async () => {
-            await pokemonCollection.create((newPokemon) => {
+        await getTrainerDatabase().write(async () => {
+            await getPokemonCollection().create((newPokemon) => {
                 newPokemon.pokemonId = pokemon.pokemonId;
                 newPokemon.name = pokemon.name;
                 newPokemon.officialArtwork = pokemon.officialArtwork;

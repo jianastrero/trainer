@@ -19,6 +19,32 @@ export default class Pokemon extends Model {
     @text("abilities") abilities!: string;
     @field("is_favorite") isFavorite!: boolean;
 
+    static create(
+        pokemonId: string,
+        name: string,
+        officialArtwork: string,
+        stats: string,
+        types: string,
+        heightCm: number,
+        weightKg: number,
+        species: string,
+        abilities: string,
+        isFavorite: boolean
+    ) {
+        return {
+            pokemonId,
+            name,
+            officialArtwork,
+            stats,
+            types,
+            heightCm,
+            weightKg,
+            species,
+            abilities,
+            isFavorite
+        } as Pokemon;
+    }
+
     @writer async setFavorite(isFavorite: boolean) {
         await this.update((pokemon) => {
             pokemon.isFavorite = isFavorite;
@@ -73,7 +99,7 @@ export default class Pokemon extends Model {
         return typesList;
     }
 
-    static fromPokeApiResponse(pokemon: PokemonResponse, species: PokemonSpeciesResponse): Pokemon {
+    static fromPokeApiResponse(pokemon: PokemonResponse, species: PokemonSpeciesResponse | null): Pokemon {
         const stats: PokemonStatItem[] = [];
         pokemon.stats.forEach((stat) => {
             const statName = PokemonStat.getFromString(stat.stat.name);
@@ -95,7 +121,7 @@ export default class Pokemon extends Model {
             types: JSON.stringify(types),
             heightCm: pokemon.height,
             weightKg: pokemon.weight,
-            species: species.genera.find((genus) => genus.language.name === "en")?.genus || "",
+            species: species?.genera?.find((genus) => genus.language.name === "en")?.genus || "",
             abilities: JSON.stringify(pokemon.abilities.map((ability) => ability.ability.name)),
             isFavorite: false
         } as Pokemon;
